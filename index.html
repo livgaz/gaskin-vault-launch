@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Gaskin Vault — Archival Assets & Market Movements</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -11,21 +11,19 @@
     --ink: #0d0d0d;
     --pink: #f2c4d0;
     --pink-deep: #e8a8bc;
-    --pink-pale: #fdf5f7;
-    --archive-cream: #fdfaf5; /* New Archive Cream Color */
+    --archive-cream: #fdfaf5;
     --gold: #b89a6a;
     --rule-strong: 1.5px solid #0d0d0d;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
   html { scroll-behavior: smooth; }
 
   body {
     background: var(--cream);
     color: var(--ink);
     font-family: 'Barlow', sans-serif;
-    font-weight: 400;
-    overflow-x: hidden;
+    line-height: 1.5;
   }
 
   /* NAV */
@@ -42,465 +40,194 @@
   }
 
   .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Cormorant Garamond', serif !important;
     font-weight: 600;
     font-size: 1.05rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
   }
 
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-
-  .nav-links a {
-    font-size: 0.62rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: var(--ink);
-    opacity: 0.45;
-    transition: opacity 0.25s;
-  }
-  .nav-links a:hover { opacity: 1; }
-
-  .nav-cta {
-    background: var(--ink);
-    color: var(--pink);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 0.6rem 1.4rem;
-    border: none;
-    cursor: pointer;
-    transition: all 0.25s;
-    text-decoration: none;
-    display: inline-block;
-  }
-  .nav-cta:hover { background: var(--pink-deep); color: var(--ink); }
-
   /* HERO */
   .hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 92vh;
+    min-height: 90vh;
     border-bottom: var(--rule-strong);
   }
 
   .hero-left {
-    padding: 3.5rem 3rem 3.5rem 2.5rem;
+    padding: 3.5rem 2.5rem;
     border-right: var(--rule-strong);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    animation: fadeUp 0.7s ease both;
-  }
-
-  .hero-issue {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.8rem;
-    letter-spacing: 0.12em;
-    opacity: 0.45;
   }
 
   .hero-title {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif !important;
     font-weight: 900;
-    font-size: clamp(5rem, 11vw, 8.5rem);
-    line-height: 0.88;
+    font-size: clamp(4rem, 10vw, 8.5rem);
+    line-height: 0.85;
     text-transform: uppercase;
-    letter-spacing: -0.01em;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
   }
 
-  .hero-title .stroke-line {
+  .stroke-line {
     display: block;
     color: var(--pink);
     -webkit-text-stroke: 1.5px var(--ink);
   }
 
-  .hero-divider {
-    width: 40px;
-    height: 1px;
-    background: var(--gold);
-    margin: 2rem 0;
-  }
-
   .hero-tagline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem;
-    line-height: 1.85;
-    max-width: 360px;
-    opacity: 0.7;
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.1rem;
     font-style: italic;
+    max-width: 400px;
+    opacity: 0.8;
   }
-
-  .hero-btn {
-    display: inline-block;
-    width: fit-content;
-    margin-top: 2rem;
-    background: var(--ink);
-    color: var(--pink);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 800;
-    font-size: 0.7rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    padding: 0.9rem 2.2rem;
-    border: none;
-    cursor: pointer;
-    transition: all 0.25s;
-    text-decoration: none;
-  }
-  .hero-btn:hover { background: var(--pink-deep); color: var(--ink); }
 
   .hero-right {
     background: var(--pink);
+    padding: 3rem 2.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 3rem 2.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-right-top {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    opacity: 0.5;
-  }
-
-  .hero-rings {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -55%);
-    width: 90%;
-    opacity: 0.12;
-  }
-
-  .hero-right-bottom { position: relative; z-index: 2; }
-
-  .hero-report-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: clamp(2.8rem, 5.5vw, 4.5rem);
-    text-transform: uppercase;
-    line-height: 0.95;
-    letter-spacing: -0.01em;
-  }
-
-  .hero-report-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.85rem;
-    letter-spacing: 0.12em;
-    opacity: 0.55;
-    margin-top: 0.75rem;
+    justify-content: flex-end;
   }
 
   /* TICKER */
   .ticker {
     background: var(--ink);
     color: var(--pink);
-    padding: 0.7rem 0;
+    padding: 0.8rem 0;
     overflow: hidden;
     white-space: nowrap;
     border-bottom: var(--rule-strong);
-  }
-
-  .ticker-inner {
-    display: inline-flex;
-    gap: 2.5rem;
-    animation: ticker 28s linear infinite;
-  }
-
-  .ticker-item {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
+    font-family: 'Barlow Condensed', sans-serif !important;
     text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
   }
 
-  .ticker-item .up { color: #a8dba8; }
-  .ticker-dot { opacity: 0.3; }
-
-  @keyframes ticker {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  /* STATS */
-  .stats {
+  /* INSIDE SECTION GRID */
+  .inside-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-bottom: var(--rule-strong);
+    grid-template-columns: 1fr 1fr;
   }
-
-  .stat {
-    padding: 3rem 2.5rem;
-    border-right: var(--rule-strong);
-    position: relative;
-    transition: background 0.25s;
-  }
-  .stat:last-child { border-right: none; }
-  .stat:hover { background: var(--pink-pale); }
-
-  .stat::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 2.5rem;
-    width: 24px; height: 2px;
-    background: var(--gold);
-  }
-
-  .stat-num {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 3.8rem;
-    line-height: 1;
-    text-transform: uppercase;
-    margin-top: 1rem;
-  }
-
-  .stat-label {
-    margin-top: 0.6rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.85rem;
-    line-height: 1.6;
-    opacity: 0.5;
-    max-width: 200px;
-  }
-
-  /* INSIDE */
-  .inside-section { border-bottom: var(--rule-strong); }
-
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 1.6rem 2.5rem;
-    border-bottom: var(--rule-strong);
-  }
-
-  .inside-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
 
   .inside-item {
     padding: 2.5rem;
     border-right: var(--rule-strong);
     border-bottom: var(--rule-strong);
-    transition: background 0.3s;
-  }
-  .inside-item:nth-child(even) { border-right: none; }
-  .inside-item:hover { background: var(--pink-pale); }
-
-  /* QUOTE */
-  .quote-section {
-    background: var(--pink);
-    border-bottom: var(--rule-strong);
-    padding: 5rem 2.5rem;
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 3rem;
-    align-items: center;
   }
 
-  /* CTA - CHANGED TO ARCHIVE CREAM */
-  .cta {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-bottom: var(--rule-strong);
-    background: var(--archive-cream); 
-  }
-
-  .cta-left {
-    background: var(--ink);
-    color: var(--cream);
-    padding: 4rem 3rem;
-    border-right: 2px solid var(--pink);
-  }
-
-  .cta-price {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 4rem;
-    color: var(--pink);
-  }
-
-  .cta-right {
-    padding: 4rem 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .btn-black {
-    background: var(--ink);
-    color: var(--pink);
-    padding: 1rem;
-    text-align: center;
-    text-decoration: none;
-    font-family: 'Barlow Condensed', sans-serif;
+  .inside-title {
+    font-family: 'Barlow Condensed', sans-serif !important;
     font-weight: 800;
+    font-size: 1.4rem;
     text-transform: uppercase;
-    display: block;
-    margin-bottom: 10px;
   }
 
-  /* ————— MOBILE FIXES ————— */
+  /* ————— MOBILE MEDIA QUERY ————— */
   @media (max-width: 768px) {
-    /* Stack Hero */
     .hero { grid-template-columns: 1fr; }
-    .hero-left { border-right: none; border-bottom: var(--rule-strong); }
-    .hero-right { height: 400px; }
+    .hero-left { border-right: none; border-bottom: var(--rule-strong); padding: 2rem; }
+    .hero-right { height: 350px; }
 
-    /* Stack Stats */
-    .stats { grid-template-columns: 1fr; }
-    .stat { border-right: none; border-bottom: var(--rule-strong); }
+    /* Force the Hero Title to stay bold and correct font */
+    .hero-title { 
+        font-size: 4.5rem !important; 
+        font-family: 'Barlow Condensed', sans-serif !important; 
+    }
 
-    /* Stack Inside Items */
-    .inside-grid { grid-template-columns: 1fr; }
-    .inside-item { border-right: none !important; }
+    /* Stack the content squares */
+    .inside-grid { grid-template-columns: 1fr !important; }
+    .inside-item { border-right: none !important; padding: 2rem !important; }
 
-    /* Stack Quote */
-    .quote-section { grid-template-columns: 1fr; text-align: center; }
-    .quote-rule { margin: 1rem auto; }
+    /* Fix Nav */
+    .nav-links { display: none; }
+    nav { padding: 1rem 1.5rem; }
 
-    /* Stack Testimonials */
-    .testimonials { grid-template-columns: 1fr; }
-    .testi { border-right: none; border-bottom: var(--rule-strong); }
-
-    /* Stack CTA */
-    .cta { grid-template-columns: 1fr; }
-    .cta-left { border-right: none; border-bottom: var(--rule-strong); }
+    /* Ensure body text doesn't look tiny */
+    p, div { font-size: 1rem !important; }
     
-    /* Shrink Title for Phone */
-    .hero-title { font-size: 4rem; }
-    
-    /* Nav Adjustments */
-    .nav-links { display: none; } /* Hides links on mobile to save space */
-    nav { padding: 1rem; }
+    .cta { grid-template-columns: 1fr !important; }
+    .cta-left { border-right: none !important; border-bottom: var(--rule-strong); }
   }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
 </style>
 </head>
 <body>
 
 <nav>
   <div class="nav-logo">Gaskin Vault</div>
-  <ul class="nav-links">
-    <li><a href="#cta-section">The Report</a></li>
-    <li><a href="#market-data">Market Data</a></li>
-    <li><a href="#cta-section">About</a></li>
-  </ul>
-  <a class="nav-cta" href="#cta-section">Get the Guide →</a>
+  <a class="nav-cta" href="#cta-section" style="text-decoration:none; padding: 0.6rem 1rem; background: var(--ink); color: var(--pink); font-family: 'Barlow Condensed'; font-weight:700; font-size:0.7rem; text-transform:uppercase;">Get the Guide →</a>
 </nav>
 
 <section class="hero">
   <div class="hero-left">
     <div>
-      <p class="hero-issue">Vol. 01 &nbsp;·&nbsp; 2026 Edition &nbsp;·&nbsp; Archival Assets</p>
+      <p style="font-family: 'Cormorant Garamond'; font-style:italic; opacity:0.5; font-size:0.8rem;">Vol. 01 &nbsp;·&nbsp; 2026 Edition</p>
       <h1 class="hero-title">GASKIN<br><span class="stroke-line">VAULT</span></h1>
     </div>
     <div>
-      <div class="hero-divider"></div>
-      <p class="hero-tagline">We don't buy trends. We secure assets. Fashion history is the only hedge against retail inflation.</p>
-      <a class="hero-btn" href="#cta-section">Acquire the Report →</a>
+      <p class="hero-tagline">Fashion history is the only hedge against retail inflation. We don't buy trends. We secure assets.</p>
+      <a href="#cta-section" style="display:inline-block; margin-top:2rem; background:var(--ink); color:var(--pink); padding:1rem 2rem; text-decoration:none; font-family:'Barlow Condensed'; font-weight:800; text-transform:uppercase; font-size:0.8rem;">Acquire the Report →</a>
     </div>
   </div>
   <div class="hero-right">
-    <div class="hero-right-top">A Report by Gaskin Vault</div>
-    <svg class="hero-rings" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="200" cy="200" r="190" stroke="#0d0d0d" stroke-width="1"/>
-      <circle cx="200" cy="200" r="110" stroke="#0d0d0d" stroke-width="1"/>
-    </svg>
-    <div class="hero-right-bottom">
-      <div class="hero-report-label">MIU MIU<br>REPORT</div>
-    </div>
+    <div style="font-family: 'Barlow Condensed'; font-weight:900; font-size:4rem; line-height:0.9; text-transform:uppercase;">MIU MIU<br>REPORT</div>
   </div>
 </section>
 
 <div class="ticker" id="market-data">
-  <div class="ticker-inner">
-    <span class="ticker-item">Miu Miu Vitello Lux <span class="up">+233%</span></span>
-    <span class="ticker-item ticker-dot">·</span>
-    <span class="ticker-item">Hermès Birkin 25 <span class="up">+130%</span></span>
-  </div>
-</div>
-
-<div class="stats">
-  <div class="stat">
-    <div class="stat-num">+233%</div>
-    <div class="stat-label">Miu Miu Vitello Lux appreciation, 2024–2026</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">$42B</div>
-    <div class="stat-label">Projected luxury resale market, 2026</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">35–50%</div>
-    <div class="stat-label">Discount vs. boutique MSRP</div>
+  <div style="display:flex; gap:2rem; padding-left:2rem;">
+    <span>Miu Miu Vitello Lux +233%</span> <span>·</span>
+    <span>Hermès Birkin 25 +130%</span> <span>·</span>
+    <span>Chanel Classic +112%</span>
   </div>
 </div>
 
 <section class="inside-section">
-  <div class="section-header">
-    <div class="section-title-sm">What's inside</div>
-    <div class="section-count">6 chapters</div>
-  </div>
+  <div style="padding: 1.5rem 2rem; border-bottom: var(--rule-strong); font-family: 'Cormorant Garamond'; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; font-size:0.8rem;">What's inside the report</div>
   <div class="inside-grid">
     <div class="inside-item">
       <div class="inside-title">01. Founder Letter</div>
-      <p class="inside-desc">The end of disposable luxury.</p>
+      <p style="font-family: 'Cormorant Garamond'; font-style:italic; opacity:0.7;">The philosophy of intentional archive curation.</p>
     </div>
     <div class="inside-item">
       <div class="inside-title">02. Market State</div>
-      <p class="inside-desc">Raw data on archival leather superiority.</p>
+      <p style="font-family: 'Cormorant Garamond'; font-style:italic; opacity:0.7;">Raw data on archival leather superiority.</p>
     </div>
     <div class="inside-item">
       <div class="inside-title">03. Miu Miu Pivot</div>
-      <p class="inside-desc">Analysis of the +233% sleeper hit.</p>
+      <p style="font-family: 'Cormorant Garamond'; font-style:italic; opacity:0.7;">Deep-dive on the +233% market correction.</p>
     </div>
     <div class="inside-item">
-      <div class="inside-title">04. Acquisition</div>
-      <p class="inside-desc">Framework for identifying verified pieces.</p>
+      <div class="inside-item-last" style="border-bottom:none;">
+        <div class="inside-title">04. Acquisition</div>
+        <p style="font-family: 'Cormorant Garamond'; font-style:italic; opacity:0.7;">Framework for identifying verified pieces.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="quote-section">
-  <div class="quote-text">"Buying archival is like buying a vintage Porsche;<br>it has already survived its depreciation."</div>
-</div>
-
-<section class="cta" id="cta-section">
-  <div class="cta-left">
-    <div class="cta-title">SECURE<br>THE <span class="pink">PAST.</span><br>INVEST<br>IN THE<br><span class="pink">FUTURE.</span></div>
-    <div class="cta-price">£35</div>
+<section class="cta" id="cta-section" style="display:grid; grid-template-columns: 1fr 1fr; background: var(--archive-cream); border-bottom: var(--rule-strong);">
+  <div class="cta-left" style="background: var(--ink); color: var(--cream); padding: 4rem 2rem; border-right: var(--rule-strong);">
+    <div style="font-family: 'Barlow Condensed'; font-weight:900; font-size:3.5rem; line-height:0.9; text-transform:uppercase;">SECURE<br>THE <span style="color:var(--pink)">PAST.</span></div>
+    <div style="font-family: 'Barlow Condensed'; font-weight:900; font-size:4rem; color:var(--pink); margin-top:2rem;">£35</div>
   </div>
-  <div class="cta-right">
-    <ul class="cta-features">
-      <li>Full 2026 Market Report (PDF)</li>
-      <li>Founder's Strategic Outlook</li>
-      <li>The Acquisition Pathway</li>
+  <div class="cta-right" style="padding: 4rem 2rem; display:flex; flex-direction:column; justify-content:center;">
+    <ul style="list-style:none; font-family:'Cormorant Garamond'; font-style:italic; font-size:1.1rem; margin-bottom:2rem;">
+      <li>· Full 2026 Archival Market Report</li>
+      <li>· Miu Miu Vitello Lux Case Study</li>
+      <li>· The Acquisition Pathway</li>
     </ul>
-    <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" class="btn-black">Acquire the Report →</a>
-    <p class="cta-guarantee">Secure checkout · press@gaskinvault.co.uk</p>
+    <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" style="background:var(--ink); color:var(--pink); padding:1.2rem; text-align:center; text-decoration:none; font-family:'Barlow Condensed'; font-weight:800; text-transform:uppercase; letter-spacing:0.1em;">Acquire Now →</a>
   </div>
 </section>
 
-<footer>
-  <div class="footer-logo">Gaskin Vault</div>
-  <div class="footer-copy">© 2026 Gaskin Vault · London · Worldwide</div>
+<footer style="padding: 2rem; text-align:center; font-family:'Cormorant Garamond'; font-size:0.8rem; opacity:0.5;">
+  © 2026 Gaskin Vault · London · Worldwide
 </footer>
 
 </body>
