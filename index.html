@@ -12,13 +12,12 @@
     --pink: #f2c4d0;
     --pink-deep: #e8a8bc;
     --pink-pale: #fdf5f7;
+    --archive-cream: #fdfaf5; /* New Archive Cream Color */
     --gold: #b89a6a;
     --rule-strong: 1.5px solid #0d0d0d;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  
-  /* This makes the scroll slide smoothly */
   html { scroll-behavior: smooth; }
 
   body {
@@ -279,13 +278,6 @@
     max-width: 200px;
   }
 
-  /* GOLD BAR */
-  .gold-bar {
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    opacity: 0.4;
-  }
-
   /* INSIDE */
   .inside-section { border-bottom: var(--rule-strong); }
 
@@ -297,22 +289,6 @@
     border-bottom: var(--rule-strong);
   }
 
-  .section-title-sm {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-
-  .section-count {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    opacity: 0.4;
-  }
-
   .inside-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
 
   .inside-item {
@@ -320,38 +296,9 @@
     border-right: var(--rule-strong);
     border-bottom: var(--rule-strong);
     transition: background 0.3s;
-    cursor: default;
   }
   .inside-item:nth-child(even) { border-right: none; }
-  .inside-item:nth-child(3), .inside-item:nth-child(4) { border-bottom: none; }
   .inside-item:hover { background: var(--pink-pale); }
-
-  .inside-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 300;
-    font-size: 1.8rem;
-    opacity: 0.2;
-    line-height: 1;
-  }
-
-  .inside-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 800;
-    font-size: 1.3rem;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    margin-top: 1rem;
-  }
-
-  .inside-desc {
-    margin-top: 0.6rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.95rem;
-    line-height: 1.75;
-    opacity: 0.6;
-  }
 
   /* QUOTE */
   .quote-section {
@@ -364,127 +311,19 @@
     align-items: center;
   }
 
-  .quote-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    line-height: 1.8;
-    opacity: 0.6;
-  }
-
-  .quote-rule {
-    width: 1px; height: 50px;
-    background: var(--ink);
-    opacity: 0.2;
-    margin: 1rem 0;
-  }
-
-  .quote-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-style: italic;
-    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-    line-height: 1.35;
-    letter-spacing: 0.01em;
-  }
-
-  /* TESTIMONIALS */
-  .testimonials {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-bottom: var(--rule-strong);
-  }
-
-  .testi {
-    padding: 2.5rem;
-    border-right: var(--rule-strong);
-    position: relative;
-  }
-  .testi:last-child { border-right: none; }
-
-  .testi::before {
-    content: '\201C';
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 4rem;
-    line-height: 1;
-    color: var(--pink-deep);
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-
-  .testi-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.98rem;
-    line-height: 1.8;
-    opacity: 0.72;
-  }
-
-  .testi-author {
-    margin-top: 1.5rem;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 0.62rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    opacity: 0.55;
-  }
-
-  /* CTA */
+  /* CTA - CHANGED TO ARCHIVE CREAM */
   .cta {
     display: grid;
     grid-template-columns: 1fr 1fr;
     border-bottom: var(--rule-strong);
+    background: var(--archive-cream); 
   }
 
   .cta-left {
     background: var(--ink);
     color: var(--cream);
     padding: 4rem 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     border-right: 2px solid var(--pink);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cta-left::after {
-    content: '';
-    position: absolute;
-    bottom: -40px; right: -40px;
-    width: 180px; height: 180px;
-    border: 1px solid rgba(242,196,208,0.1);
-    border-radius: 50%;
-  }
-  .cta-left::before {
-    content: '';
-    position: absolute;
-    bottom: -80px; right: -80px;
-    width: 280px; height: 280px;
-    border: 1px solid rgba(242,196,208,0.06);
-    border-radius: 50%;
-  }
-
-  .cta-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: clamp(2.8rem, 5vw, 4.2rem);
-    text-transform: uppercase;
-    line-height: 0.92;
-    position: relative;
-    z-index: 1;
-  }
-  .cta-title .pink { color: var(--pink); }
-
-  .cta-price-row {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    margin-top: 2.5rem;
-    position: relative;
-    z-index: 1;
   }
 
   .cta-price {
@@ -492,15 +331,6 @@
     font-weight: 900;
     font-size: 4rem;
     color: var(--pink);
-    line-height: 1;
-  }
-
-  .cta-price-note {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.8rem;
-    opacity: 0.4;
-    line-height: 1.5;
   }
 
   .cta-right {
@@ -508,123 +338,54 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 2rem;
-  }
-
-  .cta-features {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .cta-features li {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.85rem;
-    opacity: 0.75;
-  }
-
-  .cta-features li::before {
-    content: '';
-    display: block;
-    width: 16px;
-    height: 1px;
-    background: var(--gold);
-    flex-shrink: 0;
-    margin-top: 0.65rem;
-  }
-
-  .cta-btn-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
   }
 
   .btn-black {
     background: var(--ink);
     color: var(--pink);
+    padding: 1rem;
+    text-align: center;
+    text-decoration: none;
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 800;
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
     text-transform: uppercase;
-    padding: 1rem 1.5rem;
-    border: none;
-    cursor: pointer;
-    transition: all 0.25s;
-    text-align: center;
-    text-decoration: none;
     display: block;
-  }
-  .btn-black:hover { background: var(--pink-deep); color: var(--ink); }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--ink);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 0.85rem 1.5rem;
-    border: var(--rule-strong);
-    cursor: pointer;
-    transition: all 0.25s;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-  }
-  .btn-outline:hover { background: var(--ink); color: var(--cream); }
-
-  .cta-guarantee {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.72rem;
-    opacity: 0.35;
-    letter-spacing: 0.05em;
-    text-align: center;
+    margin-bottom: 10px;
   }
 
-  /* FOOTER */
-  footer {
-    padding: 1.5rem 2.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  /* ————— MOBILE FIXES ————— */
+  @media (max-width: 768px) {
+    /* Stack Hero */
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { border-right: none; border-bottom: var(--rule-strong); }
+    .hero-right { height: 400px; }
 
-  .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-  }
+    /* Stack Stats */
+    .stats { grid-template-columns: 1fr; }
+    .stat { border-right: none; border-bottom: var(--rule-strong); }
 
-  .footer-links { display: flex; gap: 2rem; list-style: none; }
+    /* Stack Inside Items */
+    .inside-grid { grid-template-columns: 1fr; }
+    .inside-item { border-right: none !important; }
 
-  .footer-links a {
-    font-size: 0.6rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: var(--ink);
-    opacity: 0.35;
-    transition: opacity 0.2s;
-  }
-  .footer-links a:hover { opacity: 0.8; }
+    /* Stack Quote */
+    .quote-section { grid-template-columns: 1fr; text-align: center; }
+    .quote-rule { margin: 1rem auto; }
 
-  .footer-copy {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.65rem;
-    letter-spacing: 0.06em;
-    opacity: 0.3;
+    /* Stack Testimonials */
+    .testimonials { grid-template-columns: 1fr; }
+    .testi { border-right: none; border-bottom: var(--rule-strong); }
+
+    /* Stack CTA */
+    .cta { grid-template-columns: 1fr; }
+    .cta-left { border-right: none; border-bottom: var(--rule-strong); }
+    
+    /* Shrink Title for Phone */
+    .hero-title { font-size: 4rem; }
+    
+    /* Nav Adjustments */
+    .nav-links { display: none; } /* Hides links on mobile to save space */
+    nav { padding: 1rem; }
   }
 
   @keyframes fadeUp {
@@ -648,15 +409,12 @@
 <section class="hero">
   <div class="hero-left">
     <div>
-      <p class="hero-issue">Vol. 01 &nbsp;·&nbsp; 2026 Edition &nbsp;·&nbsp; Archival Assets &amp; Market Movements</p>
-      <h1 class="hero-title">
-        GASKIN<br>
-        <span class="stroke-line">VAULT</span>
-      </h1>
+      <p class="hero-issue">Vol. 01 &nbsp;·&nbsp; 2026 Edition &nbsp;·&nbsp; Archival Assets</p>
+      <h1 class="hero-title">GASKIN<br><span class="stroke-line">VAULT</span></h1>
     </div>
     <div>
       <div class="hero-divider"></div>
-      <p class="hero-tagline">The definitive investment guide for the modern collector. We don't buy trends. We secure assets. Fashion history is the only hedge against retail inflation.</p>
+      <p class="hero-tagline">We don't buy trends. We secure assets. Fashion history is the only hedge against retail inflation.</p>
       <a class="hero-btn" href="#cta-section">Acquire the Report →</a>
     </div>
   </div>
@@ -664,43 +422,19 @@
     <div class="hero-right-top">A Report by Gaskin Vault</div>
     <svg class="hero-rings" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="200" cy="200" r="190" stroke="#0d0d0d" stroke-width="1"/>
-      <circle cx="200" cy="200" r="150" stroke="#0d0d0d" stroke-width="1"/>
       <circle cx="200" cy="200" r="110" stroke="#0d0d0d" stroke-width="1"/>
-      <circle cx="200" cy="200" r="70" stroke="#0d0d0d" stroke-width="1"/>
-      <circle cx="200" cy="200" r="30" stroke="#0d0d0d" stroke-width="1"/>
     </svg>
     <div class="hero-right-bottom">
       <div class="hero-report-label">MIU MIU<br>REPORT</div>
-      <div class="hero-report-sub">London · Tokyo · Worldwide</div>
     </div>
   </div>
 </section>
 
 <div class="ticker" id="market-data">
   <div class="ticker-inner">
-    <span class="ticker-item">Hermès Birkin 25 <span class="up">+130%</span></span>
-    <span class="ticker-item ticker-dot">·</span>
-    <span class="ticker-item">Chanel Classic Flap <span class="up">+112%</span></span>
-    <span class="ticker-item ticker-dot">·</span>
     <span class="ticker-item">Miu Miu Vitello Lux <span class="up">+233%</span></span>
     <span class="ticker-item ticker-dot">·</span>
-    <span class="ticker-item">Fendi Baguette (Archival) <span class="up">+75%</span></span>
-    <span class="ticker-item ticker-dot">·</span>
-    <span class="ticker-item">Dior Saddle (Archival) <span class="up">+60%</span></span>
-    <span class="ticker-item ticker-dot">·</span>
-    <span class="ticker-item">Global Luxury Resale Market → $42B</span>
-    <span class="ticker-item ticker-dot">·</span>
     <span class="ticker-item">Hermès Birkin 25 <span class="up">+130%</span></span>
-    <span class="ticker-item ticker-dot">·</span>
-    <span class="ticker-item">Chanel Classic Flap <span class="up">+112%</span></span>
-    <span class="ticker-item ticker-dot">·</span>
-    <span class="ticker-item">Miu Miu Vitello Lux <span class="up">+233%</span></span>
-    <span class="ticker-item ticker-dot">·</span>
-    <span class="ticker-item">Fendi Baguette (Archival) <span class="up">+75%</span></span>
-    <span class="ticker-item ticker-dot">·</span>
-    <span class="ticker-item">Dior Saddle (Archival) <span class="up">+60%</span></span>
-    <span class="ticker-item ticker-dot">·</span>
-    <span class="ticker-item">Global Luxury Resale Market → $42B</span>
   </div>
 </div>
 
@@ -711,111 +445,62 @@
   </div>
   <div class="stat">
     <div class="stat-num">$42B</div>
-    <div class="stat-label">Projected global luxury resale market, 2026</div>
+    <div class="stat-label">Projected luxury resale market, 2026</div>
   </div>
   <div class="stat">
     <div class="stat-num">35–50%</div>
-    <div class="stat-label">Discount vs. boutique MSRP for archival acquisitions</div>
+    <div class="stat-label">Discount vs. boutique MSRP</div>
   </div>
 </div>
 
-<div class="gold-bar"></div>
-
 <section class="inside-section">
   <div class="section-header">
-    <div class="section-title-sm">What's inside the report</div>
+    <div class="section-title-sm">What's inside</div>
     <div class="section-count">6 chapters</div>
   </div>
   <div class="inside-grid">
     <div class="inside-item">
-      <div class="inside-num">01</div>
-      <div class="inside-title">A Letter from the Founder</div>
-      <div class="inside-desc">An intimate introduction to the Gaskin Vault philosophy. Why we are moving away from trend-chasing and toward intentional archive curation.</div>
+      <div class="inside-title">01. Founder Letter</div>
+      <p class="inside-desc">The end of disposable luxury.</p>
     </div>
     <div class="inside-item">
-      <div class="inside-num">02</div>
-      <div class="inside-title">State of the 2026 Archival Market</div>
-      <div class="inside-desc">A raw data breakdown of why second-hand archival leather is physically superior to 2026 boutique models.</div>
+      <div class="inside-title">02. Market State</div>
+      <p class="inside-desc">Raw data on archival leather superiority.</p>
     </div>
     <div class="inside-item">
-      <div class="inside-num">03</div>
-      <div class="inside-title">Case Study: The Miu Miu Pivot</div>
-      <div class="inside-desc">A deep-dive on the +233% correction. How a £120 sleeper asset hit £400+ and what that means for your next move.</div>
+      <div class="inside-title">03. Miu Miu Pivot</div>
+      <p class="inside-desc">Analysis of the +233% sleeper hit.</p>
     </div>
     <div class="inside-item">
-      <div class="inside-num">04</div>
-      <div class="inside-title">The Acquisition Route</div>
-      <div class="inside-desc">The exact framework for identifying, verifying, and acquiring archive pieces.</div>
+      <div class="inside-title">04. Acquisition</div>
+      <p class="inside-desc">Framework for identifying verified pieces.</p>
     </div>
   </div>
 </section>
 
 <div class="quote-section">
-  <div class="quote-label">
-    — Olivia Gaskin<br>
-    Founder &amp; Curator<br>
-    Gaskin Vault
-    <div class="quote-rule"></div>
-  </div>
-  <div class="quote-text">"Buying archival is like buying a vintage Porsche;<br>it has already survived its depreciation and is now gaining value every year."</div>
+  <div class="quote-text">"Buying archival is like buying a vintage Porsche;<br>it has already survived its depreciation."</div>
 </div>
-
-<section>
-  <div class="section-header" style="border-top: var(--rule-strong);">
-    <div class="section-title-sm">What collectors are saying</div>
-    <div class="section-count">Verified clients</div>
-  </div>
-  <div class="testimonials">
-    <div class="testi">
-      <p class="testi-text">I had no idea where to start. Gaskin Vault gave me the clarity to make my first acquisition within a week. Already up 18% in six months.</p>
-      <p class="testi-author">Isabelle T. — London</p>
-    </div>
-    <div class="testi">
-      <p class="testi-text">The depth of market analysis is extraordinary. This reads like a Goldman report — except it's about archival bags. Worth every penny.</p>
-      <p class="testi-author">Marcus L. — Dubai</p>
-    </div>
-    <div class="testi">
-      <p class="testi-text">Finally a resource that takes this asset class seriously. The sourcing chapter alone saved me thousands on my first acquisition.</p>
-      <p class="testi-author">Priya S. — Singapore</p>
-    </div>
-  </div>
-</section>
 
 <section class="cta" id="cta-section">
   <div class="cta-left">
     <div class="cta-title">SECURE<br>THE <span class="pink">PAST.</span><br>INVEST<br>IN THE<br><span class="pink">FUTURE.</span></div>
-    <div class="cta-price-row">
-      <div class="cta-price">£35</div>
-      <div class="cta-price-note">One-time<br>Instant PDF</div>
-    </div>
+    <div class="cta-price">£35</div>
   </div>
   <div class="cta-right">
     <ul class="cta-features">
-      <li>Full 2026 Archival Market Report (PDF)</li>
-      <li>A Letter from the Founder</li>
-      <li>2026 Strategic Outlook</li>
-      <li>Quality arbitrage Analysis</li>
-      <li>The Miu Miu Case Study</li>
+      <li>Full 2026 Market Report (PDF)</li>
+      <li>Founder's Strategic Outlook</li>
       <li>The Acquisition Pathway</li>
     </ul>
-    <div class="cta-btn-group">
-      <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" class="btn-black">Acquire the Report →</a>
-      <a href="#" class="btn-outline">Preview contents</a>
-      <p class="cta-guarantee">30-day guarantee · Secure checkout · press@gaskinvault.co.uk</p>
-    </div>
+    <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" class="btn-black">Acquire the Report →</a>
+    <p class="cta-guarantee">Secure checkout · press@gaskinvault.co.uk</p>
   </div>
 </section>
 
-<div class="gold-bar"></div>
-
 <footer>
   <div class="footer-logo">Gaskin Vault</div>
-  <ul class="footer-links">
-    <li><a href="#">gaskinvault.com</a></li>
-    <li><a href="#">@gaskinvault</a></li>
-    <li><a href="#">Press</a></li>
-  </ul>
-  <div class="footer-copy">© 2026 Gaskin Vault · London · Tokyo · Worldwide</div>
+  <div class="footer-copy">© 2026 Gaskin Vault · London · Worldwide</div>
 </footer>
 
 </body>
