@@ -1,214 +1,234 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaskin Vault — Archival Assets & Market Movements</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --cream: #f4ede4;
+    --ink: #0d0d0d;
+    --pink: #f2c4d0;
+    --pink-deep: #e8a8bc;
+    --pink-pale: #fdf5f7;
+    --gold: #b89a6a;
+    --rule-strong: 1.5px solid #0d0d0d;
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
   body {
-    background: #f0ebe4;
-    color: #0d0d0d;
+    background: var(--cream);
+    color: var(--ink);
     font-family: 'Barlow', sans-serif;
     font-weight: 400;
     overflow-x: hidden;
   }
 
+  /* NAV */
   nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.25rem 2rem;
-    border-bottom: 1.5px solid #0d0d0d;
+    padding: 1.1rem 2.5rem;
+    border-bottom: var(--rule-strong);
     position: sticky;
     top: 0;
-    background: #f0ebe4;
+    background: var(--cream);
     z-index: 99;
   }
 
   .nav-logo {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 1.1rem;
-    letter-spacing: 0.08em;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
   }
 
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
 
   .nav-links a {
-    font-size: 0.7rem;
+    font-size: 0.62rem;
     font-weight: 500;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     text-decoration: none;
-    color: #0d0d0d;
-    opacity: 0.5;
-    transition: opacity 0.2s;
+    color: var(--ink);
+    opacity: 0.45;
+    transition: opacity 0.25s;
   }
-
   .nav-links a:hover { opacity: 1; }
 
   .nav-cta {
-    background: #0d0d0d;
-    color: #f7ccd8;
+    background: var(--ink);
+    color: var(--pink);
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 700;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    padding: 0.55rem 1.25rem;
+    padding: 0.6rem 1.4rem;
     border: none;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.25s;
+    text-decoration: none;
+    display: inline-block;
   }
-
-  .nav-cta:hover { background: #f7ccd8; color: #0d0d0d; }
+  .nav-cta:hover { background: var(--pink-deep); color: var(--ink); }
 
   /* HERO */
   .hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 90vh;
-    border-bottom: 1.5px solid #0d0d0d;
+    min-height: 92vh;
+    border-bottom: var(--rule-strong);
   }
 
   .hero-left {
-    padding: 3rem 2rem;
-    border-right: 1.5px solid #0d0d0d;
+    padding: 3.5rem 3rem 3.5rem 2.5rem;
+    border-right: var(--rule-strong);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    animation: fadeUp 0.7s ease both;
   }
 
   .hero-issue {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    opacity: 0.4;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    opacity: 0.45;
   }
 
   .hero-title {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 900;
-    font-size: clamp(5rem, 12vw, 9rem);
-    line-height: 0.9;
+    font-size: clamp(5rem, 11vw, 8.5rem);
+    line-height: 0.88;
     text-transform: uppercase;
     letter-spacing: -0.01em;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
   }
 
-  .hero-title span {
+  .hero-title .stroke-line {
     display: block;
-    color: #f7ccd8;
-    -webkit-text-stroke: 1.5px #0d0d0d;
+    color: var(--pink);
+    -webkit-text-stroke: 1.5px var(--ink);
   }
 
-  .hero-bottom {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  .hero-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 2rem 0;
   }
 
   .hero-tagline {
-    font-size: 0.85rem;
-    line-height: 1.7;
-    max-width: 340px;
-    opacity: 0.65;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    max-width: 360px;
+    opacity: 0.7;
+    font-style: italic;
   }
 
   .hero-btn {
     display: inline-block;
     width: fit-content;
-    background: #f7ccd8;
-    color: #0d0d0d;
+    margin-top: 2rem;
+    background: var(--ink);
+    color: var(--pink);
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 800;
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    padding: 0.8rem 2rem;
-    border: 1.5px solid #0d0d0d;
+    padding: 0.9rem 2.2rem;
+    border: none;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.25s;
     text-decoration: none;
   }
-
-  .hero-btn:hover { background: #0d0d0d; color: #f7ccd8; }
+  .hero-btn:hover { background: var(--pink-deep); color: var(--ink); }
 
   .hero-right {
-    background: #f7ccd8;
+    background: var(--pink);
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 2rem;
+    justify-content: space-between;
+    padding: 3rem 2.5rem;
     position: relative;
     overflow: hidden;
   }
+
+  .hero-right-top {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  .hero-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    width: 90%;
+    opacity: 0.12;
+  }
+
+  .hero-right-bottom { position: relative; z-index: 2; }
 
   .hero-report-label {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 900;
-    font-size: clamp(3rem, 6vw, 5rem);
+    font-size: clamp(2.8rem, 5.5vw, 4.5rem);
     text-transform: uppercase;
-    line-height: 1;
+    line-height: 0.95;
     letter-spacing: -0.01em;
-    position: relative;
-    z-index: 2;
   }
 
-  .hero-sub-label {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+  .hero-report-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
     opacity: 0.55;
-    margin-top: 0.5rem;
-    position: relative;
-    z-index: 2;
-  }
-
-  .hero-bag-bg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -60%);
-    width: 75%;
-    opacity: 0.18;
-    z-index: 1;
+    margin-top: 0.75rem;
   }
 
   /* TICKER */
   .ticker {
-    border-top: 1.5px solid #0d0d0d;
-    border-bottom: 1.5px solid #0d0d0d;
-    background: #0d0d0d;
-    color: #f7ccd8;
-    padding: 0.75rem 0;
+    background: var(--ink);
+    color: var(--pink);
+    padding: 0.7rem 0;
     overflow: hidden;
     white-space: nowrap;
+    border-bottom: var(--rule-strong);
   }
 
   .ticker-inner {
     display: inline-flex;
-    gap: 3rem;
-    animation: ticker 20s linear infinite;
+    gap: 2.5rem;
+    animation: ticker 28s linear infinite;
   }
 
   .ticker-item {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 700;
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
   }
 
-  .ticker-item .up { color: #a8e6a3; }
+  .ticker-item .up { color: #a8dba8; }
+  .ticker-dot { opacity: 0.3; }
 
   @keyframes ticker {
     from { transform: translateX(0); }
@@ -219,246 +239,302 @@
   .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    border-bottom: 1.5px solid #0d0d0d;
+    border-bottom: var(--rule-strong);
   }
 
   .stat {
-    padding: 2.5rem 2rem;
-    border-right: 1.5px solid #0d0d0d;
+    padding: 3rem 2.5rem;
+    border-right: var(--rule-strong);
+    position: relative;
+    transition: background 0.25s;
   }
-
   .stat:last-child { border-right: none; }
+  .stat:hover { background: var(--pink-pale); }
+
+  .stat::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 2.5rem;
+    width: 24px; height: 2px;
+    background: var(--gold);
+  }
 
   .stat-num {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 900;
-    font-size: 3.5rem;
+    font-size: 3.8rem;
     line-height: 1;
     text-transform: uppercase;
-    color: #0d0d0d;
+    margin-top: 1rem;
   }
 
   .stat-label {
-    margin-top: 0.4rem;
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    opacity: 0.45;
-    line-height: 1.5;
-    max-width: 180px;
+    margin-top: 0.6rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    opacity: 0.5;
+    max-width: 200px;
+  }
+
+  /* GOLD BAR */
+  .gold-bar {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.4;
   }
 
   /* INSIDE */
-  .inside-section {
-    border-bottom: 1.5px solid #0d0d0d;
-  }
+  .inside-section { border-bottom: var(--rule-strong); }
 
   .section-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    padding: 1.5rem 2rem;
-    border-bottom: 1.5px solid #0d0d0d;
+    padding: 1.6rem 2.5rem;
+    border-bottom: var(--rule-strong);
   }
 
   .section-title-sm {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 0.9rem;
-    letter-spacing: 0.12em;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
   }
 
   .section-count {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
     opacity: 0.4;
   }
 
-  .inside-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .inside-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
 
   .inside-item {
-    padding: 2rem;
-    border-right: 1.5px solid #0d0d0d;
-    border-bottom: 1.5px solid #0d0d0d;
-    transition: background 0.2s;
+    padding: 2.5rem;
+    border-right: var(--rule-strong);
+    border-bottom: var(--rule-strong);
+    transition: background 0.3s;
     cursor: default;
   }
-
   .inside-item:nth-child(even) { border-right: none; }
   .inside-item:nth-child(3), .inside-item:nth-child(4) { border-bottom: none; }
-
-  .inside-item:hover { background: #f7ccd8; }
+  .inside-item:hover { background: var(--pink-pale); }
 
   .inside-num {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.8rem;
+    opacity: 0.2;
     line-height: 1;
-    opacity: 0.12;
   }
 
   .inside-title {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 800;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     text-transform: uppercase;
-    letter-spacing: 0.01em;
-    margin-top: 0.75rem;
+    letter-spacing: 0.02em;
+    margin-top: 1rem;
   }
 
   .inside-desc {
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
-    line-height: 1.7;
+    margin-top: 0.6rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.75;
     opacity: 0.6;
   }
 
   /* QUOTE */
   .quote-section {
-    background: #f7ccd8;
-    border-bottom: 1.5px solid #0d0d0d;
-    padding: 4rem 2rem;
+    background: var(--pink);
+    border-bottom: var(--rule-strong);
+    padding: 5rem 2.5rem;
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 2rem;
+    grid-template-columns: 220px 1fr;
+    gap: 3rem;
     align-items: center;
   }
 
   .quote-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    opacity: 0.5;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    line-height: 1.8;
+    opacity: 0.6;
+  }
+
+  .quote-rule {
+    width: 1px; height: 50px;
+    background: var(--ink);
+    opacity: 0.2;
+    margin: 1rem 0;
   }
 
   .quote-text {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    text-transform: uppercase;
-    line-height: 1.15;
-    letter-spacing: 0.02em;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+    line-height: 1.35;
+    letter-spacing: 0.01em;
   }
 
   /* TESTIMONIALS */
   .testimonials {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    border-bottom: 1.5px solid #0d0d0d;
+    border-bottom: var(--rule-strong);
   }
 
   .testi {
-    padding: 2rem;
-    border-right: 1.5px solid #0d0d0d;
+    padding: 2.5rem;
+    border-right: var(--rule-strong);
+    position: relative;
   }
-
   .testi:last-child { border-right: none; }
 
+  .testi::before {
+    content: '\201C';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--pink-deep);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
   .testi-text {
-    font-size: 0.85rem;
-    line-height: 1.75;
-    opacity: 0.7;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.98rem;
+    line-height: 1.8;
+    opacity: 0.72;
   }
 
   .testi-author {
-    margin-top: 1.25rem;
+    margin-top: 1.5rem;
     font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 800;
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
+    font-weight: 700;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
+    opacity: 0.55;
   }
 
   /* CTA */
   .cta {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    border-bottom: 1.5px solid #0d0d0d;
-    min-height: 280px;
+    border-bottom: var(--rule-strong);
   }
 
   .cta-left {
-    background: #0d0d0d;
-    color: #f0ebe4;
-    padding: 3rem 2rem;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 4rem 3rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-right: 1.5px solid #f7ccd8;
+    border-right: 2px solid var(--pink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-left::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 180px; height: 180px;
+    border: 1px solid rgba(242,196,208,0.1);
+    border-radius: 50%;
+  }
+  .cta-left::before {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: -80px;
+    width: 280px; height: 280px;
+    border: 1px solid rgba(242,196,208,0.06);
+    border-radius: 50%;
   }
 
   .cta-title {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 900;
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
     text-transform: uppercase;
-    line-height: 0.95;
+    line-height: 0.92;
+    position: relative;
+    z-index: 1;
   }
-
-  .cta-title span { color: #f7ccd8; }
+  .cta-title .pink { color: var(--pink); }
 
   .cta-price-row {
     display: flex;
     align-items: baseline;
     gap: 1rem;
+    margin-top: 2.5rem;
+    position: relative;
+    z-index: 1;
   }
 
   .cta-price {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 900;
-    font-size: 3.5rem;
-    color: #f7ccd8;
+    font-size: 4rem;
+    color: var(--pink);
     line-height: 1;
   }
 
   .cta-price-note {
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    opacity: 0.45;
-    color: #f0ebe4;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    opacity: 0.4;
+    line-height: 1.5;
   }
 
   .cta-right {
-    padding: 3rem 2rem;
+    padding: 4rem 3rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 2rem;
   }
 
   .cta-features {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
   }
 
   .cta-features li {
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    opacity: 0.7;
+    align-items: flex-start;
+    gap: 0.85rem;
+    opacity: 0.75;
   }
 
   .cta-features li::before {
     content: '';
     display: block;
-    width: 6px;
-    height: 6px;
-    background: #0d0d0d;
+    width: 16px;
+    height: 1px;
+    background: var(--gold);
     flex-shrink: 0;
+    margin-top: 0.65rem;
   }
 
   .cta-btn-group {
@@ -468,75 +544,91 @@
   }
 
   .btn-black {
-    background: #0d0d0d;
-    color: #f7ccd8;
+    background: var(--ink);
+    color: var(--pink);
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 800;
-    font-size: 0.85rem;
-    letter-spacing: 0.15em;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    padding: 0.9rem 1.5rem;
-    border: 1.5px solid #0d0d0d;
+    padding: 1rem 1.5rem;
+    border: none;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.25s;
     text-align: center;
+    text-decoration: none;
+    display: block;
   }
-
-  .btn-black:hover { background: #f7ccd8; color: #0d0d0d; }
+  .btn-black:hover { background: var(--pink-deep); color: var(--ink); }
 
   .btn-outline {
     background: transparent;
-    color: #0d0d0d;
+    color: var(--ink);
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 700;
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    padding: 0.75rem 1.5rem;
-    border: 1.5px solid #0d0d0d;
+    padding: 0.85rem 1.5rem;
+    border: var(--rule-strong);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.25s;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--cream); }
+
+  .cta-guarantee {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.72rem;
+    opacity: 0.35;
+    letter-spacing: 0.05em;
     text-align: center;
   }
 
-  .btn-outline:hover { background: #0d0d0d; color: #f7ccd8; }
-
+  /* FOOTER */
   footer {
-    padding: 1.25rem 2rem;
+    padding: 1.5rem 2.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
   .footer-logo {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
     font-size: 0.9rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
   }
 
-  .footer-links {
-    display: flex;
-    gap: 1.5rem;
-    list-style: none;
-  }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
 
   .footer-links a {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 500;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     text-decoration: none;
-    color: #0d0d0d;
-    opacity: 0.4;
+    color: var(--ink);
+    opacity: 0.35;
+    transition: opacity 0.2s;
   }
+  .footer-links a:hover { opacity: 0.8; }
 
   .footer-copy {
-    font-size: 0.6rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
     opacity: 0.3;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 </style>
 </head>
@@ -545,38 +637,40 @@
 <nav>
   <div class="nav-logo">Gaskin Vault</div>
   <ul class="nav-links">
-    <button class="nav-btn" onclick="document.getElementById('purchase').scrollIntoView({behavior:'smooth'})">The Report</button>
-    <li><a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00">Market Data</a></li>
-    <li><a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00">About</a></li>
+    <li><a href="#">The Report</a></li>
+    <li><a href="#">Market Data</a></li>
+    <li><a href="#">About</a></li>
   </ul>
-  <button class="nav-cta" onclick="document.querySelector('.cta').scrollIntoView({behavior:'smooth'})">Get the Guide →</button>
+  <a class="nav-cta" href="#cta-section">Get the Guide →</a>
 </nav>
 
 <section class="hero">
   <div class="hero-left">
     <div>
-      <p class="hero-issue">Vol. 01 — 2026 Edition &nbsp;·&nbsp; Archival Assets & Market Movements</p>
+      <p class="hero-issue">Vol. 01 &nbsp;·&nbsp; 2026 Edition &nbsp;·&nbsp; Archival Assets &amp; Market Movements</p>
       <h1 class="hero-title">
         GASKIN<br>
-        <span>VAULT</span>
+        <span class="stroke-line">VAULT</span>
       </h1>
     </div>
-    <div class="hero-bottom">
+    <div>
+      <div class="hero-divider"></div>
       <p class="hero-tagline">The definitive investment guide for the modern collector. We don't buy trends. We secure assets. Fashion history is the only hedge against retail inflation.</p>
-<a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00">
-<a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" style="text-decoration: none;">
-    <button class="hero-btn" style="color: #ff69b4 !important;">Acquire the Report →</button>
-</a></a>    </div>
+      <a class="hero-btn" href="#cta-section">Acquire the Report →</a>
+    </div>
   </div>
   <div class="hero-right">
-    <svg class="hero-bag-bg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="100" cy="100" rx="80" ry="80" stroke="#0d0d0d" stroke-width="1"/>
-      <ellipse cx="100" cy="100" rx="55" ry="55" stroke="#0d0d0d" stroke-width="1"/>
-      <ellipse cx="100" cy="100" rx="30" ry="30" stroke="#0d0d0d" stroke-width="1"/>
+    <div class="hero-right-top">A Report by Gaskin Vault</div>
+    <svg class="hero-rings" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="200" cy="200" r="190" stroke="#0d0d0d" stroke-width="1"/>
+      <circle cx="200" cy="200" r="150" stroke="#0d0d0d" stroke-width="1"/>
+      <circle cx="200" cy="200" r="110" stroke="#0d0d0d" stroke-width="1"/>
+      <circle cx="200" cy="200" r="70" stroke="#0d0d0d" stroke-width="1"/>
+      <circle cx="200" cy="200" r="30" stroke="#0d0d0d" stroke-width="1"/>
     </svg>
-    <div style="position: relative; z-index: 2;">
+    <div class="hero-right-bottom">
       <div class="hero-report-label">MIU MIU<br>REPORT</div>
-      <div class="hero-sub-label">London · Tokyo · Worldwide</div>
+      <div class="hero-report-sub">London · Tokyo · Worldwide</div>
     </div>
   </div>
 </section>
@@ -584,27 +678,27 @@
 <div class="ticker">
   <div class="ticker-inner">
     <span class="ticker-item">Hermès Birkin 25 <span class="up">+130%</span></span>
-    <span class="ticker-item">·</span>
+    <span class="ticker-item ticker-dot">·</span>
     <span class="ticker-item">Chanel Classic Flap <span class="up">+112%</span></span>
-    <span class="ticker-item">·</span>
+    <span class="ticker-item ticker-dot">·</span>
     <span class="ticker-item">Miu Miu Vitello Lux <span class="up">+233%</span></span>
-    <span class="ticker-item">·</span>
+    <span class="ticker-item ticker-dot">·</span>
     <span class="ticker-item">Fendi Baguette (Archival) <span class="up">+75%</span></span>
-    <span class="ticker-item">·</span>
+    <span class="ticker-item ticker-dot">·</span>
     <span class="ticker-item">Dior Saddle (Archival) <span class="up">+60%</span></span>
-    <span class="ticker-item">·</span>
+    <span class="ticker-item ticker-dot">·</span>
     <span class="ticker-item">Global Luxury Resale Market → $42B</span>
-    <span class="ticker-item">·</span>
+    <span class="ticker-item ticker-dot">·</span>
     <span class="ticker-item">Hermès Birkin 25 <span class="up">+130%</span></span>
-    <span class="ticker-item">·</span>
+    <span class="ticker-item ticker-dot">·</span>
     <span class="ticker-item">Chanel Classic Flap <span class="up">+112%</span></span>
-    <span class="ticker-item">·</span>
+    <span class="ticker-item ticker-dot">·</span>
     <span class="ticker-item">Miu Miu Vitello Lux <span class="up">+233%</span></span>
-    <span class="ticker-item">·</span>
+    <span class="ticker-item ticker-dot">·</span>
     <span class="ticker-item">Fendi Baguette (Archival) <span class="up">+75%</span></span>
-    <span class="ticker-item">·</span>
+    <span class="ticker-item ticker-dot">·</span>
     <span class="ticker-item">Dior Saddle (Archival) <span class="up">+60%</span></span>
-    <span class="ticker-item">·</span>
+    <span class="ticker-item ticker-dot">·</span>
     <span class="ticker-item">Global Luxury Resale Market → $42B</span>
   </div>
 </div>
@@ -623,6 +717,8 @@
     <div class="stat-label">Discount vs. boutique MSRP for archival acquisitions</div>
   </div>
 </div>
+
+<div class="gold-bar"></div>
 
 <section class="inside-section">
   <div class="section-header">
@@ -654,12 +750,17 @@
 </section>
 
 <div class="quote-section">
-  <div class="quote-label">— Olivia Gaskin<br>Founder & Curator</div>
+  <div class="quote-label">
+    — Olivia Gaskin<br>
+    Founder &amp; Curator<br>
+    Gaskin Vault
+    <div class="quote-rule"></div>
+  </div>
   <div class="quote-text">"We are not just selling bags.<br>We are managing legacies."</div>
 </div>
 
 <section>
-  <div class="section-header" style="border-top: 1.5px solid #0d0d0d;">
+  <div class="section-header" style="border-top: var(--rule-strong);">
     <div class="section-title-sm">What collectors are saying</div>
     <div class="section-count">Verified clients</div>
   </div>
@@ -679,34 +780,32 @@
   </div>
 </section>
 
-<section class="cta">
+<section class="cta" id="cta-section">
   <div class="cta-left">
-    <div class="cta-title">SECURE<br>THE <span>PAST.</span><br>INVEST<br>IN THE<br><span>FUTURE.</span></div>
-    <div>
-      <div class="cta-price-row">
-        <div id="purchase" class="cta-price">£35</div>
-        <div class="cta-price-note">One-time · Instant PDF</div>
-      </div>
+    <div class="cta-title">SECURE<br>THE <span class="pink">PAST.</span><br>INVEST<br>IN THE<br><span class="pink">FUTURE.</span></div>
+    <div class="cta-price-row">
+      <div class="cta-price">£35</div>
+      <div class="cta-price-note">One-time<br>Instant PDF</div>
     </div>
   </div>
   <div class="cta-right">
     <ul class="cta-features">
       <li>Full 2026 Archival Market Report (PDF)</li>
-      <li>Miu Miu Vitello Lux case study & trajectory analysis</li>
+      <li>Miu Miu Vitello Lux case study &amp; trajectory analysis</li>
       <li>Seasonal acquisition strategy Q1–Q4</li>
       <li>Investment tier breakdown with historical data</li>
-      <li>Authentication & sourcing framework</li>
+      <li>Authentication &amp; sourcing framework</li>
       <li>Access to the Curated Drop subscriber list</li>
     </ul>
     <div class="cta-btn-group">
-      <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" style="text-decoration: none;">
-   <button class="cta-button" onclick="window.location.href='https://buy.stripe.com/test_7sY3cw7E9cyBdrXbaZefC01'">Acquire the Report →</button>
-</a>
-      <button class="btn-outline">Preview contents</button>
-      <p style="font-size: 0.6rem; opacity: 0.35; letter-spacing: 0.08em; text-transform: uppercase;">30-day guarantee · Secure checkout · press@gaskinvault.co.uk</p>
+      <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" class="btn-black">Acquire the Report →</a>
+      <a href="#" class="btn-outline">Preview contents</a>
+      <p class="cta-guarantee">30-day guarantee · Secure checkout · press@gaskinvault.co.uk</p>
     </div>
   </div>
 </section>
+
+<div class="gold-bar"></div>
 
 <footer>
   <div class="footer-logo">Gaskin Vault</div>
