@@ -8,258 +8,329 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --w:#fff;--off:#f8f6f3;--ink:#0e0e0e;--mid:#6b6b6b;--faint:#b8b2aa;
+  --w:#fff;--off:#f8f6f3;--ink:#111;--mid:#6b6b6b;--faint:#b0a9a2;
   --pk:#e8a0b4;--pk2:#fce8ef;--pk3:#fdf6f9;--gold:#c8a96e;
-  --rule:1px solid #ebebeb;--rule-d:1px solid #0e0e0e;
+  --rule:1px solid #e8e4e0;--rule-d:1px solid #111;
 }
 html{scroll-behavior:smooth}
-body{font-family:'Geist',sans-serif;background:var(--w);color:var(--ink);
-  overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:'Geist',sans-serif;background:var(--w);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 .pg{display:none}.pg.on{display:block}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;
-  background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;height:54px;
+  background:rgba(255,255,255,.97);backdrop-filter:blur(10px);
   border-bottom:var(--rule);display:flex;align-items:center;
   justify-content:space-between;padding:0 2rem}
-.n-logo{font-family:'Playfair Display',serif;font-size:1rem;font-weight:500;
-  letter-spacing:.04em;color:var(--ink);text-decoration:none;cursor:pointer}
+.n-logo{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:500;
+  letter-spacing:.04em;color:var(--ink);text-decoration:none;cursor:pointer;flex-shrink:0}
 .n-logo b{color:var(--pk);font-weight:400;font-style:italic}
 .n-tabs{display:flex;border:var(--rule)}
-.n-tab{font-size:.6rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;
-  padding:.42rem 1.1rem;background:transparent;border:none;border-left:var(--rule);
-  color:var(--mid);cursor:pointer;transition:all .18s;font-family:'Geist',sans-serif}
+.n-tab{font-size:.58rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  padding:.4rem 1rem;background:transparent;border:none;border-left:var(--rule);
+  color:var(--mid);cursor:pointer;transition:all .18s;font-family:'Geist',sans-serif;white-space:nowrap}
 .n-tab:first-child{border-left:none}
 .n-tab.on,.n-tab:hover{background:var(--ink);color:#fff}
-.n-right{display:flex;align-items:center;gap:1.5rem}
-.n-loc{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
-.n-btn{font-size:.6rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
-  padding:.48rem 1.2rem;background:var(--ink);color:#fff;border:none;cursor:pointer;
+.n-right{display:flex;align-items:center;gap:1.5rem;flex-shrink:0}
+.n-loc{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.n-btn{font-size:.58rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  padding:.45rem 1.1rem;background:var(--ink);color:#fff;border:none;cursor:pointer;
   transition:background .18s;text-decoration:none;display:inline-block;font-family:'Geist',sans-serif}
 .n-btn:hover{background:var(--pk)}
-.btn{font-size:.6rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
-  padding:.78rem 1.8rem;background:var(--ink);color:#fff;border:none;cursor:pointer;
+
+/* ── SHARED ── */
+.btn{font-size:.58rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  padding:.75rem 1.8rem;background:var(--ink);color:#fff;border:none;cursor:pointer;
   transition:background .18s;text-decoration:none;display:inline-block;font-family:'Geist',sans-serif}
 .btn:hover{background:var(--pk)}
-.btn-out{font-size:.6rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
-  padding:.76rem 1.6rem;background:transparent;color:var(--ink);border:var(--rule-d);
+.btn-out{font-size:.58rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  padding:.73rem 1.6rem;background:transparent;color:var(--ink);border:var(--rule-d);
   cursor:pointer;transition:all .18s;text-decoration:none;display:inline-block;font-family:'Geist',sans-serif}
 .btn-out:hover{background:var(--ink);color:#fff}
-footer{border-top:var(--rule);padding:1.4rem 2rem;display:flex;justify-content:space-between;align-items:center}
-.f-logo{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:400;letter-spacing:.04em}
+.btn-pk{font-size:.58rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  padding:.75rem 1.8rem;background:var(--pk);color:#fff;border:none;cursor:pointer;
+  transition:opacity .18s;text-decoration:none;display:inline-block;font-family:'Geist',sans-serif}
+.btn-pk:hover{opacity:.85}
+.sec-bar{display:flex;justify-content:space-between;align-items:center;padding:.95rem 2rem;border-bottom:var(--rule)}
+.sec-lbl{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid)}
+.sec-link{color:var(--pk);cursor:pointer;text-decoration:none}
+footer{border-top:var(--rule);padding:1.3rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.f-logo{font-family:'Playfair Display',serif;font-size:.88rem;letter-spacing:.04em}
 .f-logo b{color:var(--pk);font-weight:400;font-style:italic}
-.f-links{display:flex;gap:1.8rem;list-style:none}
-.f-links a{font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--faint);transition:color .18s}
+.f-links{display:flex;gap:1.6rem;list-style:none}
+.f-links a{font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--faint);transition:color .18s}
 .f-links a:hover{color:var(--ink)}
-.f-copy{font-size:.54rem;letter-spacing:.1em;color:var(--faint)}
-.sec-bar{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;border-bottom:var(--rule)}
-.sec-lbl{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid)}
-.sec-lbl a{color:var(--pk);text-decoration:none;cursor:pointer}
+.f-copy{font-size:.52rem;letter-spacing:.1em;color:var(--faint)}
 
-/* ══ HOME ══ */
-#p-home{padding-top:56px}
-.hero{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 56px)}
-.hero-l{padding:5rem 3.5rem 4rem 2rem;border-right:var(--rule);display:flex;flex-direction:column;justify-content:space-between}
-.h-tag{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:.6rem}
+/* ── LAY FLAT BAG SVGs (cream bg, bag drawn in code) ── */
+.layflat{width:100%;height:100%;background:var(--off);display:flex;align-items:center;justify-content:center}
+.layflat svg{width:62%;height:62%}
+
+/* ══════════ HOME ══════════ */
+#p-home{padding-top:54px}
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 54px)}
+.hero-l{padding:5rem 3rem 4rem 2rem;border-right:var(--rule);display:flex;flex-direction:column;justify-content:space-between}
+.h-tag{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:.55rem}
 .h-dot{width:5px;height:5px;background:var(--pk);border-radius:50%;flex-shrink:0}
-.h-h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:400;line-height:1.04;letter-spacing:-.01em;margin-top:2rem}
+.h-h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5.5vw,5rem);font-weight:400;line-height:1.04;letter-spacing:-.01em;margin-top:1.8rem}
 .h-h1 i{font-style:italic;color:var(--pk)}
-.h-sub{font-size:.88rem;color:var(--mid);line-height:1.8;max-width:360px;font-weight:300;margin-top:1.6rem}
-.h-btns{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap}
-
-/* Bag mosaic */
+.h-sub{font-size:.86rem;color:var(--mid);line-height:1.8;max-width:340px;font-weight:300;margin-top:1.4rem}
+.h-btns{display:flex;gap:.85rem;margin-top:1.8rem;flex-wrap:wrap}
 .hero-r{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;background:var(--rule)}
-.bag-cell{overflow:hidden;position:relative;cursor:default;background:var(--off)}
-.bag-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
-.bag-cell:hover img{transform:scale(1.04)}
-.bag-cell-info{position:absolute;bottom:0;left:0;right:0;padding:.9rem 1rem;background:linear-gradient(transparent,rgba(0,0,0,0.5))}
-.bc-brand{font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
-.bc-name{font-family:'Playfair Display',serif;font-size:.85rem;font-weight:400;color:#fff;margin-top:.15rem}
-.bc-price{font-size:.58rem;color:rgba(255,255,255,.6);margin-top:.1rem;letter-spacing:.06em}
+.hero-cell{position:relative;overflow:hidden;cursor:pointer;transition:opacity .2s}
+.hero-cell:hover{opacity:.92}
+.hero-cell-lbl{position:absolute;bottom:0;left:0;right:0;padding:.8rem 1rem;background:linear-gradient(transparent,rgba(0,0,0,.42))}
+.hc-brand{font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
+.hc-name{font-family:'Playfair Display',serif;font-size:.82rem;color:#fff;margin-top:.12rem}
+.hc-price{font-size:.55rem;color:rgba(255,255,255,.55);margin-top:.1rem}
 
-/* Ticker */
-.ticker{background:var(--ink);overflow:hidden;white-space:nowrap;padding:.6rem 0}
-.t-track{display:inline-flex;gap:2.5rem;animation:scroll 32s linear infinite}
+.ticker{background:var(--ink);overflow:hidden;white-space:nowrap;padding:.58rem 0}
+.t-track{display:inline-flex;gap:2.5rem;animation:scroll 34s linear infinite}
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.ti{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);font-weight:400}
+.ti{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.32)}
 .ti .up{color:#9ddba9}
 
-/* Stats */
-.stats{display:grid;grid-template-columns:repeat(4,1fr)}
-.sc{padding:2.2rem 2rem;border-right:var(--rule);border-bottom:var(--rule)}
-.sc:last-child{border-right:none}
-.sn{font-family:'Playfair Display',serif;font-size:2.3rem;font-weight:400;line-height:1}
-.sb{width:16px;height:1px;background:var(--pk);margin:.7rem 0}
-.sd{font-size:.73rem;color:var(--mid);line-height:1.5;font-weight:300}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:2rem;border-right:var(--rule);border-bottom:var(--rule)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:400;line-height:1}
+.stat-bar{width:14px;height:1px;background:var(--pk);margin:.6rem 0}
+.stat-d{font-size:.7rem;color:var(--mid);line-height:1.5;font-weight:300}
 
-/* Featured */
-.feat-section{border-bottom:var(--rule)}
-.feat-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+/* Featured products */
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:var(--rule)}
 .feat-card{border-right:var(--rule);cursor:pointer;transition:background .2s;position:relative}
 .feat-card:last-child{border-right:none}
 .feat-card:hover{background:var(--off)}
-.fc-img{width:100%;aspect-ratio:1/1.15;overflow:hidden;background:var(--off);position:relative}
-.fc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
-.feat-card:hover .fc-img img{transform:scale(1.05)}
-.fc-badge{position:absolute;top:.75rem;left:.75rem;z-index:2;font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .5rem}
+.fc-img{width:100%;aspect-ratio:1/1.15;position:relative}
+.fc-badge{position:absolute;top:.7rem;left:.7rem;z-index:2;font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:.18rem .48rem}
 .b-new{background:var(--pk);color:#fff}
 .b-sold{background:var(--ink);color:#fff}
-.fc-info{padding:1rem 1.2rem 1.4rem;border-top:var(--rule)}
-.fc-brand{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
-.fc-name{font-family:'Playfair Display',serif;font-size:.88rem;font-weight:400;margin-top:.2rem;line-height:1.3}
-.fc-meta{display:flex;justify-content:space-between;align-items:center;margin-top:.7rem}
-.fc-price{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400}
-.fc-grade{font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;padding:.18rem .4rem;background:var(--pk2);color:var(--pk)}
+.fc-info{padding:.95rem 1.15rem 1.3rem;border-top:var(--rule)}
+.fc-brand{font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
+.fc-name{font-family:'Playfair Display',serif;font-size:.85rem;font-weight:400;margin-top:.18rem;line-height:1.3}
+.fc-meta{display:flex;justify-content:space-between;align-items:center;margin-top:.65rem}
+.fc-price{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:400}
+.fc-grade{font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;padding:.16rem .38rem;background:var(--pk2);color:var(--pk)}
 
 /* Guide band */
 .guide-band{background:var(--off);border-bottom:var(--rule);display:grid;grid-template-columns:1fr 1fr}
-.gb-l{padding:4rem 3rem 4rem 2rem;border-right:var(--rule)}
-.gb-tag{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
-.gb-h{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:400;line-height:1.1;margin-top:.8rem}
+.gb-l{padding:3.5rem 3rem 3.5rem 2rem;border-right:var(--rule)}
+.gb-tag{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+.gb-h{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,2.8vw,2.5rem);font-weight:400;line-height:1.1;margin-top:.7rem}
 .gb-h i{font-style:italic;color:var(--pk)}
-.gb-body{font-size:.85rem;color:var(--mid);line-height:1.75;font-weight:300;margin-top:1.2rem;max-width:420px}
-.gb-feats{list-style:none;margin-top:1.8rem;display:flex;flex-direction:column;gap:.65rem}
-.gb-feats li{font-size:.78rem;color:var(--mid);display:flex;align-items:center;gap:.7rem;font-weight:300}
-.gb-feats li::before{content:'';display:block;width:12px;height:1px;background:var(--pk);flex-shrink:0}
-.gb-actions{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap}
-.gb-r{padding:4rem 3rem;display:flex;align-items:center;justify-content:center}
+.gb-body{font-size:.83rem;color:var(--mid);line-height:1.75;font-weight:300;margin-top:1rem;max-width:400px}
+.gb-feats{list-style:none;margin-top:1.5rem;display:flex;flex-direction:column;gap:.6rem}
+.gb-feats li{font-size:.76rem;color:var(--mid);display:flex;align-items:center;gap:.65rem;font-weight:300}
+.gb-feats li::before{content:'';display:block;width:11px;height:1px;background:var(--pk);flex-shrink:0}
+.gb-acts{display:flex;gap:.85rem;margin-top:1.8rem;flex-wrap:wrap}
+.gb-r{padding:3.5rem 3rem;display:flex;align-items:center;justify-content:center}
 .price-card{text-align:center}
-.pc-note{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
-.pc-price{font-family:'Playfair Display',serif;font-size:5rem;font-weight:400;line-height:1;margin-top:.3rem}
-.pc-detail{font-size:.72rem;color:var(--mid);font-weight:300;margin-top:.5rem}
+.pc-note{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.pc-price{font-family:'Playfair Display',serif;font-size:4.5rem;font-weight:400;line-height:1;margin-top:.3rem}
+.pc-detail{font-size:.7rem;color:var(--mid);font-weight:300;margin-top:.45rem}
 
 /* Quote */
-.q-band{background:var(--ink);color:#fff;display:grid;grid-template-columns:180px 1fr;gap:4rem;align-items:center;padding:4rem 2rem;border-bottom:var(--rule-d)}
-.qa{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.28);line-height:2.2}
-.qt{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.5vw,2.1rem);font-weight:400;font-style:italic;line-height:1.5}
+.q-band{background:var(--ink);color:#fff;display:grid;grid-template-columns:160px 1fr;gap:3.5rem;align-items:center;padding:3.5rem 2rem}
+.qa{font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);line-height:2.3}
+.qt{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.3vw,2rem);font-weight:400;font-style:italic;line-height:1.5}
 .qt em{color:var(--pk);font-style:normal}
 
 /* Blog preview */
-.blog-prev{border-bottom:var(--rule)}
 .bp-grid{display:grid;grid-template-columns:repeat(3,1fr)}
 .bp-card{border-right:var(--rule);cursor:pointer;transition:background .2s}
 .bp-card:last-child{border-right:none}
 .bp-card:hover{background:var(--pk3)}
-.bp-img{width:100%;height:180px;overflow:hidden;border-bottom:var(--rule);background:var(--off)}
-.bp-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
-.bp-card:hover .bp-img img{transform:scale(1.04)}
-.bp-body{padding:1.5rem}
-.bp-tag{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
-.bp-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;line-height:1.35;margin-top:.4rem}
-.bp-exc{font-size:.78rem;color:var(--mid);line-height:1.65;font-weight:300;margin-top:.5rem}
-.bp-read{font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:1rem}
-.tone{display:inline-block;font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;padding:.14rem .38rem;margin-left:.35rem;vertical-align:middle}
+.bp-img{width:100%;height:200px;border-bottom:var(--rule)}
+.bp-body{padding:1.4rem}
+.bp-tag{font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
+.bp-title{font-family:'Playfair Display',serif;font-size:.96rem;font-weight:400;line-height:1.35;margin-top:.38rem}
+.bp-exc{font-size:.76rem;color:var(--mid);line-height:1.65;font-weight:300;margin-top:.48rem}
+.bp-read{font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:.9rem}
+.tone{display:inline-block;font-size:.44rem;letter-spacing:.1em;text-transform:uppercase;padding:.13rem .36rem;margin-left:.32rem;vertical-align:middle}
 .tone-s{background:#f0ece4;color:#8a7a5a}
 .tone-l{background:var(--pk2);color:var(--pk)}
 
-/* ══ SHOP ══ */
-#p-shop{padding-top:56px}
-.shop-head{padding:3rem 2rem 2rem;border-bottom:var(--rule);display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:end}
-.sh-h{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:400;line-height:1.05}
+/* ══════════ SHOP ══════════ */
+#p-shop{padding-top:54px}
+.shop-head{padding:2.8rem 2rem 2rem;border-bottom:var(--rule);display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:end}
+.sh-h{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.8vw,3.2rem);font-weight:400;line-height:1.05}
 .sh-h i{font-style:italic;color:var(--pk)}
 .sh-r{text-align:right}
-.sh-desc{font-size:.8rem;color:var(--mid);line-height:1.7;font-weight:300;max-width:300px;margin-left:auto}
-.sh-meta{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-top:.5rem}
+.sh-desc{font-size:.78rem;color:var(--mid);line-height:1.7;font-weight:300;max-width:280px;margin-left:auto}
+.sh-meta{font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-top:.45rem}
 .filters{display:flex;border-bottom:var(--rule);overflow-x:auto}
-.f-btn{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;padding:.85rem 1.3rem;background:none;border:none;border-right:var(--rule);color:var(--faint);cursor:pointer;white-space:nowrap;transition:all .18s;font-family:'Geist',sans-serif}
+.f-btn{font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;padding:.8rem 1.2rem;background:none;border:none;border-right:var(--rule);color:var(--faint);cursor:pointer;white-space:nowrap;transition:all .18s;font-family:'Geist',sans-serif}
 .f-btn.on,.f-btn:hover{color:var(--ink);background:var(--pk3)}
+
+/* Collections */
 .colls{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:var(--rule)}
-.coll{border-right:var(--rule);cursor:pointer;transition:background .2s;position:relative;overflow:hidden}
+.coll{border-right:var(--rule);cursor:pointer;transition:background .2s;overflow:hidden}
 .coll:last-child{border-right:none}
-.coll-photo{width:100%;height:200px;overflow:hidden}
-.coll-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
-.coll:hover .coll-photo img{transform:scale(1.05)}
-.coll-info{padding:1.5rem 1.8rem}
-.coll-bar{width:24px;height:2px;margin-bottom:.8rem}
+.coll:hover{background:var(--pk3)}
+.coll-photo{width:100%;height:180px}
+.coll-info{padding:1.4rem 1.6rem}
+.coll-bar{width:22px;height:1.5px;margin-bottom:.75rem}
 .coll:nth-child(1) .coll-bar{background:var(--pk)}
 .coll:nth-child(2) .coll-bar{background:var(--ink)}
 .coll:nth-child(3) .coll-bar{background:var(--gold)}
-.coll-tag{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
-.coll-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;line-height:1.25;margin-top:.3rem}
-.coll-sub{font-size:.7rem;color:var(--mid);margin-top:.3rem;font-weight:300}
+.coll-tag{font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+.coll-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400;line-height:1.25;margin-top:.28rem}
+.coll-sub{font-size:.68rem;color:var(--mid);margin-top:.28rem;font-weight:300}
+
+/* Products grid */
 .products{display:grid;grid-template-columns:repeat(3,1fr)}
 .prod{border-right:var(--rule);border-bottom:var(--rule);cursor:pointer;position:relative;transition:background .2s}
 .prod:nth-child(3n){border-right:none}
 .prod:hover{background:var(--off)}
-.prod-img{width:100%;aspect-ratio:1/1.15;overflow:hidden;background:var(--off)}
-.prod-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
-.prod:hover .prod-img img{transform:scale(1.04)}
-.prod-badge{position:absolute;top:.75rem;left:.75rem;z-index:2;font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .5rem}
+.prod-img{width:100%;aspect-ratio:1/1.15;position:relative}
+.prod-badge{position:absolute;top:.7rem;left:.7rem;z-index:2;font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:.18rem .48rem}
 .pn{background:var(--pk);color:#fff}
 .ps{background:var(--ink);color:#fff}
-.prod-info{padding:1.1rem 1.4rem 1.5rem;border-top:var(--rule)}
-.p-brand{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
-.p-name{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:400;margin-top:.2rem;line-height:1.3}
-.p-detail{font-size:.68rem;color:var(--faint);margin-top:.25rem;font-weight:300}
-.p-meta{display:flex;justify-content:space-between;align-items:center;margin-top:.8rem}
-.p-price{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400}
-.p-grade{font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;padding:.18rem .4rem;background:var(--pk2);color:var(--pk)}
-.p-cta{display:block;width:100%;margin-top:.9rem;font-size:.56rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;padding:.6rem;border:var(--rule);background:transparent;color:var(--mid);cursor:pointer;transition:all .18s;text-decoration:none;text-align:center;font-family:'Geist',sans-serif}
+.prod-info{padding:1.05rem 1.35rem 1.45rem;border-top:var(--rule)}
+.p-brand{font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
+.p-name{font-family:'Playfair Display',serif;font-size:.88rem;font-weight:400;margin-top:.2rem;line-height:1.3}
+.p-detail{font-size:.66rem;color:var(--faint);margin-top:.22rem;font-weight:300}
+.p-meta{display:flex;justify-content:space-between;align-items:center;margin-top:.75rem}
+.p-price{font-family:'Playfair Display',serif;font-size:1.02rem;font-weight:400}
+.p-grade{font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;padding:.16rem .38rem;background:var(--pk2);color:var(--pk)}
+.p-cta{display:block;width:100%;margin-top:.85rem;font-size:.54rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;padding:.58rem;border:var(--rule);background:transparent;color:var(--mid);cursor:pointer;transition:all .18s;text-decoration:none;text-align:center;font-family:'Geist',sans-serif}
 .p-cta:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
 .p-cta.sold{opacity:.3;pointer-events:none}
-.concierge{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;padding:2.5rem 2rem;border-top:var(--rule);background:var(--off)}
-.con-t{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;font-style:italic}
-.con-d{font-size:.78rem;color:var(--mid);font-weight:300;margin-top:.3rem;max-width:500px;line-height:1.6}
 
-/* ══ BLOG ══ */
-#p-blog{padding-top:56px}
-.blog-head{padding:3rem 2rem 2rem;border-bottom:var(--rule);display:flex;justify-content:space-between;align-items:flex-end}
-.bh-h{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:400;line-height:1.05}
+.concierge{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;padding:2.2rem 2rem;border-top:var(--rule);background:var(--off)}
+.con-t{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:400;font-style:italic}
+.con-d{font-size:.76rem;color:var(--mid);font-weight:300;margin-top:.28rem;max-width:460px;line-height:1.6}
+
+/* ══════════ PRODUCT PAGE ══════════ */
+#p-product{padding-top:54px}
+.prod-page{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 54px)}
+.pp-left{border-right:var(--rule);position:sticky;top:54px;height:calc(100vh - 54px)}
+.pp-main-img{width:100%;height:70%;border-bottom:var(--rule)}
+.pp-thumbs{display:grid;grid-template-columns:repeat(3,1fr);height:30%}
+.pp-thumb{border-right:var(--rule);cursor:pointer;transition:background .2s}
+.pp-thumb:last-child{border-right:none}
+.pp-thumb:hover,.pp-thumb.on{background:var(--pk2)}
+.pp-right{padding:3.5rem 3rem 3rem 3rem;overflow-y:auto}
+.pp-breadcrumb{font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:1.5rem;cursor:pointer}
+.pp-breadcrumb span{color:var(--mid)}
+.pp-brand{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--pk)}
+.pp-name{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:400;line-height:1.15;margin-top:.4rem}
+.pp-era{font-size:.7rem;color:var(--mid);font-weight:300;margin-top:.35rem;font-style:italic}
+.pp-price-row{display:flex;align-items:baseline;gap:1.2rem;margin-top:1.5rem;padding-top:1.5rem;border-top:var(--rule)}
+.pp-price{font-family:'Playfair Display',serif;font-size:2rem;font-weight:400}
+.pp-grade-badge{font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;padding:.28rem .65rem;background:var(--pk2);color:var(--pk);align-self:center}
+.pp-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:1.5rem;border:var(--rule)}
+.pp-stat{padding:1rem 1.1rem;border-right:var(--rule)}
+.pp-stat:last-child{border-right:none}
+.pp-stat-l{font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.pp-stat-v{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;margin-top:.25rem}
+.pp-section{margin-top:1.8rem;padding-top:1.8rem;border-top:var(--rule)}
+.pp-section-title{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:.9rem}
+.pp-body{font-size:.85rem;color:var(--mid);line-height:1.78;font-weight:300}
+.pp-spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.pp-spec{display:flex;flex-direction:column;gap:.2rem;padding:.7rem;background:var(--off)}
+.pp-spec-k{font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.pp-spec-v{font-size:.82rem;color:var(--ink);font-weight:400}
+.pp-bullets{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.pp-bullets li{font-size:.82rem;color:var(--mid);display:flex;align-items:flex-start;gap:.65rem;font-weight:300;line-height:1.5}
+.pp-bullets li::before{content:'';display:block;width:11px;height:1px;background:var(--pk);flex-shrink:0;margin-top:.7rem}
+.pp-cta-block{margin-top:2rem;padding-top:2rem;border-top:var(--rule);display:flex;flex-direction:column;gap:.7rem}
+.pp-guarantee{font-size:.6rem;letter-spacing:.08em;color:var(--faint);text-align:center}
+.pp-appr{display:inline-flex;align-items:center;gap:.5rem;font-size:.62rem;color:var(--mid);margin-top:.3rem}
+.pp-appr-dot{width:6px;height:6px;background:var(--gold);border-radius:50%}
+
+/* ══════════ BLOG LIST ══════════ */
+#p-blog{padding-top:54px}
+.blog-head{padding:2.8rem 2rem 2rem;border-bottom:var(--rule);display:flex;justify-content:space-between;align-items:flex-end}
+.bh-h{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:400;line-height:1.05}
 .bh-h i{font-style:italic;color:var(--pk)}
-.bh-desc{font-size:.8rem;color:var(--mid);line-height:1.7;font-weight:300;max-width:340px;text-align:right}
-.essay-feat{display:grid;grid-template-columns:1fr 1fr;border-bottom:var(--rule);min-height:380px}
-.ef-photo{overflow:hidden;border-right:var(--rule)}
-.ef-photo img{width:100%;height:100%;object-fit:cover;display:block}
-.ef-body{padding:4rem 3rem;display:flex;flex-direction:column;justify-content:space-between}
-.ef-tag{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
-.ef-h{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:400;line-height:1.15;margin-top:.6rem}
+.bh-desc{font-size:.78rem;color:var(--mid);line-height:1.7;font-weight:300;max-width:320px;text-align:right}
+.essay-feat{display:grid;grid-template-columns:1fr 1fr;border-bottom:var(--rule);min-height:360px}
+.ef-img{border-right:var(--rule)}
+.ef-body{padding:3.5rem 3rem;display:flex;flex-direction:column;justify-content:space-between}
+.ef-tag{font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
+.ef-h{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.8vw,2.2rem);font-weight:400;line-height:1.15;margin-top:.55rem}
 .ef-h i{font-style:italic}
-.ef-exc{font-size:.85rem;color:var(--mid);line-height:1.75;font-weight:300;margin-top:1.2rem;max-width:380px}
-.ef-meta{margin-top:2rem;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:1rem}
+.ef-exc{font-size:.83rem;color:var(--mid);line-height:1.75;font-weight:300;margin-top:1rem;max-width:360px}
+.ef-meta{margin-top:1.8rem;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:.9rem}
 .ef-dot{width:3px;height:3px;background:var(--faint);border-radius:50%}
 .essay-grid{display:grid;grid-template-columns:repeat(2,1fr)}
-.essay-card{border-right:var(--rule);border-bottom:var(--rule);cursor:pointer;transition:background .2s;display:grid;grid-template-columns:140px 1fr}
+.essay-card{border-right:var(--rule);border-bottom:var(--rule);cursor:pointer;transition:background .2s;display:grid;grid-template-columns:130px 1fr}
 .essay-card:nth-child(even){border-right:none}
 .essay-card:hover{background:var(--pk3)}
-.ec-img{border-right:var(--rule);overflow:hidden}
-.ec-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
-.essay-card:hover .ec-img img{transform:scale(1.04)}
-.ec-body{padding:1.5rem}
-.ec-tag{font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
-.ec-h{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:400;line-height:1.35;margin-top:.35rem}
-.ec-exc{font-size:.75rem;color:var(--mid);line-height:1.6;font-weight:300;margin-top:.4rem}
-.ec-meta{font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:.8rem}
-.newsletter{background:var(--ink);color:#fff;padding:3.5rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;border-top:var(--rule-d)}
-.nl-h{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;font-style:italic;line-height:1.3}
+.ec-img{border-right:var(--rule)}
+.ec-body{padding:1.4rem}
+.ec-tag{font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
+.ec-h{font-family:'Playfair Display',serif;font-size:.92rem;font-weight:400;line-height:1.35;margin-top:.32rem}
+.ec-exc{font-size:.73rem;color:var(--mid);line-height:1.6;font-weight:300;margin-top:.38rem}
+.ec-meta{font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:.75rem}
+.nl{background:var(--ink);color:#fff;padding:3rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center}
+.nl-h{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;font-style:italic;line-height:1.3}
 .nl-h em{color:var(--pk);font-style:normal}
-.nl-sub{font-size:.78rem;color:rgba(255,255,255,.45);font-weight:300;margin-top:.6rem;line-height:1.65}
+.nl-sub{font-size:.76rem;color:rgba(255,255,255,.4);font-weight:300;margin-top:.55rem;line-height:1.65}
 .nl-form{display:flex}
-.nl-input{flex:1;padding:.75rem 1rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-right:none;color:#fff;font-size:.78rem;font-family:'Geist',sans-serif;outline:none}
-.nl-input::placeholder{color:rgba(255,255,255,.3)}
-.nl-submit{padding:.75rem 1.5rem;background:var(--pk);color:#fff;border:none;font-size:.6rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:'Geist',sans-serif}
+.nl-input{flex:1;padding:.7rem .9rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-right:none;color:#fff;font-size:.76rem;font-family:'Geist',sans-serif;outline:none}
+.nl-input::placeholder{color:rgba(255,255,255,.28)}
+.nl-sub-btn{padding:.7rem 1.4rem;background:var(--pk);color:#fff;border:none;font-size:.58rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:'Geist',sans-serif}
 
-/* ══ GUIDE PAGE ══ */
-#p-guide{padding-top:56px}
-.guide-hero{min-height:60vh;background:var(--ink);color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:5rem 2rem 3rem}
-.gh-tag{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35)}
-.gh-h{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,6rem);font-weight:400;line-height:.95;margin-top:1.5rem}
+/* ══════════ BLOG POST ══════════ */
+#p-post{padding-top:54px}
+.post-hero{border-bottom:var(--rule);padding:3rem 2rem 0}
+.post-back{font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);cursor:pointer;margin-bottom:1.5rem;display:inline-block}
+.post-back:hover{color:var(--ink)}
+.post-tag{font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
+.post-h{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3.5rem);font-weight:400;line-height:1.1;margin-top:.6rem;max-width:800px}
+.post-h i{font-style:italic}
+.post-meta{display:flex;align-items:center;gap:1.2rem;margin-top:1.5rem;margin-bottom:2.5rem;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.post-meta-dot{width:3px;height:3px;background:var(--faint);border-radius:50%}
+.post-hero-img{width:100%;height:380px;border-top:var(--rule)}
+.post-body{display:grid;grid-template-columns:1fr 280px;gap:0;border-bottom:var(--rule)}
+.post-content{padding:3rem 3.5rem 3rem 2rem;border-right:var(--rule)}
+.post-lead{font-family:'Playfair Display',serif;font-size:1.12rem;font-weight:400;font-style:italic;line-height:1.65;color:var(--ink);margin-bottom:2rem}
+.post-p{font-size:.9rem;color:var(--mid);line-height:1.85;font-weight:300;margin-bottom:1.4rem}
+.post-h2{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:400;margin:2.5rem 0 .8rem;color:var(--ink)}
+.post-h2 i{font-style:italic;color:var(--pk)}
+.post-pull{border-left:2px solid var(--pk);padding-left:1.4rem;margin:2rem 0;font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400;font-style:italic;line-height:1.6;color:var(--ink)}
+.post-sidebar{padding:2.5rem 2rem}
+.sidebar-section{margin-bottom:2rem;padding-bottom:2rem;border-bottom:var(--rule)}
+.sidebar-section:last-child{border-bottom:none}
+.sidebar-label{font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:.8rem}
+.sidebar-stat{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;line-height:1}
+.sidebar-stat-d{font-size:.7rem;color:var(--mid);font-weight:300;margin-top:.3rem;line-height:1.5}
+.sidebar-box{background:var(--pk3);padding:1.2rem;border:var(--rule)}
+.sidebar-box-title{font-family:'Playfair Display',serif;font-size:.88rem;font-weight:400;margin-bottom:.5rem}
+.sidebar-box-body{font-size:.74rem;color:var(--mid);line-height:1.6;font-weight:300}
+.related-posts{border-top:var(--rule);padding:2.5rem 2rem}
+.rp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:var(--rule);margin-top:1rem}
+.rp-card{border-right:var(--rule);padding:1.5rem;cursor:pointer;transition:background .2s}
+.rp-card:last-child{border-right:none}
+.rp-card:hover{background:var(--pk3)}
+.rp-img{width:100%;height:110px;margin-bottom:1rem;border-bottom:var(--rule)}
+.rp-brand{font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pk)}
+.rp-title{font-family:'Playfair Display',serif;font-size:.85rem;font-weight:400;margin-top:.25rem;line-height:1.3}
+
+/* ══════════ GUIDE ══════════ */
+#p-guide{padding-top:54px}
+.guide-hero{min-height:58vh;background:var(--ink);color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:4.5rem 2rem 3rem}
+.gh-tag{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.32)}
+.gh-h{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6.5vw,5.5rem);font-weight:400;line-height:.95;margin-top:1.3rem}
 .gh-h i{font-style:italic;color:var(--pk)}
-.gh-sub{font-size:.9rem;color:rgba(255,255,255,.5);font-weight:300;max-width:460px;line-height:1.75;margin-top:1.5rem}
-.gh-bottom{display:flex;align-items:flex-end;justify-content:space-between;border-top:1px solid rgba(255,255,255,.1);padding-top:2rem;margin-top:3rem}
-.gh-price{font-family:'Playfair Display',serif;font-size:4rem;font-weight:400;color:var(--pk);line-height:1}
-.gh-pnote{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:.3rem}
-.gh-buy{padding:.9rem 2rem;background:var(--pk);color:#fff;border:none;font-size:.6rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:'Geist',sans-serif;text-decoration:none;display:inline-block}
+.gh-sub{font-size:.88rem;color:rgba(255,255,255,.48);font-weight:300;max-width:440px;line-height:1.75;margin-top:1.3rem}
+.gh-bot{display:flex;align-items:flex-end;justify-content:space-between;border-top:1px solid rgba(255,255,255,.1);padding-top:1.8rem;margin-top:2.5rem}
+.gh-price{font-family:'Playfair Display',serif;font-size:3.8rem;font-weight:400;color:var(--pk);line-height:1}
+.gh-pnote{font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:.3rem}
 .gc-grid{display:grid;grid-template-columns:repeat(3,1fr)}
-.gc-item{padding:2rem;border-right:var(--rule);border-bottom:var(--rule)}
+.gc-item{padding:1.9rem;border-right:var(--rule);border-bottom:var(--rule)}
 .gc-item:nth-child(3n){border-right:none}
 .gc-item:nth-child(7),.gc-item:nth-child(8),.gc-item:nth-child(9){border-bottom:none}
-.gc-n{font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
-.gc-t{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:400;margin-top:.5rem;line-height:1.3}
-.gc-d{font-size:.73rem;color:var(--mid);font-weight:300;line-height:1.6;margin-top:.4rem}
+.gc-n{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
+.gc-t{font-family:'Playfair Display',serif;font-size:.92rem;font-weight:400;margin-top:.45rem;line-height:1.3}
+.gc-d{font-size:.7rem;color:var(--mid);font-weight:300;line-height:1.58;margin-top:.38rem}
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <span class="n-logo" onclick="go('home')">Gaskin <b>Lab</b></span>
   <div class="n-tabs">
@@ -274,37 +345,119 @@ footer{border-top:var(--rule);padding:1.4rem 2rem;display:flex;justify-content:s
   </div>
 </nav>
 
-<!-- ══ HOME ══ -->
+<!-- ════════════════ HOME ════════════════ -->
 <div id="p-home" class="pg on">
 <section class="hero">
   <div class="hero-l">
     <div>
       <div class="h-tag"><div class="h-dot"></div>Archival Handbags — Authenticated</div>
       <h1 class="h-h1">We source<br>the bags<br>you <i>cannot</i><br>find.</h1>
-      <p class="h-sub">S-Grade archival handbags from the golden era of luxury craftsmanship. Every piece authenticated, rigorously graded, and priced with investment logic.</p>
+      <p class="h-sub">S-Grade archival handbags from the golden era of luxury craftsmanship. Every piece graded, authenticated, and priced with investment logic.</p>
       <div class="h-btns">
         <button class="btn" onclick="go('shop')">Shop the collection</button>
         <button class="btn-out" onclick="go('guide')">Buying guide — £35</button>
       </div>
     </div>
   </div>
+  <!-- Hero mosaic: 4 lay flat bag cells -->
   <div class="hero-r">
-    <!-- Collector's Cage CDN images - brand collection shots -->
-    <div class="bag-cell">
-      <img src="https://collectorscage.com/cdn/shop/files/497495063_721326126912489_5722380507079985960_n_1.jpg?v=1757259249&width=700" alt="Chanel" loading="lazy">
-      <div class="bag-cell-info"><div class="bc-brand">Chanel</div><div class="bc-name">Classic Flap</div><div class="bc-price">from £2,400</div></div>
+    <div class="hero-cell" onclick="openProduct('chanel-flap')">
+      <div class="layflat" style="background:#f7f4f1">
+        <!-- Chanel Classic Flap lay flat -->
+        <svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="25" y="60" width="150" height="100" rx="4" fill="#1a1a1a"/>
+          <rect x="25" y="60" width="150" height="100" rx="4" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+          <!-- quilted pattern -->
+          <path d="M25 80 L175 80M25 100 L175 100M25 120 L175 120M25 140 L175 140M55 60 L55 160M85 60 L85 160M115 60 L115 160M145 60 L145 160" stroke="rgba(255,255,255,0.08)" stroke-width="0.8"/>
+          <path d="M25 70 L55 80M55 80 L85 70M85 70 L115 80M115 80 L145 70M145 70 L175 80M25 90 L55 100M55 100 L85 90M85 90 L115 100M115 100 L145 90M145 90 L175 100M25 110 L55 120M55 120 L85 110M85 110 L115 120M115 120 L145 110M145 110 L175 120M25 130 L55 140M55 140 L85 130M85 130 L115 140M115 140 L145 130M145 130 L175 140M25 150 L55 160M55 160 L85 150M85 150 L115 160M115 160 L145 150M145 150 L175 160" stroke="rgba(255,255,255,0.06)" stroke-width="0.6"/>
+          <!-- flap -->
+          <path d="M25 60 Q100 30 175 60" fill="#222" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+          <!-- CC clasp -->
+          <circle cx="100" cy="60" r="6" fill="none" stroke="#c8a96e" stroke-width="1.2"/>
+          <path d="M96 60 Q100 56 104 60 Q100 64 96 60Z" fill="none" stroke="#c8a96e" stroke-width="0.8"/>
+          <!-- chain -->
+          <path d="M60 60 Q55 45 60 35M140 60 Q145 45 140 35" stroke="#c8a96e" stroke-width="1.2" stroke-dasharray="2 1.5"/>
+          <line x1="60" y1="35" x2="140" y2="35" stroke="#c8a96e" stroke-width="1.2" stroke-dasharray="2 1.5"/>
+        </svg>
+      </div>
+      <div class="hero-cell-lbl"><div class="hc-brand">Chanel</div><div class="hc-name">Classic Flap</div><div class="hc-price">from £2,400</div></div>
     </div>
-    <div class="bag-cell">
-      <img src="https://collectorscage.com/cdn/shop/files/525422039_778512067860561_6825843025401550674_n.jpg?v=1757159488&width=700" alt="Balenciaga" loading="lazy">
-      <div class="bag-cell-info"><div class="bc-brand">Balenciaga</div><div class="bc-name">City</div><div class="bc-price">from £950</div></div>
+    <div class="hero-cell" onclick="openProduct('miu-miu-vitello')">
+      <div class="layflat" style="background:#fdf5f8">
+        <!-- Miu Miu Vitello Lux lay flat -->
+        <svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- body -->
+          <rect x="30" y="65" width="140" height="100" rx="5" fill="#e8a0b4"/>
+          <!-- flap overlay -->
+          <path d="M30 65 Q100 50 170 65 L170 105 Q100 92 30 105 Z" fill="#d48898"/>
+          <!-- top handles -->
+          <path d="M70 65 Q70 40 100 40 Q130 40 130 65" stroke="#c07888" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <!-- bow detail left -->
+          <path d="M45 90 L60 82 L55 92 L70 84 L60 96 L45 90Z" fill="#c07888"/>
+          <!-- bow detail right -->
+          <path d="M155 90 L140 82 L145 92 L130 84 L140 96 L155 90Z" fill="#c07888"/>
+          <!-- shoulder strap -->
+          <path d="M50 75 L30 160M150 75 L170 160" stroke="#c07888" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 2"/>
+          <!-- hardware -->
+          <circle cx="100" cy="88" r="4" fill="none" stroke="#d4a060" stroke-width="1.5"/>
+          <!-- Miu Miu text stamp -->
+          <text x="100" y="130" text-anchor="middle" fill="rgba(192,120,136,0.5)" font-size="6" font-family="serif" letter-spacing="2">MIU MIU</text>
+        </svg>
+      </div>
+      <div class="hero-cell-lbl"><div class="hc-brand">Miu Miu</div><div class="hc-name">Vitello Lux</div><div class="hc-price">from £480</div></div>
     </div>
-    <div class="bag-cell">
-      <img src="https://collectorscage.com/cdn/shop/files/535552792_793720723006362_3237020979720727457_n.jpg?v=1757159354&width=700" alt="Fendi" loading="lazy">
-      <div class="bag-cell-info"><div class="bc-brand">Fendi</div><div class="bc-name">Baguette</div><div class="bc-price">from £380</div></div>
+    <div class="hero-cell" onclick="openProduct('fendi-baguette')">
+      <div class="layflat" style="background:#f5f0e8">
+        <!-- Fendi Baguette lay flat -->
+        <svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- body - elongated baguette shape -->
+          <rect x="20" y="70" width="160" height="75" rx="12" fill="#c8a96e"/>
+          <!-- FF canvas pattern -->
+          <path d="M40 70 L40 145M60 70 L60 145M80 70 L80 145M100 70 L100 145M120 70 L120 145M140 70 L140 145M160 70 L160 145" stroke="rgba(100,80,40,0.15)" stroke-width="0.7"/>
+          <path d="M20 85 L180 85M20 100 L180 100M20 115 L180 115M20 130 L180 130" stroke="rgba(100,80,40,0.15)" stroke-width="0.7"/>
+          <!-- FF monogram marks at intersections -->
+          <text x="50" y="95" fill="rgba(80,60,20,0.3)" font-size="7" font-family="serif" font-weight="bold">FF</text>
+          <text x="90" y="112" fill="rgba(80,60,20,0.3)" font-size="7" font-family="serif" font-weight="bold">FF</text>
+          <text x="130" y="95" fill="rgba(80,60,20,0.3)" font-size="7" font-family="serif" font-weight="bold">FF</text>
+          <text x="70" y="128" fill="rgba(80,60,20,0.3)" font-size="7" font-family="serif" font-weight="bold">FF</text>
+          <text x="110" y="128" fill="rgba(80,60,20,0.3)" font-size="7" font-family="serif" font-weight="bold">FF</text>
+          <!-- strap -->
+          <path d="M60 70 Q60 48 100 48 Q140 48 140 70" stroke="#b8983e" stroke-width="8" fill="none" stroke-linecap="round"/>
+          <!-- flap -->
+          <path d="M20 70 L180 70 L180 92 Q100 85 20 92 Z" fill="#b8983e"/>
+          <!-- clasp -->
+          <rect x="88" y="66" width="24" height="10" rx="2" fill="#e8c860" stroke="#d4a040" stroke-width="0.8"/>
+          <text x="100" y="73" text-anchor="middle" fill="#a07820" font-size="4" font-family="serif" letter-spacing="0.5">FENDI</text>
+        </svg>
+      </div>
+      <div class="hero-cell-lbl"><div class="hc-brand">Fendi</div><div class="hc-name">Baguette</div><div class="hc-price">from £380</div></div>
     </div>
-    <div class="bag-cell">
-      <img src="https://collectorscage.com/cdn/shop/files/481306026_665526509159118_7802602108737816159_n_f945a033-ded8-4633-8315-ece07e91297f.jpg?v=1757098752&width=700" alt="Bottega Veneta" loading="lazy">
-      <div class="bag-cell-info"><div class="bc-brand">Bottega Veneta</div><div class="bc-name">Intrecciato</div><div class="bc-price">from £680</div></div>
+    <div class="hero-cell" onclick="openProduct('hermes-birkin')">
+      <div class="layflat" style="background:#f5f2ee">
+        <!-- Hermès Birkin lay flat -->
+        <svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- main body -->
+          <path d="M25 75 L175 75 L170 160 L30 160 Z" fill="#b89060"/>
+          <!-- Togo leather texture -->
+          <path d="M25 90 L175 88M25 105 L175 103M25 120 L175 118M25 135 L175 133M25 150 L175 148" stroke="rgba(90,65,30,0.08)" stroke-width="0.7"/>
+          <!-- top handle -->
+          <path d="M70 75 L70 55 Q100 45 130 55 L130 75" stroke="#9a7840" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+          <!-- straps and buckles -->
+          <rect x="25" y="72" width="18" height="6" rx="1.5" fill="#9a7840"/>
+          <rect x="157" y="72" width="18" height="6" rx="1.5" fill="#9a7840"/>
+          <rect x="30" y="70" width="8" height="8" rx="1" fill="none" stroke="#d4a060" stroke-width="1.2"/>
+          <rect x="162" y="70" width="8" height="8" rx="1" fill="none" stroke="#d4a060" stroke-width="1.2"/>
+          <!-- lock -->
+          <rect x="88" y="68" width="24" height="16" rx="2" fill="#d4a060"/>
+          <path d="M93 68 Q100 60 107 68" stroke="#d4a060" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <circle cx="100" cy="76" r="3" fill="#b88040"/>
+          <!-- stitching lines -->
+          <path d="M32 80 L32 155M168 80 L168 155" stroke="rgba(90,65,30,0.2)" stroke-width="0.5" stroke-dasharray="2 1.5"/>
+          <!-- Hermes stamp -->
+          <text x="100" y="125" text-anchor="middle" fill="rgba(90,65,30,0.25)" font-size="5" font-family="serif" letter-spacing="1.5">HERMÈS PARIS</text>
+        </svg>
+      </div>
+      <div class="hero-cell-lbl"><div class="hc-brand">Hermès</div><div class="hc-name">Birkin 25</div><div class="hc-price">from £7,000</div></div>
     </div>
   </div>
 </section>
@@ -326,36 +479,69 @@ footer{border-top:var(--rule);padding:1.4rem 2rem;display:flex;justify-content:s
   <span class="ti">10.2% average annual archival appreciation</span>
 </div></div>
 
-<div class="stats">
-  <div class="sc"><div class="sn">+233%</div><div class="sb"></div><div class="sd">Miu Miu Vitello Lux appreciation, 2022–26</div></div>
-  <div class="sc"><div class="sn">S-Grade</div><div class="sb"></div><div class="sd">Every piece authenticated before it ships to you</div></div>
-  <div class="sc"><div class="sn">£380–10k</div><div class="sb"></div><div class="sd">Pieces across every collector budget tier</div></div>
-  <div class="sc"><div class="sn">35–50%</div><div class="sb"></div><div class="sd">Below current boutique MSRP for equivalent pieces</div></div>
+<div class="stats-row">
+  <div class="stat"><div class="stat-n">+233%</div><div class="stat-bar"></div><div class="stat-d">Miu Miu Vitello Lux appreciation, 2022–26</div></div>
+  <div class="stat"><div class="stat-n">S-Grade</div><div class="stat-bar"></div><div class="stat-d">Every piece authenticated before it ships</div></div>
+  <div class="stat"><div class="stat-n">£380–10k</div><div class="stat-bar"></div><div class="stat-d">Pieces across every collector budget tier</div></div>
+  <div class="stat"><div class="stat-n">35–50%</div><div class="stat-bar"></div><div class="stat-d">Below current boutique MSRP for equivalent pieces</div></div>
 </div>
 
-<div class="feat-section">
+<!-- Featured bags -->
+<div style="border-bottom:var(--rule)">
   <div class="sec-bar">
     <span class="sec-lbl">New In &amp; Featured</span>
-    <span class="sec-lbl"><a onclick="go('shop')">View all &rarr;</a></span>
+    <span class="sec-lbl"><a class="sec-link" onclick="go('shop')">View all &rarr;</a></span>
   </div>
   <div class="feat-grid">
-    <div class="feat-card">
+    <div class="feat-card" onclick="openProduct('miu-miu-vitello')">
       <div class="fc-badge b-new">New In</div>
-      <div class="fc-img"><img src="https://collectorscage.com/cdn/shop/files/481306026_665526509159118_7802602108737816159_n_f945a033-ded8-4633-8315-ece07e91297f.jpg?v=1757098752&width=500" alt="Bottega Veneta" loading="lazy"></div>
-      <div class="fc-info"><div class="fc-brand">Bottega Veneta</div><div class="fc-name">Intrecciato Hobo — Nero</div><div class="fc-meta"><div class="fc-price">£680</div><div class="fc-grade">S-Grade</div></div></div>
+      <div class="fc-img">
+        <div class="layflat" style="background:#fdf5f8">
+          <svg viewBox="0 0 200 200" fill="none"><rect x="30" y="70" width="140" height="105" rx="5" fill="#e8a0b4"/><path d="M30 70 Q100 52 170 70 L170 115 Q100 100 30 115 Z" fill="#d48898"/><path d="M72 70 Q72 44 100 44 Q128 44 128 70" stroke="#c07888" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M45 94 L62 85 L57 97 L74 88 L62 100 L45 94Z" fill="#c07888"/><path d="M155 94 L138 85 L143 97 L126 88 L138 100 L155 94Z" fill="#c07888"/><circle cx="100" cy="92" r="4" fill="none" stroke="#d4a060" stroke-width="1.5"/></svg>
+        </div>
+      </div>
+      <div class="fc-info"><div class="fc-brand">Miu Miu</div><div class="fc-name">Vitello Lux Bow Satchel — Rosa</div><div class="fc-meta"><div class="fc-price">£550</div><div class="fc-grade">S-Grade</div></div></div>
     </div>
-    <div class="feat-card">
-      <div class="fc-img"><img src="https://collectorscage.com/cdn/shop/files/482005401_668338848877884_6217423105538724484_n.jpg?v=1756755036&width=500" alt="Gucci" loading="lazy"></div>
-      <div class="fc-info"><div class="fc-brand">Gucci</div><div class="fc-name">Jackie — Tom Ford Era</div><div class="fc-meta"><div class="fc-price">£540</div><div class="fc-grade">A-Grade</div></div></div>
+    <div class="feat-card" onclick="openProduct('fendi-baguette')">
+      <div class="fc-img">
+        <div class="layflat" style="background:#f7f2e8">
+          <svg viewBox="0 0 200 200" fill="none"><rect x="18" y="75" width="164" height="80" rx="13" fill="#c8a96e"/><path d="M40 75 L40 155M60 75 L60 155M80 75 L80 155M100 75 L100 155M120 75 L120 155M140 75 L140 155M160 75 L160 155M18 90 L182 90M18 107 L182 107M18 124 L182 124M18 140 L182 140" stroke="rgba(100,75,30,0.12)" stroke-width="0.8"/><text x="50" y="101" fill="rgba(80,55,15,0.28)" font-size="7.5" font-family="serif" font-weight="bold">FF</text><text x="90" y="118" fill="rgba(80,55,15,0.28)" font-size="7.5" font-family="serif" font-weight="bold">FF</text><text x="130" y="101" fill="rgba(80,55,15,0.28)" font-size="7.5" font-family="serif" font-weight="bold">FF</text><text x="70" y="135" fill="rgba(80,55,15,0.28)" font-size="7.5" font-family="serif" font-weight="bold">FF</text><text x="110" y="135" fill="rgba(80,55,15,0.28)" font-size="7.5" font-family="serif" font-weight="bold">FF</text><path d="M62 75 Q62 52 100 52 Q138 52 138 75" stroke="#b8983e" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M18 75 L182 75 L182 98 Q100 90 18 98 Z" fill="#b8983e"/><rect x="87" y="71" width="26" height="10" rx="2" fill="#e8c860" stroke="#c4941c" stroke-width="0.8"/></svg>
+        </div>
+      </div>
+      <div class="fc-info"><div class="fc-brand">Fendi</div><div class="fc-name">Baguette — Tobacco Zucca Canvas</div><div class="fc-meta"><div class="fc-price">£420</div><div class="fc-grade">A-Grade</div></div></div>
     </div>
-    <div class="feat-card">
+    <div class="feat-card" onclick="openProduct('chanel-flap')">
+      <div class="fc-img">
+        <div class="layflat" style="background:#f5f3f0">
+          <svg viewBox="0 0 200 200" fill="none"><rect x="24" y="65" width="152" height="108" rx="4" fill="#1a1a1a"/><path d="M24 80 L176 80M24 100 L176 100M24 120 L176 120M24 140 L176 140M24 160 L176 160M55 65 L55 173M85 65 L85 173M115 65 L115 173M145 65 L145 173" stroke="rgba(255,255,255,0.06)" stroke-width="0.9"/><path d="M24 65 Q100 38 176 65" fill="#222" stroke="rgba(255,255,255,0.08)" stroke-width="0.8"/><circle cx="100" cy="65" r="6.5" fill="none" stroke="#c8a96e" stroke-width="1.3"/><path d="M95 65 Q100 60 105 65 Q100 70 95 65Z" fill="none" stroke="#c8a96e" stroke-width="0.9"/><path d="M62 65 Q57 48 62 38M138 65 Q143 48 138 38" stroke="#c8a96e" stroke-width="1.3" stroke-dasharray="2.5 1.5"/><line x1="62" y1="38" x2="138" y2="38" stroke="#c8a96e" stroke-width="1.3" stroke-dasharray="2.5 1.5"/></svg>
+        </div>
+      </div>
+      <div class="fc-info"><div class="fc-brand">Chanel</div><div class="fc-name">Classic Flap Medium — Black Caviar</div><div class="fc-meta"><div class="fc-price">£2,800</div><div class="fc-grade">S-Grade</div></div></div>
+    </div>
+    <div class="feat-card" onclick="openProduct('dior-saddle')">
       <div class="fc-badge b-new">New In</div>
-      <div class="fc-img"><img src="https://collectorscage.com/cdn/shop/files/487485434_691376349907467_4088073753845808369_n.jpg?v=1757259054&width=500" alt="Prada" loading="lazy"></div>
-      <div class="fc-info"><div class="fc-brand">Prada</div><div class="fc-name">Re-Nylon Hobo — Black</div><div class="fc-meta"><div class="fc-price">£480</div><div class="fc-grade">S-Grade</div></div></div>
-    </div>
-    <div class="feat-card">
-      <div class="fc-img"><img src="https://collectorscage.com/cdn/shop/files/497495063_721326126912489_5722380507079985960_n_2.jpg?v=1757516169&width=500" alt="Chanel" loading="lazy"></div>
-      <div class="fc-info"><div class="fc-brand">Chanel</div><div class="fc-name">Classic Flap Medium — Caviar</div><div class="fc-meta"><div class="fc-price">£2,800</div><div class="fc-grade">S-Grade</div></div></div>
+      <div class="fc-img">
+        <div class="layflat" style="background:#f2f4f7">
+          <svg viewBox="0 0 200 200" fill="none">
+            <!-- Dior Saddle - asymmetric silhouette -->
+            <path d="M50 75 Q40 75 35 90 L30 155 Q30 165 50 165 L150 165 Q175 165 170 145 L165 95 Q162 75 140 75 Q130 72 110 70 Q80 72 50 75Z" fill="#4a6a9a"/>
+            <!-- Oblique canvas pattern -->
+            <path d="M35 85 L165 95M33 100 L167 110M32 115 L168 125M31 130 L169 140M30 145 L170 155" stroke="rgba(255,255,255,0.08)" stroke-width="0.7"/>
+            <path d="M45 75 L35 165M65 74 L55 165M85 72 L78 165M105 70 L100 165M125 71 L122 165M145 74 L145 165M162 80 L165 155" stroke="rgba(255,255,255,0.06)" stroke-width="0.7"/>
+            <!-- D clasp -->
+            <path d="M95 75 Q95 58 100 55 Q105 52 110 55 L112 75" stroke="#d4a060" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <rect x="92" y="70" width="22" height="10" rx="2" fill="#d4a060"/>
+            <!-- DIOR text on clasp -->
+            <text x="103" y="77" text-anchor="middle" fill="rgba(80,60,20,0.7)" font-size="4.5" font-family="serif" letter-spacing="0.8">DIOR</text>
+            <!-- metal feet -->
+            <circle cx="50" cy="162" r="3" fill="#d4a060"/>
+            <circle cx="150" cy="162" r="3" fill="#d4a060"/>
+            <!-- strap -->
+            <path d="M65 74 Q65 50 100 45 Q135 50 135 74" stroke="#3a5a8a" stroke-width="4" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="fc-info"><div class="fc-brand">Dior</div><div class="fc-name">Saddle — Denim Oblique 2002</div><div class="fc-meta"><div class="fc-price">£680</div><div class="fc-grade">S-Grade</div></div></div>
     </div>
   </div>
 </div>
@@ -368,12 +554,11 @@ footer{border-top:var(--rule);padding:1.4rem 2rem;display:flex;justify-content:s
     <ul class="gb-feats">
       <li>Best bags at £500, £1k, £3k, £5k &amp; £10k</li>
       <li>Historical appreciation charts (2020–2026)</li>
-      <li>Where we source — and why it matters</li>
       <li>When to buy, hold, and exit for peak ROI</li>
       <li>Authentication essentials for every major house</li>
       <li>2026–2028 market outlook &amp; assets to watch</li>
     </ul>
-    <div class="gb-actions">
+    <div class="gb-acts">
       <a class="btn" href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00">Buy the guide — £35</a>
       <button class="btn-out" onclick="go('guide')">Preview contents</button>
     </div>
@@ -392,15 +577,17 @@ footer{border-top:var(--rule);padding:1.4rem 2rem;display:flex;justify-content:s
   <div class="qt">"The most exciting assets are no longer in boutique windows. They are <em>hidden in the archives</em> — and most people have no idea."</div>
 </div>
 
-<div class="blog-prev">
+<!-- Blog preview -->
+<div style="border-bottom:var(--rule)">
   <div class="sec-bar" style="border-top:var(--rule)">
     <span class="sec-lbl">From the Journal</span>
-    <span class="sec-lbl"><a onclick="go('blog')">Read all essays &rarr;</a></span>
+    <span class="sec-lbl"><a class="sec-link" onclick="go('blog')">Read all essays &rarr;</a></span>
   </div>
   <div class="bp-grid">
-    <div class="bp-card" onclick="go('blog')">
-      <!-- Balenciaga bags — for the market analysis essay about appreciation -->
-      <div class="bp-img"><img src="https://collectorscage.com/cdn/shop/files/525422039_778512067860561_6825843025401550674_n.jpg?v=1757159488&width=600" alt="archival bags" loading="lazy"></div>
+    <div class="bp-card" onclick="openPost('miu-miu')">
+      <div class="bp-img layflat" style="background:#fdf5f8">
+        <svg viewBox="0 0 300 200" fill="none" width="100%" height="100%"><rect x="55" y="55" width="190" height="120" rx="6" fill="#e8a0b4"/><path d="M55 55 Q150 35 245 55 L245 105 Q150 88 55 105 Z" fill="#d48898"/><path d="M95 55 Q95 28 150 28 Q205 28 205 55" stroke="#c07888" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M68 88 L92 76 L85 92 L109 80 L92 98 L68 88Z" fill="#c07888"/><path d="M232 88 L208 76 L215 92 L191 80 L208 98 L232 88Z" fill="#c07888"/></svg>
+      </div>
       <div class="bp-body">
         <div class="bp-tag">Market Analysis <span class="tone tone-s">Serious</span></div>
         <div class="bp-title">Why the Miu Miu Vitello Lux is the most important bag of the decade</div>
@@ -408,9 +595,10 @@ footer{border-top:var(--rule);padding:1.4rem 2rem;display:flex;justify-content:s
         <div class="bp-read">Read essay &rarr;</div>
       </div>
     </div>
-    <div class="bp-card" onclick="go('blog')">
-      <!-- Chanel bags — for the Chanel hunting diary essay -->
-      <div class="bp-img"><img src="https://collectorscage.com/cdn/shop/files/497495063_721326126912489_5722380507079985960_n_1.jpg?v=1757259249&width=600" alt="Chanel flap" loading="lazy"></div>
+    <div class="bp-card" onclick="openPost('chanel-hunt')">
+      <div class="bp-img layflat" style="background:#f5f3f0">
+        <svg viewBox="0 0 300 200" fill="none" width="100%" height="100%"><rect x="50" y="50" width="200" height="120" rx="4" fill="#1a1a1a"/><path d="M50 65 L250 65M50 85 L250 85M50 105 L250 105M50 125 L250 125M50 145 L250 145M50 165 L250 165M80 50 L80 170M110 50 L110 170M140 50 L140 170M170 50 L170 170M200 50 L200 170M230 50 L230 170" stroke="rgba(255,255,255,0.05)" stroke-width="1"/><path d="M50 50 Q150 25 250 50" fill="#222" stroke="rgba(255,255,255,0.08)" stroke-width="0.8"/><circle cx="150" cy="50" r="8" fill="none" stroke="#c8a96e" stroke-width="1.5"/><line x1="100" y1="50" x2="100" y2="30" stroke="#c8a96e" stroke-width="1.3" stroke-dasharray="3 2"/><line x1="200" y1="50" x2="200" y2="30" stroke="#c8a96e" stroke-width="1.3" stroke-dasharray="3 2"/><line x1="100" y1="30" x2="200" y2="30" stroke="#c8a96e" stroke-width="1.3" stroke-dasharray="3 2"/></svg>
+      </div>
       <div class="bp-body">
         <div class="bp-tag">Collecting Life <span class="tone tone-l">Light</span></div>
         <div class="bp-title">I spent 6 months finding the perfect Chanel flap. Here's what I learned.</div>
@@ -418,9 +606,10 @@ footer{border-top:var(--rule);padding:1.4rem 2rem;display:flex;justify-content:s
         <div class="bp-read">Read essay &rarr;</div>
       </div>
     </div>
-    <div class="bp-card" onclick="go('blog')">
-      <!-- Fendi bags — for the authentication essay -->
-      <div class="bp-img"><img src="https://collectorscage.com/cdn/shop/files/535552792_793720723006362_3237020979720727457_n.jpg?v=1757159354&width=600" alt="Fendi baguette" loading="lazy"></div>
+    <div class="bp-card" onclick="openPost('authentication')">
+      <div class="bp-img layflat" style="background:#f7f2e8">
+        <svg viewBox="0 0 300 200" fill="none" width="100%" height="100%"><rect x="35" y="58" width="230" height="100" rx="16" fill="#c8a96e"/><path d="M60 58 L60 158M90 58 L90 158M120 58 L120 158M150 58 L150 158M180 58 L180 158M210 58 L210 158M240 58 L240 158M35 78 L265 78M35 98 L265 98M35 118 L265 118M35 138 L265 138" stroke="rgba(100,75,30,0.1)" stroke-width="1"/><path d="M88 58 Q88 36 150 36 Q212 36 212 58" stroke="#b8983e" stroke-width="11" fill="none" stroke-linecap="round"/><path d="M35 58 L265 58 L265 84 Q150 76 35 84 Z" fill="#b8983e"/><rect x="130" y="52" width="40" height="14" rx="2.5" fill="#e8c860" stroke="#c4941c" stroke-width="1"/><text x="150" y="61" text-anchor="middle" fill="#a07820" font-size="5.5" font-family="serif" letter-spacing="0.8">FENDI</text></svg>
+      </div>
       <div class="bp-body">
         <div class="bp-tag">Authentication <span class="tone tone-s">Serious</span></div>
         <div class="bp-title">The five things counterfeiters always get wrong</div>
@@ -434,41 +623,46 @@ footer{border-top:var(--rule);padding:1.4rem 2rem;display:flex;justify-content:s
 <footer><div class="f-logo">Gaskin <b>Lab</b></div><ul class="f-links"><li><a href="#">@gaskinlab</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul><div class="f-copy">&copy; 2026 Gaskin Lab · London · Worldwide</div></footer>
 </div>
 
-<!-- ══ SHOP ══ -->
+<!-- ════════════════ SHOP ════════════════ -->
 <div id="p-shop" class="pg">
 <div class="shop-head">
   <div>
-    <div style="font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:.8rem">Gaskin Lab — Curated Archival</div>
+    <div style="font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:.75rem">Gaskin Lab — Curated Archival</div>
     <h1 class="sh-h">The <i>Vault</i><br>Collection</h1>
   </div>
   <div class="sh-r">
     <div class="sh-desc">Every piece S-Grade authenticated, rigorously graded, and pre-vetted for investment potential.</div>
-    <div class="sh-meta">12 pieces available · Updated monthly</div>
+    <div class="sh-meta">6 pieces available · Updated monthly</div>
   </div>
 </div>
 <div class="filters">
   <button class="f-btn on" onclick="flt(this)">All</button>
+  <button class="f-btn" onclick="flt(this)">Miu Miu</button>
   <button class="f-btn" onclick="flt(this)">Chanel</button>
-  <button class="f-btn" onclick="flt(this)">Balenciaga</button>
+  <button class="f-btn" onclick="flt(this)">Hermès</button>
   <button class="f-btn" onclick="flt(this)">Fendi</button>
   <button class="f-btn" onclick="flt(this)">Dior</button>
-  <button class="f-btn" onclick="flt(this)">Bottega Veneta</button>
   <button class="f-btn" onclick="flt(this)">Under £1,000</button>
-  <button class="f-btn" onclick="flt(this)">S-Grade Only</button>
 </div>
 <div>
   <div class="sec-bar"><span class="sec-lbl">Curated Collections</span><span class="sec-lbl">3 active drops</span></div>
   <div class="colls">
     <div class="coll">
-      <div class="coll-photo"><img src="https://collectorscage.com/cdn/shop/files/497495063_721326126912489_5722380507079985960_n_1.jpg?v=1757259249&width=800" alt="Chanel" loading="lazy"></div>
-      <div class="coll-info"><div class="coll-bar"></div><div class="coll-tag">Drop 001 · 2026</div><div class="coll-name">Lagerfeld Era Chanel</div><div class="coll-sub">3 pieces · £1,800–£3,400</div></div>
+      <div class="coll-photo layflat" style="background:#fdf5f8">
+        <svg viewBox="0 0 300 180" fill="none" width="100%" height="100%"><rect x="50" y="45" width="200" height="115" rx="5" fill="#e8a0b4"/><path d="M50 45 Q150 25 250 45 L250 90 Q150 73 50 90 Z" fill="#d48898"/><path d="M95 45 Q95 18 150 18 Q205 18 205 45" stroke="#c07888" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M68 72 L90 62 L84 74 L106 64 L90 78 L68 72Z" fill="#c07888"/><path d="M232 72 L210 62 L216 74 L194 64 L210 78 L232 72Z" fill="#c07888"/></svg>
+      </div>
+      <div class="coll-info"><div class="coll-bar"></div><div class="coll-tag">Drop 001 · 2026</div><div class="coll-name">The Miu Miu Vitello Edit</div><div class="coll-sub">4 pieces · £480–£1,100</div></div>
     </div>
     <div class="coll">
-      <div class="coll-photo"><img src="https://collectorscage.com/cdn/shop/files/525422039_778512067860561_6825843025401550674_n.jpg?v=1757159488&width=800" alt="Balenciaga" loading="lazy"></div>
-      <div class="coll-info"><div class="coll-bar"></div><div class="coll-tag">Drop 002 · 2026</div><div class="coll-name">Original Hardware Balenciaga</div><div class="coll-sub">4 pieces · £850–£1,600</div></div>
+      <div class="coll-photo layflat" style="background:#f5f3f0">
+        <svg viewBox="0 0 300 180" fill="none" width="100%" height="100%"><rect x="40" y="40" width="220" height="120" rx="4" fill="#1a1a1a"/><path d="M40 56 L260 56M40 76 L260 76M40 96 L260 96M40 116 L260 116M40 136 L260 136M40 156 L260 156M75 40 L75 160M110 40 L110 160M145 40 L145 160M180 40 L180 160M215 40 L215 160M250 40 L250 160" stroke="rgba(255,255,255,0.05)" stroke-width="1"/><path d="M40 40 Q150 12 260 40" fill="#222"/><circle cx="150" cy="40" r="9" fill="none" stroke="#c8a96e" stroke-width="1.5"/><line x1="100" y1="40" x2="100" y2="18" stroke="#c8a96e" stroke-width="1.3" stroke-dasharray="3 2"/><line x1="200" y1="40" x2="200" y2="18" stroke="#c8a96e" stroke-width="1.3" stroke-dasharray="3 2"/><line x1="100" y1="18" x2="200" y2="18" stroke="#c8a96e" stroke-width="1.3" stroke-dasharray="3 2"/></svg>
+      </div>
+      <div class="coll-info"><div class="coll-bar"></div><div class="coll-tag">Drop 002 · 2026</div><div class="coll-name">Lagerfeld Era Chanel</div><div class="coll-sub">3 pieces · £1,800–£3,400</div></div>
     </div>
     <div class="coll">
-      <div class="coll-photo"><img src="https://collectorscage.com/cdn/shop/files/535552792_793720723006362_3237020979720727457_n.jpg?v=1757159354&width=800" alt="Fendi" loading="lazy"></div>
+      <div class="coll-photo layflat" style="background:#f7f2e8">
+        <svg viewBox="0 0 300 180" fill="none" width="100%" height="100%"><rect x="30" y="55" width="240" height="95" rx="14" fill="#c8a96e"/><path d="M52 55 L52 150M80 55 L80 150M108 55 L108 150M136 55 L136 150M164 55 L164 150M192 55 L192 150M220 55 L220 150M248 55 L248 150M30 72 L270 72M30 89 L270 89M30 107 L270 107M30 124 L270 124M30 141 L270 141" stroke="rgba(100,75,30,0.1)" stroke-width="0.8"/><path d="M90 55 Q90 30 150 30 Q210 30 210 55" stroke="#b8983e" stroke-width="10" fill="none" stroke-linecap="round"/><path d="M30 55 L270 55 L270 80 Q150 72 30 80 Z" fill="#b8983e"/><rect x="125" y="49" width="50" height="14" rx="3" fill="#e8c860" stroke="#c4941c" stroke-width="1"/></svg>
+      </div>
       <div class="coll-info"><div class="coll-bar"></div><div class="coll-tag">Drop 003 · 2026</div><div class="coll-name">Archival Entry Points</div><div class="coll-sub">5 pieces · £280–£650</div></div>
     </div>
   </div>
@@ -476,33 +670,82 @@ footer{border-top:var(--rule);padding:1.4rem 2rem;display:flex;justify-content:s
 <div>
   <div class="sec-bar" style="border-top:var(--rule)"><span class="sec-lbl">Individual Pieces</span><span class="sec-lbl">All S-Grade unless stated</span></div>
   <div class="products">
-    <div class="prod">
+
+    <div class="prod" onclick="openProduct('miu-miu-vitello')">
       <div class="prod-badge pn">New In</div>
-      <div class="prod-img"><img src="https://collectorscage.com/cdn/shop/files/481306026_665526509159118_7802602108737816159_n_f945a033-ded8-4633-8315-ece07e91297f.jpg?v=1757098752&width=600" alt="Bottega Veneta" loading="lazy"></div>
-      <div class="prod-info"><div class="p-brand">Bottega Veneta</div><div class="p-name">Intrecciato Hobo — Nero</div><div class="p-detail">Tomas Maier era · Woven calfskin</div><div class="p-meta"><div class="p-price">£680</div><div class="p-grade">S-Grade</div></div><a class="p-cta" href="#">Enquire &rarr;</a></div>
+      <div class="prod-img layflat" style="background:#fdf5f8">
+        <svg viewBox="0 0 200 220" fill="none" width="100%" height="100%"><rect x="30" y="75" width="140" height="115" rx="5" fill="#e8a0b4"/><path d="M30 75 Q100 55 170 75 L170 120 Q100 104 30 120 Z" fill="#d48898"/><path d="M72 75 Q72 48 100 48 Q128 48 128 75" stroke="#c07888" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M45 100 L63 90 L57 103 L75 93 L62 107 L45 100Z" fill="#c07888"/><path d="M155 100 L137 90 L143 103 L125 93 L138 107 L155 100Z" fill="#c07888"/><circle cx="100" cy="97" r="4.5" fill="none" stroke="#d4a060" stroke-width="1.5"/><text x="100" y="148" text-anchor="middle" fill="rgba(192,120,136,0.35)" font-size="5.5" font-family="serif" letter-spacing="2">MIU MIU</text></svg>
+      </div>
+      <div class="prod-info"><div class="p-brand">Miu Miu</div><div class="p-name">Vitello Lux Bow Satchel — Rosa</div><div class="p-detail">2002–2006 era · Full-grain Vitello · Gold HW</div><div class="p-meta"><div class="p-price">£550</div><div class="p-grade">S-Grade</div></div><a class="p-cta" onclick="openProduct('miu-miu-vitello')">View piece &rarr;</a></div>
     </div>
-    <div class="prod">
-      <div class="prod-img"><img src="https://collectorscage.com/cdn/shop/files/482005401_668338848877884_6217423105538724484_n.jpg?v=1756755036&width=600" alt="Gucci" loading="lazy"></div>
-      <div class="prod-info"><div class="p-brand">Gucci</div><div class="p-name">Jackie — Tom Ford Era</div><div class="p-detail">1994–2004 · Original canvas</div><div class="p-meta"><div class="p-price">£540</div><div class="p-grade">A-Grade</div></div><a class="p-cta" href="#">Enquire &rarr;</a></div>
+
+    <div class="prod" onclick="openProduct('fendi-baguette')">
+      <div class="prod-img layflat" style="background:#f7f2e8">
+        <svg viewBox="0 0 200 220" fill="none" width="100%" height="100%"><rect x="18" y="88" width="164" height="88" rx="13" fill="#c8a96e"/><path d="M38 88 L38 176M58 88 L58 176M78 88 L78 176M98 88 L98 176M118 88 L118 176M138 88 L138 176M158 88 L158 176M178 88 L178 176M18 103 L182 103M18 118 L182 118M18 134 L182 134M18 150 L182 150M18 165 L182 165" stroke="rgba(100,75,30,0.1)" stroke-width="0.8"/><text x="48" y="116" fill="rgba(80,55,15,0.3)" font-size="7.5" font-family="serif" font-weight="bold">FF</text><text x="88" y="132" fill="rgba(80,55,15,0.3)" font-size="7.5" font-family="serif" font-weight="bold">FF</text><text x="128" y="116" fill="rgba(80,55,15,0.3)" font-size="7.5" font-family="serif" font-weight="bold">FF</text><text x="68" y="148" fill="rgba(80,55,15,0.3)" font-size="7.5" font-family="serif" font-weight="bold">FF</text><text x="108" y="148" fill="rgba(80,55,15,0.3)" font-size="7.5" font-family="serif" font-weight="bold">FF</text><path d="M58 88 Q58 64 100 64 Q142 64 142 88" stroke="#b8983e" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M18 88 L182 88 L182 110 Q100 102 18 110 Z" fill="#b8983e"/><rect x="82" y="83" width="36" height="12" rx="2.5" fill="#e8c860" stroke="#c4941c" stroke-width="0.9"/><text x="100" y="91" text-anchor="middle" fill="#a07820" font-size="4.5" font-family="serif" letter-spacing="0.8">FENDI</text></svg>
+      </div>
+      <div class="prod-info"><div class="p-brand">Fendi</div><div class="p-name">Baguette — Tobacco Zucca Canvas</div><div class="p-detail">1999–2002 archival · Original canvas · Brass</div><div class="p-meta"><div class="p-price">£420</div><div class="p-grade">A-Grade</div></div><a class="p-cta" onclick="openProduct('fendi-baguette')">View piece &rarr;</a></div>
     </div>
-    <div class="prod">
+
+    <div class="prod" onclick="openProduct('chanel-flap')">
       <div class="prod-badge ps">Sold</div>
-      <div class="prod-img"><img src="https://collectorscage.com/cdn/shop/files/497495063_721326126912489_5722380507079985960_n_2.jpg?v=1757516169&width=600" alt="Chanel" loading="lazy"></div>
-      <div class="prod-info"><div class="p-brand">Chanel</div><div class="p-name">Classic Flap Medium — Black Caviar</div><div class="p-detail">Lagerfeld era · Caviar leather · Gold CC</div><div class="p-meta"><div class="p-price">£2,800</div><div class="p-grade">S-Grade</div></div><a class="p-cta sold" href="#">Sold</a></div>
+      <div class="prod-img layflat" style="background:#f5f3f0">
+        <svg viewBox="0 0 200 220" fill="none" width="100%" height="100%"><rect x="24" y="72" width="152" height="118" rx="4" fill="#1a1a1a"/><path d="M24 86 L176 86M24 106 L176 106M24 126 L176 126M24 146 L176 146M24 166 L176 166M24 186 L176 186M55 72 L55 190M85 72 L85 190M115 72 L115 190M145 72 L145 190" stroke="rgba(255,255,255,0.055)" stroke-width="1"/><path d="M24 72 Q100 44 176 72" fill="#222" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><circle cx="100" cy="72" r="7" fill="none" stroke="#c8a96e" stroke-width="1.4"/><path d="M94 72 Q100 66 106 72 Q100 78 94 72Z" fill="none" stroke="#c8a96e" stroke-width="1"/><path d="M62 72 Q57 52 62 40M138 72 Q143 52 138 40" stroke="#c8a96e" stroke-width="1.4" stroke-dasharray="3 2"/><line x1="62" y1="40" x2="138" y2="40" stroke="#c8a96e" stroke-width="1.4" stroke-dasharray="3 2"/></svg>
+      </div>
+      <div class="prod-info"><div class="p-brand">Chanel</div><div class="p-name">Classic Flap Medium — Black Caviar</div><div class="p-detail">Lagerfeld era · Caviar leather · Gold CC</div><div class="p-meta"><div class="p-price">£2,800</div><div class="p-grade">S-Grade</div></div><a class="p-cta sold">Sold</a></div>
     </div>
-    <div class="prod">
+
+    <div class="prod" onclick="openProduct('dior-saddle')">
       <div class="prod-badge pn">New In</div>
-      <div class="prod-img"><img src="https://collectorscage.com/cdn/shop/files/487485434_691376349907467_4088073753845808369_n.jpg?v=1757259054&width=600" alt="Prada" loading="lazy"></div>
-      <div class="prod-info"><div class="p-brand">Prada</div><div class="p-name">Re-Nylon Hobo — Black</div><div class="p-detail">1990s original · Re-Nylon · Silver HW</div><div class="p-meta"><div class="p-price">£480</div><div class="p-grade">S-Grade</div></div><a class="p-cta" href="#">Enquire &rarr;</a></div>
+      <div class="prod-img layflat" style="background:#f2f4f7">
+        <svg viewBox="0 0 200 220" fill="none" width="100%" height="100%">
+          <path d="M50 88 Q38 88 33 104 L28 178 Q28 190 50 190 L150 190 Q178 190 173 168 L167 112 Q163 88 140 88 Q128 84 108 82 Q78 84 50 88Z" fill="#4a6a9a"/>
+          <path d="M34 100 L166 112M32 118 L168 130M30 136 L170 148M29 154 L171 166M28 172 L172 180" stroke="rgba(255,255,255,0.07)" stroke-width="0.8"/>
+          <path d="M45 88 L33 190M68 87 L57 190M92 84 L85 190M116 82 L113 190M139 84 L142 190M159 88 L166 175" stroke="rgba(255,255,255,0.055)" stroke-width="0.8"/>
+          <path d="M92 88 Q92 68 100 64 Q108 60 116 64 L118 88" stroke="#d4a060" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <rect x="88" y="82" width="28" height="12" rx="2.5" fill="#d4a060"/>
+          <text x="102" y="91" text-anchor="middle" fill="rgba(80,55,10,0.7)" font-size="4.8" font-family="serif" letter-spacing="0.8">DIOR</text>
+          <circle cx="50" cy="186" r="3.5" fill="#d4a060"/>
+          <circle cx="150" cy="186" r="3.5" fill="#d4a060"/>
+          <path d="M65 87 Q65 62 100 57 Q135 62 135 87" stroke="#3a5a8a" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="prod-info"><div class="p-brand">Dior</div><div class="p-name">Saddle — Denim Oblique 2002</div><div class="p-detail">2000–2004 archival · Original denim · Silver HW</div><div class="p-meta"><div class="p-price">£680</div><div class="p-grade">S-Grade</div></div><a class="p-cta" onclick="openProduct('dior-saddle')">View piece &rarr;</a></div>
     </div>
-    <div class="prod">
-      <div class="prod-img"><img src="https://collectorscage.com/cdn/shop/files/525422039_778512067860561_6825843025401550674_n.jpg?v=1757159488&width=600" alt="Balenciaga City" loading="lazy"></div>
-      <div class="prod-info"><div class="p-brand">Balenciaga</div><div class="p-name">City — Giant Hardware</div><div class="p-detail">2006–2008 · Distressed lambskin · Silver GH</div><div class="p-meta"><div class="p-price">£1,100</div><div class="p-grade">S-Grade</div></div><a class="p-cta" href="#">Enquire &rarr;</a></div>
+
+    <div class="prod" onclick="openProduct('balenciaga-city')">
+      <div class="prod-img layflat" style="background:#f5f3f0">
+        <svg viewBox="0 0 200 220" fill="none" width="100%" height="100%">
+          <!-- Balenciaga City - distressed look -->
+          <rect x="25" y="78" width="150" height="118" rx="4" fill="#3a3a3a"/>
+          <!-- leather texture -->
+          <path d="M25 95 L175 95M25 115 L175 115M25 135 L175 135M25 155 L175 155M25 175 L175 175" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <!-- top zip -->
+          <rect x="25" y="74" width="150" height="8" rx="2" fill="#2a2a2a"/>
+          <circle cx="100" cy="78" r="3" fill="#888"/>
+          <!-- handles -->
+          <path d="M55 78 Q55 55 75 50 Q100 46 125 50 Q145 55 145 78" stroke="#2a2a2a" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <!-- giant hardware rivets -->
+          <circle cx="36" cy="84" r="5" fill="#aaa" stroke="#888" stroke-width="0.5"/>
+          <circle cx="164" cy="84" r="5" fill="#aaa" stroke="#888" stroke-width="0.5"/>
+          <!-- front zipper -->
+          <line x1="40" y1="130" x2="160" y2="130" stroke="#555" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <circle cx="155" cy="130" r="3.5" fill="#888"/>
+          <!-- tassel -->
+          <path d="M36 84 L28 110 M164 84 L172 110" stroke="#888" stroke-width="1.5"/>
+          <!-- shoulder strap -->
+          <path d="M40 84 L20 190M160 84 L180 190" stroke="#2a2a2a" stroke-width="3.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="prod-info"><div class="p-brand">Balenciaga</div><div class="p-name">City — Giant Hardware, Anthracite</div><div class="p-detail">2006–2008 era · Distressed lambskin · Silver GH</div><div class="p-meta"><div class="p-price">£1,100</div><div class="p-grade">S-Grade</div></div><a class="p-cta" onclick="openProduct('balenciaga-city')">View piece &rarr;</a></div>
     </div>
-    <div class="prod">
-      <div class="prod-img"><img src="https://collectorscage.com/cdn/shop/files/535552792_793720723006362_3237020979720727457_n.jpg?v=1757159354&width=600" alt="Fendi" loading="lazy"></div>
-      <div class="prod-info"><div class="p-brand">Fendi</div><div class="p-name">Baguette — Tobacco Zucca Canvas</div><div class="p-detail">1999–2002 · Original canvas · Brass logo</div><div class="p-meta"><div class="p-price">£420</div><div class="p-grade">A-Grade</div></div><a class="p-cta" href="#">Enquire &rarr;</a></div>
+
+    <div class="prod" onclick="openProduct('hermes-birkin')">
+      <div class="prod-img layflat" style="background:#f5f2ee">
+        <svg viewBox="0 0 200 220" fill="none" width="100%" height="100%"><path d="M25 82 L175 82 L170 188 L30 188 Z" fill="#b89060"/><path d="M25 98 L175 96M25 114 L175 112M25 130 L175 128M25 146 L175 144M25 162 L175 160M25 178 L175 176" stroke="rgba(90,65,30,0.07)" stroke-width="0.8"/><path d="M68 82 L68 60 Q100 50 132 60 L132 82" stroke="#9a7840" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="25" y="78" width="20" height="7" rx="2" fill="#9a7840"/><rect x="155" y="78" width="20" height="7" rx="2" fill="#9a7840"/><rect x="29" y="76" width="9" height="9" rx="1.5" fill="none" stroke="#d4a060" stroke-width="1.3"/><rect x="162" y="76" width="9" height="9" rx="1.5" fill="none" stroke="#d4a060" stroke-width="1.3"/><rect x="86" y="74" width="28" height="18" rx="2.5" fill="#d4a060"/><path d="M91 74 Q100 65 109 74" stroke="#d4a060" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="100" cy="83" r="3.5" fill="#b08040"/><path d="M32 86 L32 184M168 86 L168 184" stroke="rgba(90,65,30,0.18)" stroke-width="0.6" stroke-dasharray="2.5 1.5"/><text x="100" y="148" text-anchor="middle" fill="rgba(90,65,30,0.2)" font-size="5" font-family="serif" letter-spacing="2">HERMÈS PARIS</text></svg>
+      </div>
+      <div class="prod-info"><div class="p-brand">Hermès</div><div class="p-name">Birkin 25 — Gold Togo</div><div class="p-detail">2005 era · Togo leather · Gold palladium HW</div><div class="p-meta"><div class="p-price">£7,400</div><div class="p-grade">S-Grade</div></div><a class="p-cta" onclick="openProduct('hermes-birkin')">View piece &rarr;</a></div>
     </div>
+
   </div>
 </div>
 <div class="concierge">
@@ -512,16 +755,24 @@ footer{border-top:var(--rule);padding:1.4rem 2rem;display:flex;justify-content:s
 <footer><div class="f-logo">Gaskin <b>Lab</b></div><ul class="f-links"><li><a href="#">@gaskinlab</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul><div class="f-copy">&copy; 2026 Gaskin Lab</div></footer>
 </div>
 
-<!-- ══ BLOG ══ -->
+<!-- ════════════════ PRODUCT PAGE ════════════════ -->
+<div id="p-product" class="pg">
+<div class="prod-page" id="product-content">
+  <!-- Filled by JS -->
+</div>
+</div>
+
+<!-- ════════════════ BLOG LIST ════════════════ -->
 <div id="p-blog" class="pg">
 <div class="blog-head">
   <div><h1 class="bh-h">The Gaskin Lab<br><i>Journal</i></h1></div>
-  <div class="bh-desc">Essays on archival fashion — from market analysis and authentication deep-dives to the more personal, obsessive, and occasionally absurd realities of collecting.</div>
+  <div class="bh-desc">Essays on archival fashion — from market analysis and authentication deep-dives to the occasionally absurd realities of collecting.</div>
 </div>
 
-<div class="essay-feat">
-  <!-- Featured essay: Miu Miu analysis — using Balenciaga bag photo as archival editorial -->
-  <div class="ef-photo"><img src="https://collectorscage.com/cdn/shop/files/501750624_731282759250159_7934380311137775783_n_2.jpg?v=1757159628&width=900" alt="archival bags" loading="lazy" onerror="this.src='https://collectorscage.com/cdn/shop/files/525422039_778512067860561_6825843025401550674_n.jpg?v=1757159488&width=900'"></div>
+<div class="essay-feat" style="cursor:pointer" onclick="openPost('miu-miu')">
+  <div class="ef-img layflat" style="background:#fdf5f8">
+    <svg viewBox="0 0 500 360" fill="none" width="100%" height="100%"><rect x="100" y="90" width="300" height="200" rx="8" fill="#e8a0b4"/><path d="M100 90 Q250 60 400 90 L400 170 Q250 144 100 170 Z" fill="#d48898"/><path d="M165 90 Q165 40 250 40 Q335 40 335 90" stroke="#c07888" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M122 155 L162 136 L150 160 L190 141 L160 170 L122 155Z" fill="#c07888"/><path d="M378 155 L338 136 L350 160 L310 141 L340 170 L378 155Z" fill="#c07888"/><circle cx="250" cy="155" r="10" fill="none" stroke="#d4a060" stroke-width="3"/></svg>
+  </div>
   <div class="ef-body">
     <div>
       <div class="ef-tag">Market Analysis <span class="tone tone-s">Serious</span></div>
@@ -533,54 +784,61 @@ footer{border-top:var(--rule);padding:1.4rem 2rem;display:flex;justify-content:s
 </div>
 
 <div class="essay-grid">
-  <div class="essay-card">
-    <div class="ec-img"><img src="https://collectorscage.com/cdn/shop/files/535552792_793720723006362_3237020979720727457_n.jpg?v=1757159354&width=300" alt="Fendi" loading="lazy"></div>
-    <div class="ec-body"><div class="ec-tag">Authentication <span class="tone tone-s">Serious</span></div><div class="ec-h">The five things counterfeiters always get wrong</div><div class="ec-exc">Hardware weight, stitch tension, serial format. The tells that expose even sophisticated fakes.</div><div class="ec-meta">8 min · February 2026</div></div>
-  </div>
-  <div class="essay-card">
-    <div class="ec-img"><img src="https://collectorscage.com/cdn/shop/files/497495063_721326126912489_5722380507079985960_n_1.jpg?v=1757259249&width=300" alt="Chanel" loading="lazy"></div>
+  <div class="essay-card" onclick="openPost('chanel-hunt')">
+    <div class="ec-img layflat" style="background:#f5f3f0;min-height:160px">
+      <svg viewBox="0 0 130 160" fill="none" width="100%" height="100%"><rect x="18" y="45" width="94" height="90" rx="3" fill="#1a1a1a"/><path d="M18 55 L112 55M18 70 L112 70M18 85 L112 85M18 100 L112 100M18 115 L112 115M18 130 L112 130" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/><path d="M35 45 L35 135M50 45 L50 135M65 45 L65 135M80 45 L80 135M95 45 L95 135" stroke="rgba(255,255,255,0.04)" stroke-width="0.8"/><path d="M18 45 Q65 26 112 45" fill="#222"/><circle cx="65" cy="45" r="5" fill="none" stroke="#c8a96e" stroke-width="1.2"/><line x1="40" y1="45" x2="40" y2="28" stroke="#c8a96e" stroke-width="1.2" stroke-dasharray="2 1.5"/><line x1="90" y1="45" x2="90" y2="28" stroke="#c8a96e" stroke-width="1.2" stroke-dasharray="2 1.5"/><line x1="40" y1="28" x2="90" y2="28" stroke="#c8a96e" stroke-width="1.2" stroke-dasharray="2 1.5"/></svg>
+    </div>
     <div class="ec-body"><div class="ec-tag">Collecting Life <span class="tone tone-l">Light</span></div><div class="ec-h">I spent six months finding the perfect Chanel flap. Here's what I learned.</div><div class="ec-exc">Patience, bad listings, a near-miss counterfeit, and the moment everything clicked.</div><div class="ec-meta">10 min · January 2026</div></div>
   </div>
-  <div class="essay-card">
-    <div class="ec-img"><img src="https://collectorscage.com/cdn/shop/files/525422039_778512067860561_6825843025401550674_n.jpg?v=1757159488&width=300" alt="Balenciaga" loading="lazy"></div>
-    <div class="ec-body"><div class="ec-tag">Market Analysis <span class="tone tone-s">Serious</span></div><div class="ec-h">The archival supply is running out. What happens next?</div><div class="ec-exc">The supply of S-grade golden era leather is finite. When the stockrooms are empty, the floor price correction will be permanent.</div><div class="ec-meta">9 min · December 2025</div></div>
+  <div class="essay-card" onclick="openPost('authentication')">
+    <div class="ec-img layflat" style="background:#f7f2e8;min-height:160px">
+      <svg viewBox="0 0 130 160" fill="none" width="100%" height="100%"><rect x="12" y="52" width="106" height="72" rx="9" fill="#c8a96e"/><path d="M25 52 L25 124M40 52 L40 124M55 52 L55 124M70 52 L70 124M85 52 L85 124M100 52 L100 124M12 65 L118 65M12 78 L118 78M12 91 L118 91M12 104 L118 104M12 117 L118 117" stroke="rgba(100,75,30,0.1)" stroke-width="0.7"/><path d="M38 52 Q38 32 65 32 Q92 32 92 52" stroke="#b8983e" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M12 52 L118 52 L118 68 Q65 62 12 68 Z" fill="#b8983e"/><rect x="52" y="47" width="26" height="10" rx="2" fill="#e8c860" stroke="#c4941c" stroke-width="0.8"/></svg>
+    </div>
+    <div class="ec-body"><div class="ec-tag">Authentication <span class="tone tone-s">Serious</span></div><div class="ec-h">The five things counterfeiters always get wrong</div><div class="ec-exc">Hardware weight, stitch tension, serial format. The tells that expose even sophisticated fakes.</div><div class="ec-meta">8 min · February 2026</div></div>
   </div>
-  <div class="essay-card">
-    <div class="ec-img"><img src="https://collectorscage.com/cdn/shop/files/482005401_668338848877884_6217423105538724484_n.jpg?v=1756755036&width=300" alt="Gucci" loading="lazy"></div>
-    <div class="ec-body"><div class="ec-tag">Collecting Life <span class="tone tone-l">Light</span></div><div class="ec-h">How I accidentally explained bag investment theory at my sister's wedding</div><div class="ec-exc">Nobody asked. I started anyway. By the third course, three people wanted to know if the Miu Miu beat a pension.</div><div class="ec-meta">6 min · November 2025</div></div>
+  <div class="essay-card" onclick="openPost('supply')">
+    <div class="ec-img layflat" style="background:#f5f2ee;min-height:160px">
+      <svg viewBox="0 0 130 160" fill="none" width="100%" height="100%"><path d="M20 65 L110 65 L106 138 L24 138 Z" fill="#b89060"/><path d="M20 78 L110 76M20 91 L110 89M20 104 L110 102M20 117 L110 115M20 130 L110 128" stroke="rgba(90,65,30,0.07)" stroke-width="0.7"/><path d="M45 65 L45 48 Q65 40 85 48 L85 65" stroke="#9a7840" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="54" y="58" width="22" height="14" rx="2" fill="#d4a060"/><path d="M58 58 Q65 52 72 58" stroke="#d4a060" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="65" cy="65" r="3" fill="#b08040"/></svg>
+    </div>
+    <div class="ec-body"><div class="ec-tag">Market Analysis <span class="tone tone-s">Serious</span></div><div class="ec-h">The archival supply is running out. What happens next?</div><div class="ec-exc">S-grade Golden Era inventory (1990–2010) is reaching critical depletion. When the stockrooms are empty, the floor price correction will be permanent.</div><div class="ec-meta">9 min · December 2025</div></div>
   </div>
-  <div class="essay-card">
-    <div class="ec-img"><img src="https://collectorscage.com/cdn/shop/files/481306026_665526509159118_7802602108737816159_n_f945a033-ded8-4633-8315-ece07e91297f.jpg?v=1757098752&width=300" alt="Bottega Veneta" loading="lazy"></div>
+  <div class="essay-card" onclick="openPost('wedding')">
+    <div class="ec-img layflat" style="background:#fdf5f8;min-height:160px">
+      <svg viewBox="0 0 130 160" fill="none" width="100%" height="100%"><rect x="22" y="55" width="86" height="80" rx="4" fill="#e8a0b4"/><path d="M22 55 Q65 38 108 55 L108 90 Q65 76 22 90 Z" fill="#d48898"/><path d="M45 55 Q45 32 65 32 Q85 32 85 55" stroke="#c07888" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M32 72 L44 65 L40 74 L52 67 L44 77 L32 72Z" fill="#c07888"/><path d="M98 72 L86 65 L90 74 L78 67 L86 77 L98 72Z" fill="#c07888"/></svg>
+    </div>
+    <div class="ec-body"><div class="ec-tag">Collecting Life <span class="tone tone-l">Light</span></div><div class="ec-h">How I accidentally explained bag investment theory at my sister's wedding</div><div class="ec-exc">Nobody asked. I started anyway. By the third course, three people wanted to know if the Miu Miu beat a pension. It did.</div><div class="ec-meta">6 min · November 2025</div></div>
+  </div>
+  <div class="essay-card" onclick="openPost('baguette-history')">
+    <div class="ec-img layflat" style="background:#f7f2e8;min-height:160px">
+      <svg viewBox="0 0 130 160" fill="none" width="100%" height="100%"><rect x="8" y="62" width="114" height="66" rx="10" fill="#c8a96e"/><path d="M20 62 L20 128M35 62 L35 128M50 62 L50 128M65 62 L65 128M80 62 L80 128M95 62 L95 128M110 62 L110 128M8 75 L122 75M8 89 L122 89M8 103 L122 103M8 117 L122 117" stroke="rgba(100,75,30,0.1)" stroke-width="0.7"/><text x="28" y="83" fill="rgba(80,55,15,0.3)" font-size="6.5" font-family="serif" font-weight="bold">FF</text><text x="57" y="96" fill="rgba(80,55,15,0.3)" font-size="6.5" font-family="serif" font-weight="bold">FF</text><text x="86" y="83" fill="rgba(80,55,15,0.3)" font-size="6.5" font-family="serif" font-weight="bold">FF</text><path d="M38 62 Q38 42 65 42 Q92 42 92 62" stroke="#b8983e" stroke-width="6.5" fill="none" stroke-linecap="round"/><path d="M8 62 L122 62 L122 80 Q65 74 8 80 Z" fill="#b8983e"/></svg>
+    </div>
     <div class="ec-body"><div class="ec-tag">History <span class="tone tone-s">Serious</span></div><div class="ec-h">The Fendi Baguette and the invention of the "it bag"</div><div class="ec-exc">How one absurdly small, impractically shaped bag rewrote the rules of luxury desire and created the collector market we inhabit.</div><div class="ec-meta">11 min · October 2025</div></div>
   </div>
-  <div class="essay-card">
-    <div class="ec-img"><img src="https://collectorscage.com/cdn/shop/files/487485434_691376349907467_4088073753845808369_n.jpg?v=1757259054&width=300" alt="Prada" loading="lazy"></div>
+  <div class="essay-card" onclick="openPost('birkin-sp500')">
+    <div class="ec-img layflat" style="background:#f5f2ee;min-height:160px">
+      <svg viewBox="0 0 130 160" fill="none" width="100%" height="100%"><path d="M16 60 L114 60 L110 135 L20 135 Z" fill="#b89060"/><path d="M16 73 L114 71M16 86 L114 84M16 99 L114 97M16 112 L114 110M16 125 L114 123" stroke="rgba(90,65,30,0.07)" stroke-width="0.7"/><path d="M38 60 L38 44 Q65 36 92 44 L92 60" stroke="#9a7840" stroke-width="3.5" fill="none" stroke-linecap="round"/><rect x="20" y="57" width="13" height="5" rx="1.5" fill="#9a7840"/><rect x="97" y="57" width="13" height="5" rx="1.5" fill="#9a7840"/><rect x="57" y="54" width="18" height="12" rx="2" fill="#d4a060"/><path d="M60 54 Q65 48 70 54" stroke="#d4a060" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="65" cy="60" r="2.5" fill="#b08040"/></svg>
+    </div>
     <div class="ec-body"><div class="ec-tag">Market Analysis <span class="tone tone-s">Serious</span></div><div class="ec-h">The Hermès Birkin vs. the S&amp;P 500: a ten-year comparison</div><div class="ec-exc">We ran the numbers. The Birkin 25 returned 131% over ten years. The S&amp;P returned 174%. But you can't wear an index fund.</div><div class="ec-meta">8 min · July 2025</div></div>
   </div>
 </div>
 
-<div class="newsletter">
+<div class="nl">
   <div><div class="nl-h">The Gaskin Lab<br><em>Monthly Drop</em></div><div class="nl-sub">New inventory alerts, market analysis, and the occasional opinion nobody asked for. Once a month. Never spam.</div></div>
-  <div>
-    <div class="nl-form"><input class="nl-input" type="email" placeholder="your@email.com"><button class="nl-submit">Subscribe &rarr;</button></div>
-    <div style="font-size:.56rem;color:rgba(255,255,255,.25);margin-top:.7rem;letter-spacing:.08em">No spam. Unsubscribe anytime.</div>
-  </div>
+  <div><div class="nl-form"><input class="nl-input" type="email" placeholder="your@email.com"><button class="nl-sub-btn">Subscribe &rarr;</button></div><div style="font-size:.54rem;color:rgba(255,255,255,.22);margin-top:.65rem;letter-spacing:.08em">No spam. Unsubscribe anytime.</div></div>
 </div>
 <footer><div class="f-logo">Gaskin <b>Lab</b></div><ul class="f-links"><li><a href="#">@gaskinlab</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul><div class="f-copy">&copy; 2026 Gaskin Lab</div></footer>
 </div>
 
-<!-- ══ GUIDE ══ -->
+<!-- ════════════════ BLOG POST ════════════════ -->
+<div id="p-post" class="pg">
+  <div id="post-content"></div>
+</div>
+
+<!-- ════════════════ GUIDE ════════════════ -->
 <div id="p-guide" class="pg">
 <div class="guide-hero">
-  <div>
-    <div class="gh-tag">Gaskin Lab · 2026 Edition</div>
-    <h1 class="gh-h">The Archival<br>Buying <i>Guide</i></h1>
-    <p class="gh-sub">14 pages of market data, price history, our top picks across 9 budget tiers, and authentication intelligence. For every budget from £380 to £10,000.</p>
-  </div>
-  <div class="gh-bottom">
-    <div><div class="gh-price">£35</div><div class="gh-pnote">One-time · Instant PDF · No subscription</div></div>
-    <a class="gh-buy" href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00">Buy &amp; Download &rarr;</a>
-  </div>
+  <div><div class="gh-tag">Gaskin Lab · 2026 Edition</div><h1 class="gh-h">The Archival<br>Buying <i>Guide</i></h1><p class="gh-sub">14 pages of market data, price history, our top picks, and authentication intelligence. For every budget from £380 to £10,000.</p></div>
+  <div class="gh-bot"><div><div class="gh-price">£35</div><div class="gh-pnote">One-time · Instant PDF · No subscription</div></div><a class="btn-pk" href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00">Buy &amp; Download &rarr;</a></div>
 </div>
 <div style="border-bottom:var(--rule)">
   <div class="sec-bar"><span class="sec-lbl">What's inside — 9 chapters</span><span class="sec-lbl">14 pages · PDF</span></div>
@@ -596,10 +854,10 @@ footer{border-top:var(--rule);padding:1.4rem 2rem;display:flex;justify-content:s
     <div class="gc-item"><div class="gc-n">09</div><div class="gc-t">What's Coming: 2026–2028</div><div class="gc-d">Four assets to watch, the supply timeline, and where the next correction is building.</div></div>
   </div>
 </div>
-<div style="background:var(--off);border-top:var(--rule);padding:3rem 2rem;display:flex;justify-content:space-between;align-items:center">
+<div style="background:var(--off);border-top:var(--rule);padding:2.8rem 2rem;display:flex;justify-content:space-between;align-items:center">
   <div>
-    <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:400;font-style:italic">Ready to start collecting intelligently?</div>
-    <div style="font-size:.8rem;color:var(--mid);font-weight:300;margin-top:.4rem">One PDF. Everything you need to buy your first — or next — archival piece with confidence.</div>
+    <div style="font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:400;font-style:italic">Ready to start collecting intelligently?</div>
+    <div style="font-size:.78rem;color:var(--mid);font-weight:300;margin-top:.38rem">One PDF. Everything you need to buy your first — or next — archival piece with confidence.</div>
   </div>
   <a class="btn" href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00">Buy the guide — £35</a>
 </div>
@@ -607,16 +865,484 @@ footer{border-top:var(--rule);padding:1.4rem 2rem;display:flex;justify-content:s
 </div>
 
 <script>
+// ── page switching ──
 function go(p){
   document.querySelectorAll('.pg').forEach(e=>e.classList.remove('on'));
   document.querySelectorAll('.n-tab').forEach(e=>e.classList.remove('on'));
   document.getElementById('p-'+p).classList.add('on');
-  document.getElementById('t-'+p).classList.add('on');
+  const tab=document.getElementById('t-'+p);
+  if(tab) tab.classList.add('on');
   window.scrollTo(0,0);
 }
-function flt(el){
-  document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('on'));
-  el.classList.add('on');
+function flt(el){document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('on'));el.classList.add('on');}
+
+// ── PRODUCT DATA ──
+const PRODUCTS = {
+  'chanel-flap': {
+    brand:'Chanel', name:'Classic Flap Medium — Black Caviar',
+    era:'Lagerfeld era · 2005–2010', price:'£2,800', grade:'S-Grade',
+    appreciation:'+112%', floorWas:'£900 (2019)', floorNow:'£2,800+',
+    liquidityWindow:'Under 1 week',
+    desc:'The single most liquid archival asset below £5,000. The Classic Flap in black caviar leather with gold CC hardware is the index-tracking position in any archival portfolio — consistent appreciation, a buyer pool that never disappears, and instant resale when priced correctly.',
+    why:"Caviar leather is Chanel's most durable hide — it resists scratching and retains colour far better than lambskin. The Lagerfeld era pieces used a heavier, more structured caviar that is immediately distinguishable from the lighter material in post-2015 production. Box and original dustbag add 10–15% to achievable sale price.",
+    specs:[['Material','Black caviar leather'],['Hardware','Gold-tone CC turnlock'],['Interior','Burgundy grosgrain'],['Size','Medium (M/L)'],['Era','2005–2010'],['Provenance','Full authentication certificate']],
+    bullets:['S-Grade: zero corner wear, unchipped hardware, clean lining','Original CC turnlock alignment is precise and symmetrical — key authentication point','Holographic serial sticker intact and matching','Sold with Gaskin Lab authentication certificate and dust bag'],
+    bgColor:'#f5f3f0',
+    svgKey:'chanel-flap',
+  },
+  'miu-miu-vitello': {
+    brand:'Miu Miu', name:'Vitello Lux Bow Satchel — Rosa',
+    era:'2002–2006 era', price:'£550', grade:'S-Grade',
+    appreciation:'+500%+', floorWas:'£80 (2022)', floorNow:'£480–£700',
+    liquidityWindow:'2–5 days',
+    desc:"The defining archival story of the decade. Full-grain Vitello leather with era-specific hardware that cannot be replicated in modern mass production. With Miu Miu holding the #1 global desirability ranking three years running, the archival pieces are only going one way.",
+    why:"The Rosa colourway commands a 15–20% premium over black or beige. This example dates to 2002–2006, the peak production era with the heaviest hardware and tightest leather grain — both key value indicators. The interior serial card is present and matching.",
+    specs:[['Material','Full-grain Vitello leather'],['Colour','Rosa (blush pink)'],['Hardware','Gold-tone, original weight'],['Era','2002–2006'],['Closure','Zip top with bow detail'],['Provenance','Serial card + auth certificate']],
+    bullets:['S-Grade: all four corners pristine, hardware unchipped and original','Interior authenticity card present and matching serial number','Detachable shoulder strap included','Sold with Gaskin Lab authentication certificate'],
+    bgColor:'#fdf5f8',
+    svgKey:'miu-miu-vitello',
+  },
+  'fendi-baguette': {
+    brand:'Fendi', name:'Baguette — Tobacco Zucca Canvas',
+    era:'1999–2002 archival', price:'£420', grade:'A-Grade',
+    appreciation:'+133%', floorWas:'£120 (2022)', floorNow:'£380–£500',
+    liquidityWindow:'3–7 days',
+    desc:"The original 'it bag' is a confirmed archival classic. The Tobacco Zucca canvas colourway from the late 1990s carries the highest collector premium of any Baguette iteration — warm FF monogram on tobacco ground, original brass hardware with Fendi lettering.",
+    why:"Supply of S-Grade and A-Grade Tobacco Baguettes is extremely thin. The Zucca canvas on genuine pieces from this era continues seamlessly around all seams — a key authentication point that distinguishes originals from later production. The brass logo lettering is original weight and patina.",
+    specs:[['Material','Zucca FF canvas + leather trim'],['Colour','Tobacco / cognac'],['Hardware','Original brass Fendi logo'],['Era','1999–2002'],['Grade','A (minimal wear)'],['Provenance','Date code verified']],
+    bullets:['A-Grade: light surface wear on canvas consistent with age, all hardware intact','Zucca pattern continues seamlessly around all seams — authentication confirmed','Date code stamped on interior leather patch and verified','Sold with Gaskin Lab authentication certificate'],
+    bgColor:'#f7f2e8',
+    svgKey:'fendi-baguette',
+  },
+  'dior-saddle': {
+    brand:'Dior', name:'Saddle Bag — Denim Oblique 2002',
+    era:'2000–2004 archival', price:'£680', grade:'S-Grade',
+    appreciation:'+218%', floorWas:'£150 (2021)', floorNow:'£620–£850',
+    liquidityWindow:'3–6 days',
+    desc:"Two canonical moments in one bag. The 2000s denim Oblique is structurally different from the modern reissue — thicker canvas, more rigid construction, original metal feet on the base, and Dior script hardware rather than modern fabric-embossed lettering.",
+    why:"Celebrity styling correlation for this exact model is exceptionally strong. Price spikes of 15–30% have occurred within days of major editorial placements of the original Saddle. This 2002 example is from the peak Galliano-era production, with the correct D-clasp profile and original metal feet intact.",
+    specs:[['Material','Denim Oblique canvas'],['Hardware','Silver Dior script (original)'],['Era','2002 (Galliano era)'],['Base','4 original metal feet'],['Closure','D-ring clasp'],['Provenance','Auth certificate']],
+    bullets:['S-Grade: all four metal feet intact, canvas unfrayed, D-clasp fully functional','Original metal Dior script hardware (not modern fabric embossed)','Date code confirmed 2002 Galliano production','Sold with Gaskin Lab authentication certificate'],
+    bgColor:'#f2f4f7',
+    svgKey:'dior-saddle',
+  },
+  'balenciaga-city': {
+    brand:'Balenciaga', name:'City Bag — Giant Hardware, Anthracite',
+    era:'2006–2008 era', price:'£1,100', grade:'S-Grade',
+    appreciation:'+150%', floorWas:'£400 (2020)', floorNow:'£950–£1,500',
+    liquidityWindow:'5–10 days',
+    desc:"The defining bag of the mid-2000s is now attracting serious collector interest. This anthracite example has the original Giant hardware with 14mm rivets — the key authenticator that distinguishes first-generation Giant from later iterations with smaller 12mm rivets.",
+    why:"Anthracite is the second most desirable City colourway (after ink), commanding a premium over standard black. The distressed lambskin in this example has developed the correct patina — soft, supple, with the characteristic Balenciaga rumple rather than stiff breaking. Hardware is unpolished and original.",
+    specs:[['Material','Distressed lambskin'],['Colour','Anthracite'],['Hardware','Silver Giant HW, 14mm rivets'],['Era','2006–2008'],['Tassels','Original, intact'],['Provenance','Auth certificate']],
+    bullets:['S-Grade: lambskin supple with correct age patina, no cracking or peeling','Giant hardware rivets measure 14mm — confirmed original generation','All tassels intact, zipper pulls original weight','Sold with Gaskin Lab authentication certificate'],
+    bgColor:'#f5f3f0',
+    svgKey:'balenciaga-city',
+  },
+  'hermes-birkin': {
+    brand:'Hermès', name:'Birkin 25 — Gold Togo Leather',
+    era:'2005 production (Stamp J)', price:'£7,400', grade:'S-Grade',
+    appreciation:'+131%', floorWas:'£3,200 (2020)', floorNow:'£7,000–£9,500',
+    liquidityWindow:'Instant',
+    desc:"Togo leather in gold with palladium hardware — the single most liquid configuration of the Birkin 25. Togo is Hermès's most durable leather: scratch-resistant, colour-retaining, and aging into a beautiful patina rather than breaking down. Zero depreciation risk.",
+    why:"The Birkin 25 has outperformed the 30 and 35 in appreciation velocity since 2021, driven by the market's preference for smaller structured bags. Gold colourway with palladium (not gold) hardware is a rare and particularly sought-after combination, commanding a premium over standard gold-hardware gold.",
+    specs:[['Leather','Gold Togo'],['Hardware','Palladium (silver-tone)'],['Size','25cm'],['Era','2005 (Stamp J)'],['Date stamp','J in square — authenticated'],['Provenance','Full Hermès authentication']],
+    bullets:['S-Grade: pristine condition, no corner wear, hardware unscratched','Blind stamp J in square confirmed and independently authenticated','Clochette and padlock with two keys included','Sold with full Hermès authentication and Gaskin Lab certificate'],
+    bgColor:'#f5f2ee',
+    svgKey:'hermes-birkin',
+  },
+};
+
+// ── SVG BAG ILLUSTRATIONS (reused across pages) ──
+const SVGS = {
+  'chanel-flap': `<svg viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="35" y="88" width="230" height="165" rx="5" fill="#1a1a1a"/>
+    <path d="M35 108 L265 108M35 136 L265 136M35 164 L265 164M35 192 L265 192M35 220 L265 220M35 248 L265 248M80 88 L80 253M120 88 L120 253M160 88 L160 253M200 88 L200 253M240 88 L240 253" stroke="rgba(255,255,255,0.055)" stroke-width="1.2"/>
+    <path d="M35 88 Q150 52 265 88" fill="#222" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    <circle cx="150" cy="88" r="9" fill="none" stroke="#c8a96e" stroke-width="1.8"/>
+    <path d="M140 88 Q150 78 160 88 Q150 98 140 88Z" fill="none" stroke="#c8a96e" stroke-width="1.2"/>
+    <path d="M88 88 Q80 62 88 48M212 88 Q220 62 212 48" stroke="#c8a96e" stroke-width="1.8" stroke-dasharray="4 2.5"/>
+    <line x1="88" y1="48" x2="212" y2="48" stroke="#c8a96e" stroke-width="1.8" stroke-dasharray="4 2.5"/>
+  </svg>`,
+  'miu-miu-vitello': `<svg viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="40" y="90" width="220" height="165" rx="7" fill="#e8a0b4"/>
+    <path d="M40 90 Q150 65 260 90 L260 155 Q150 133 40 155 Z" fill="#d48898"/>
+    <path d="M100 90 Q100 52 150 52 Q200 52 200 90" stroke="#c07888" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+    <path d="M58 120 L86 106 L78 124 L106 110 L86 130 L58 120Z" fill="#c07888"/>
+    <path d="M242 120 L214 106 L222 124 L194 110 L214 130 L242 120Z" fill="#c07888"/>
+    <path d="M76 102 L40 240M224 102 L260 240" stroke="#c07888" stroke-width="4" stroke-linecap="round" stroke-dasharray="4 3"/>
+    <circle cx="150" cy="135" r="7" fill="none" stroke="#d4a060" stroke-width="2"/>
+    <text x="150" y="200" text-anchor="middle" fill="rgba(192,120,136,0.3)" font-size="8" font-family="serif" letter-spacing="3">MIU MIU</text>
+  </svg>`,
+  'fendi-baguette': `<svg viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="22" y="100" width="256" height="128" rx="18" fill="#c8a96e"/>
+    <path d="M45 100 L45 228M70 100 L70 228M95 100 L95 228M120 100 L120 228M145 100 L145 228M170 100 L170 228M195 100 L195 228M220 100 L220 228M245 100 L245 228M22 118 L278 118M22 136 L278 136M22 154 L278 154M22 172 L278 172M22 190 L278 190M22 208 L278 208" stroke="rgba(100,75,30,0.1)" stroke-width="1"/>
+    <text x="56" y="130" fill="rgba(80,55,15,0.28)" font-size="11" font-family="serif" font-weight="bold">FF</text>
+    <text x="112" y="150" fill="rgba(80,55,15,0.28)" font-size="11" font-family="serif" font-weight="bold">FF</text>
+    <text x="168" y="130" fill="rgba(80,55,15,0.28)" font-size="11" font-family="serif" font-weight="bold">FF</text>
+    <text x="224" y="150" fill="rgba(80,55,15,0.28)" font-size="11" font-family="serif" font-weight="bold">FF</text>
+    <text x="84" y="170" fill="rgba(80,55,15,0.28)" font-size="11" font-family="serif" font-weight="bold">FF</text>
+    <text x="140" y="190" fill="rgba(80,55,15,0.28)" font-size="11" font-family="serif" font-weight="bold">FF</text>
+    <text x="196" y="170" fill="rgba(80,55,15,0.28)" font-size="11" font-family="serif" font-weight="bold">FF</text>
+    <path d="M88 100 Q88 62 150 62 Q212 62 212 100" stroke="#b8983e" stroke-width="13" fill="none" stroke-linecap="round"/>
+    <path d="M22 100 L278 100 L278 128 Q150 118 22 128 Z" fill="#b8983e"/>
+    <rect x="118" y="92" width="64" height="18" rx="3.5" fill="#e8c860" stroke="#c4941c" stroke-width="1.2"/>
+    <text x="150" y="104" text-anchor="middle" fill="#a07820" font-size="7" font-family="serif" letter-spacing="1.5">FENDI</text>
+  </svg>`,
+  'dior-saddle': `<svg viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M72 96 Q55 96 48 116 L40 232 Q40 248 72 248 L228 248 Q268 248 260 220 L250 138 Q245 96 210 96 Q194 88 164 84 Q118 88 72 96Z" fill="#4a6a9a"/>
+    <path d="M44 116 L252 130M42 140 L254 154M40 165 L256 178M38 190 L258 202M36 215 L260 226" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+    <path d="M62 96 L44 248M95 93 L78 248M130 88 L120 248M165 84 L162 248M198 87 L204 248M232 96 L250 238" stroke="rgba(255,255,255,0.055)" stroke-width="1"/>
+    <path d="M140 96 Q140 72 150 66 Q162 60 172 66 L176 96" stroke="#d4a060" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <rect x="132" y="88" width="44" height="18" rx="3.5" fill="#d4a060"/>
+    <text x="154" y="100" text-anchor="middle" fill="rgba(80,55,10,0.75)" font-size="7" font-family="serif" letter-spacing="1.5">DIOR</text>
+    <circle cx="72" cy="243" r="5" fill="#d4a060"/>
+    <circle cx="228" cy="243" r="5" fill="#d4a060"/>
+    <path d="M96 92 Q96 64 150 58 Q204 64 204 92" stroke="#3a5a8a" stroke-width="6.5" fill="none" stroke-linecap="round"/>
+  </svg>`,
+  'balenciaga-city': `<svg viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="38" y="102" width="224" height="160" rx="5" fill="#3a3a3a"/>
+    <path d="M38 122 L262 122M38 145 L262 145M38 168 L262 168M38 191 L262 191M38 214 L262 214M38 237 L262 237M38 260 L262 260" stroke="rgba(255,255,255,0.04)" stroke-width="1.2"/>
+    <rect x="38" y="96" width="224" height="12" rx="3" fill="#2a2a2a"/>
+    <circle cx="150" cy="102" r="4.5" fill="#888"/>
+    <path d="M80 102 Q80 72 110 64 Q150 58 190 64 Q220 72 220 102" stroke="#2a2a2a" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <circle cx="52" cy="112" r="7" fill="#aaa" stroke="#888" stroke-width="0.8"/>
+    <circle cx="248" cy="112" r="7" fill="#aaa" stroke="#888" stroke-width="0.8"/>
+    <line x1="58" y1="170" x2="242" y2="170" stroke="#555" stroke-width="2" stroke-dasharray="4 3"/>
+    <circle cx="236" cy="170" r="5.5" fill="#888"/>
+    <path d="M52" y1="112" L40 150M248 112 L260 150" stroke="#888" stroke-width="2" stroke-linecap="round"/>
+    <path d="M52 112 L38 260M248 112 L262 260" stroke="#2a2a2a" stroke-width="5" stroke-linecap="round"/>
+  </svg>`,
+  'hermes-birkin': `<svg viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M38 104 L262 104 L254 260 L46 260 Z" fill="#b89060"/>
+    <path d="M38 124 L262 122M38 145 L262 143M38 165 L262 163M38 186 L262 184M38 207 L262 205M38 228 L262 226M38 248 L262 246" stroke="rgba(90,65,30,0.07)" stroke-width="1"/>
+    <path d="M100 104 L100 72 Q150 58 200 72 L200 104" stroke="#9a7840" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <rect x="38" y="98" width="30" height="11" rx="3" fill="#9a7840"/>
+    <rect x="232" y="98" width="30" height="11" rx="3" fill="#9a7840"/>
+    <rect x="43" y="95" width="14" height="14" rx="2.5" fill="none" stroke="#d4a060" stroke-width="2"/>
+    <rect x="243" y="95" width="14" height="14" rx="2.5" fill="none" stroke="#d4a060" stroke-width="2"/>
+    <rect x="128" y="94" width="44" height="26" rx="3.5" fill="#d4a060"/>
+    <path d="M136 94 Q150 80 164 94" stroke="#d4a060" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <circle cx="150" cy="107" r="5.5" fill="#b08040"/>
+    <path d="M46 108 L46 256M254 108 L254 256" stroke="rgba(90,65,30,0.15)" stroke-width="0.8" stroke-dasharray="3 2"/>
+    <text x="150" y="198" text-anchor="middle" fill="rgba(90,65,30,0.18)" font-size="7.5" font-family="serif" letter-spacing="3">HERMÈS PARIS</text>
+  </svg>`,
+};
+
+function openProduct(id) {
+  const p = PRODUCTS[id];
+  if(!p) return;
+  const svg = SVGS[p.svgKey] || SVGS['chanel-flap'];
+  document.getElementById('product-content').innerHTML = `
+    <div class="pp-left">
+      <div class="pp-main-img layflat" style="background:${p.bgColor}">${svg}</div>
+      <div class="pp-thumbs">
+        <div class="pp-thumb on layflat" style="background:${p.bgColor}">${svg}</div>
+        <div class="pp-thumb layflat" style="background:${p.bgColor};opacity:.6">${svg}</div>
+        <div class="pp-thumb layflat" style="background:${p.bgColor};opacity:.4">${svg}</div>
+      </div>
+    </div>
+    <div class="pp-right">
+      <div class="pp-breadcrumb" onclick="go('shop')">Shop <span>/ ${p.brand}</span></div>
+      <div class="pp-brand">${p.brand}</div>
+      <div class="pp-name">${p.name}</div>
+      <div class="pp-era">${p.era}</div>
+      <div class="pp-price-row">
+        <div class="pp-price">${p.price}</div>
+        <div class="pp-grade-badge">${p.grade}</div>
+      </div>
+      <div class="pp-stats">
+        <div class="pp-stat"><div class="pp-stat-l">Appreciation</div><div class="pp-stat-v">${p.appreciation}</div></div>
+        <div class="pp-stat"><div class="pp-stat-l">Floor was</div><div class="pp-stat-v">${p.floorWas}</div></div>
+        <div class="pp-stat"><div class="pp-stat-l">Resale window</div><div class="pp-stat-v">${p.liquidityWindow}</div></div>
+      </div>
+      <div class="pp-section">
+        <div class="pp-section-title">About this piece</div>
+        <div class="pp-body">${p.desc}</div>
+      </div>
+      <div class="pp-section">
+        <div class="pp-section-title">Why it's a strong buy</div>
+        <div class="pp-body">${p.why}</div>
+      </div>
+      <div class="pp-section">
+        <div class="pp-section-title">Specifications</div>
+        <div class="pp-spec-grid">${p.specs.map(([k,v])=>`<div class="pp-spec"><div class="pp-spec-k">${k}</div><div class="pp-spec-v">${v}</div></div>`).join('')}</div>
+      </div>
+      <div class="pp-section">
+        <div class="pp-section-title">Condition notes</div>
+        <ul class="pp-bullets">${p.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
+      </div>
+      <div class="pp-cta-block">
+        <a class="btn" href="mailto:press@gaskinlab.co.uk?subject=Enquiry: ${encodeURIComponent(p.brand+' '+p.name)}" style="text-align:center">Enquire about this piece &rarr;</a>
+        <div class="pp-guarantee">Authentication certificate included · Secure enquiry · press@gaskinlab.co.uk</div>
+        <div class="pp-appr"><div class="pp-appr-dot"></div> This piece has shown ${p.appreciation} appreciation from its 2019–2022 floor price</div>
+      </div>
+    </div>
+  `;
+  go('product');
+}
+
+// ── BLOG POST DATA ──
+const POSTS = {
+  'miu-miu': {
+    tag:'Market Analysis', tone:'Serious',
+    title:'Why the Miu Miu Vitello Lux is the most important bag of the decade',
+    author:'Olivia Gaskin', date:'March 2026', read:'12 min read',
+    bgColor:'#fdf5f8', svgKey:'miu-miu-vitello',
+    lead:"Everyone is talking about the +233% appreciation. But the real story is subtler, stranger, and more instructive than a price chart.",
+    body:`<p class="post-p">Let me tell you about a bag that sold for £80 in 2022. Not £800. Eighty pounds. It was a Miu Miu Vitello Lux Bow Satchel in Rosa, sourced from a specialist market that very few buyers were paying attention to at the time. That same bag now has a floor price of £480 — and that's the floor. S-Grade examples with original dustbag are trading at £650 to £700. In three years.</p>
+    <h2 class="post-h2">The mechanics of the correction</h2>
+    <p class="post-p">The +233% appreciation figure is accurate, but it understates the velocity of what happened. This wasn't a slow, gradual climb. It was a cliff — a sudden, sharp repricing event that happened between late 2023 and early 2025, and it was driven by three forces colliding simultaneously.</p>
+    <p class="post-p">First: Miu Miu's extraordinary runway moment. The house went from beloved-but-quiet to #1 on the Lyst Index in 2022 and held that position for three consecutive years. That kind of sustained brand heat is extraordinarily rare, and it creates a direct tailwind for archival pieces. When a new generation of buyers discovers a brand through its current collections, the first thing they often do is look backwards.</p>
+    <div class="post-pull">"When supply is finite and desire is structurally growing, the floor doesn't creep upward. It steps."</div>
+    <p class="post-p">Second: the quality gap. Collectors who sought out the 2000s-era Vitello Lux pieces discovered something important — the leather quality is categorically different from what the house produces today. The full-grain Vitello hide used in the 2002–2008 production era was constructed using tanning processes that are now prohibitively expensive for a brand manufacturing at scale. The hardware is heavier. The stitching is denser. The bag is, simply, better.</p>
+    <h2 class="post-h2">The <i>supply</i> side of the equation</h2>
+    <p class="post-p">Third, and most importantly: the supply absorbed. Once early collectors (including us) began systematically sourcing the best examples from the market, the pool of genuine S-Grade pieces depleted rapidly. What had been available in volume at £80–£120 became scarce. And scarce, in an asset class where new supply cannot be manufactured, means permanently repriced.</p>
+    <p class="post-p">This is the mechanism behind every major archival correction we've observed. It is not fashion. It is not a trend. It is basic scarcity economics applied to a non-renewable resource. Once the S-Grade Vitello Lux pieces from 2002–2006 are absorbed by collectors, they will not re-enter the market in meaningful numbers for years — and when they do, the holder sets the new floor.</p>
+    <h2 class="post-h2">What this means if you're reading it now</h2>
+    <p class="post-p">If you're reading this in mid-2026, the £80 window is closed. But the trajectory has not reversed. The current floor of £480–£550 represents a piece that still has runway. The Rosa colourway commands a 15–20% premium over black or beige, and very few S-Grade examples of the Rosa remain available through any legitimate channel.</p>
+    <p class="post-p">The more important lesson, though, is about pattern recognition. The Vitello Lux correction happened because the conditions were right: genuine craftsmanship differential, brand heat, finite supply, and a collector base that discovered the arbitrage simultaneously. We are watching those same conditions build around the 1990s Prada Nylon, the Philo-era Celine, and the Tom Ford Gucci pieces. The mechanism is identical. The timing is earlier. The opportunity is real.</p>`,
+    sidebar:[
+      {label:'Appreciation (2022–26)', stat:'+233%', detail:'From £80 floor to £480+ floor'},
+      {label:'Current price range', stat:'£480–£700', detail:'S-Grade with dustbag'},
+      {label:'Optimal buy window', stat:'Closing', detail:'S-Grade supply near critical depletion'},
+    ],
+    sideboxTitle:'Related reading', sideboxBody:'Our Archival Buying Guide covers the Miu Miu Vitello Lux in detail — with authentication notes, colourway premium data, and sourcing advice. £35, instant PDF.',
+    relatedPosts:['chanel-hunt','authentication','supply'],
+  },
+  'chanel-hunt': {
+    tag:'Collecting Life', tone:'Light',
+    title:"I spent six months finding the perfect Chanel flap. Here's what I learned.",
+    author:'Olivia Gaskin', date:'January 2026', read:'10 min read',
+    bgColor:'#f5f3f0', svgKey:'chanel-flap',
+    lead:"This is a story about patience, bad listings, a near-miss counterfeit, and the moment everything clicked. An honest collector's diary.",
+    body:`<p class="post-p">I want to preface this by saying that I know how to authenticate a Chanel Classic Flap. I have authenticated hundreds of them. I have a system. I have a checklist. I have, at various points, been quite smug about how systematic I am about this.</p>
+    <p class="post-p">So it was deeply humbling to spend six months looking for one for myself and repeatedly almost buying the wrong thing.</p>
+    <h2 class="post-h2">Month one: <i>optimism</i></h2>
+    <p class="post-p">I started with a very clear brief. Lagerfeld era, caviar leather, medium size, black with gold hardware. Pre-2010 if possible. Budget: £2,400–£2,800. I figured this would take about three weeks. I had the guide. I knew what I was doing.</p>
+    <p class="post-p">Month one produced six serious candidates. Four were eliminated on the serial card alone — two had the wrong font, one had a sticker that was the wrong holographic generation for the claimed production date, and one had a sticker so new it still had tackiness on the edge. The fifth had beautiful hardware and perfect caviar, but the CC alignment was off by about two degrees. I know that sounds small. It is not small.</p>
+    <div class="post-pull">"The CC alignment was off by about two degrees. Two degrees. I walked away."</div>
+    <h2 class="post-h2">Month three: the near-miss</h2>
+    <p class="post-p">This is the part that keeps me humble. Month three brought me a bag that passed every check I ran remotely. The listing photographs were excellent — multiple angles, good lighting, close-ups of the serial card, the CC, the interior. The seller had sold twenty-plus authentic pieces. The price was fair but not suspiciously low.</p>
+    <p class="post-p">I requested the bag in person before committing. It arrived. It looked perfect. And then I picked it up. The weight was wrong. Not dramatically wrong — not "obviously a fake" wrong. Just slightly lighter than it should have been. The caviar grain was correct but the leather felt marginally thinner under compression.</p>
+    <p class="post-p">I sent it to our authentication partner. Their verdict: the bag was a very high-quality replica — specifically, one designed to pass remote authentication. The caviar texture had been engineered to photograph correctly. The serial sticker was the right format. But the hardware was fractionally lighter, and the leather was corrected calfskin rather than genuine caviar.</p>
+    <h2 class="post-h2">What I actually learned</h2>
+    <p class="post-p">Six months. The bag I eventually bought came through a source I trust. I paid fairly. The CC alignment is perfect. The serial card is correct. The leather has the right compression and the hardware has the right weight. It took me six months to find a bag I'd been looking for in three weeks.</p>
+    <p class="post-p">The lesson isn't that the market is dangerous, although it has risks. The lesson is that there is no shortcut to physical authentication. Remote checks get you 80% of the way. The other 20% requires holding the bag, feeling the leather, testing the hardware weight. If you cannot do that yourself, buy through someone who can do it for you. The premium is not a luxury. It is the cost of certainty.</p>`,
+    sidebar:[
+      {label:'Authentication success rate', stat:'~35%', detail:'Pieces we accept from what we source'},
+      {label:'Most common failure point', stat:'Hardware', detail:'Weight and alignment before anything else'},
+      {label:'Remote auth accuracy', stat:'~80%', detail:'Physical inspection closes the gap'},
+    ],
+    sideboxTitle:'Our authentication standard', sideboxBody:'Every Gaskin Lab piece is authenticated in person before acquisition and independently verified on arrival. We provide a full certificate with every sale.',
+    relatedPosts:['authentication','miu-miu','supply'],
+  },
+  'authentication': {
+    tag:'Authentication', tone:'Serious',
+    title:'The five things counterfeiters always get wrong',
+    author:'Olivia Gaskin', date:'February 2026', read:'8 min read',
+    bgColor:'#f7f2e8', svgKey:'fendi-baguette',
+    lead:"After authenticating thousands of pieces, these are the tells that expose even the most sophisticated fakes.",
+    body:`<p class="post-p">The counterfeit market has evolved significantly. A decade ago, a fake Chanel could be identified at arm's length by anyone who'd handled the genuine article. Today, the best replicas are designed to pass remote authentication — correct sticker format, correct CC proportions, correct interior lining colour. They are built to look right in photographs.</p>
+    <p class="post-p">But they still get things wrong. They always get things wrong. Here are the five that matter most.</p>
+    <h2 class="post-h2">1. Hardware weight</h2>
+    <p class="post-p">This is the most reliable single indicator we have. Genuine luxury hardware — Chanel CC, Hermès lock, Fendi logo clasp — is made from solid brass with a plated finish. It is noticeably, sometimes dramatically heavier than the zinc alloy used in replicas. You don't need a scale. You can feel it when you hold the bag. If the clasp feels hollow or light when you tap it, the bag is fake.</p>
+    <h2 class="post-h2">2. Stitch tension</h2>
+    <p class="post-p">Authentic luxury bags use a saddle stitch — two needles, two threads, each passing through the same hole from opposite sides. The result is a tight, even stitch with consistent tension across every centimetre. Replicas use machine stitching, which looks similar but behaves differently under magnification: the thread crosses at a slightly different angle, the tension varies subtly across rows, and the thread itself is often shinier and less supple.</p>
+    <div class="post-pull">"Hardware weight is the single most reliable indicator. You don't need a scale — you can feel it."</div>
+    <h2 class="post-h2">3. Serial sticker format (Chanel)</h2>
+    <p class="post-p">Chanel's serial sticker format changed multiple times between 1984 and 2021. Each era has a specific number of digits, a specific font, and a specific holographic pattern. The replica market keeps up with the most common formats but frequently gets the wrong sticker for the claimed production date. A bag listed as "circa 2008" with a 2021-format sticker is a contradiction that cannot be resolved authentically.</p>
+    <h2 class="post-h2">4. Date stamp alignment (Hermès)</h2>
+    <p class="post-p">Every Hermès bag carries a blind stamp — a letter pressed into the leather indicating the year and craftsperson's atelier. On genuine pieces, this stamp is precisely placed and cleanly struck. On replicas, it is frequently off-centre, shallow, or in the wrong location relative to the hardware. The Hermès stamp system is also sequential — letters are not randomly assigned — so a claimed production year that doesn't match the stamp letter is immediately suspect.</p>
+    <h2 class="post-h2">5. Leather compression</h2>
+    <p class="post-p">Genuine leather and corrected calfskin behave differently under light finger pressure. Authentic Chanel caviar has a specific firmness — it compresses slightly under pressure and returns immediately. High-quality replica caviar photographs identically but feels marginally softer, and the surface texture under a loupe is slightly more uniform than genuine hide (which has natural variation across the grain). This is impossible to assess remotely. It requires physical handling.</p>
+    <p class="post-p">The pattern across all five tells is the same: they are physical, not visual. They cannot be reliably assessed from photographs. If you are buying archival pieces in a price range where counterfeiting is profitable — anything over £500 — physical authentication is not optional. It is the minimum standard of care.</p>`,
+    sidebar:[
+      {label:'Pieces we reject', stat:'~65%', detail:'From all sourced pieces, authentication failures'},
+      {label:'Most commonly faked', stat:'Chanel & Hermès', detail:'Where counterfeiting is most profitable'},
+      {label:'Remote auth accuracy', stat:'~80%', detail:'Physical inspection is non-negotiable above £500'},
+    ],
+    sideboxTitle:'Our authentication process', sideboxBody:'Every Gaskin Lab piece is inspected in person before acquisition. Hardware weight, stitch tension, leather compression — all checked physically. We provide a full certificate with every sale.',
+    relatedPosts:['chanel-hunt','miu-miu','supply'],
+  },
+  'supply': {
+    tag:'Market Analysis', tone:'Serious',
+    title:'The archival supply is running out. What happens next?',
+    author:'Olivia Gaskin', date:'December 2025', read:'9 min read',
+    bgColor:'#f5f2ee', svgKey:'hermes-birkin',
+    lead:"S-grade Golden Era inventory is approaching critical depletion. When the stockrooms empty, the floor price correction will be permanent.",
+    body:`<p class="post-p">I want to be direct about something that shapes everything we do at Gaskin Lab: the supply of genuinely mint Golden Era luxury leather — pieces manufactured between 1990 and 2010 in near-unused condition — is finite. Not scarce. Not tight. Finite. There will not be more of it.</p>
+    <p class="post-p">This is not a sales pitch. It is an arithmetic fact. The number of S-Grade Miu Miu Vitello Lux pieces that exist in the world is not going to increase. The number of mint-condition 1990s Fendi Baguettes stored in their original dustbags is not going to increase. And that supply is being absorbed by collectors at an accelerating rate.</p>
+    <h2 class="post-h2">Where the supply comes from</h2>
+    <p class="post-p">The supply we source comes from disciplined secondhand markets where preservation culture means that pieces from the 1990s and 2000s were stored correctly. Original dustbags, receipts intact, leather kept away from light and humidity. These conditions produced the remarkable phenomenon of 30-year-old bags in essentially unused condition.</p>
+    <p class="post-p">That supply is now entering the secondary market through estate sales, consignment shops, and specialist auctions. The volume that was available five years ago has declined materially. What remains is increasingly concentrated in the rarest colourways and the best-preserved examples.</p>
+    <div class="post-pull">"S-Grade supply of Golden Era leather (1990–2010) will reach critical scarcity by 2028. This is not a trend. It is a cliff."</div>
+    <h2 class="post-h2">What depletion looks like in price terms</h2>
+    <p class="post-p">The Miu Miu Vitello Lux correction between 2022 and 2024 is the clearest illustration of what supply depletion looks like in practice. The floor did not creep upward gradually. It stepped. £80 to £120 over eighteen months, then £120 to £480 in twelve months once the accessible inventory was absorbed. The step-change nature of the correction is characteristic of a scarce, non-renewable resource reaching absorption.</p>
+    <p class="post-p">We expect to see similar dynamics play out in the 1990s Prada Nylon, the Philo-era Celine (2008–2018), and select Tom Ford Gucci pieces over the next 24–36 months. The supply of S-Grade examples in each category is diminishing. The collector base discovering these categories is growing. The conditions for a correction are in place.</p>
+    <h2 class="post-h2">What this means practically</h2>
+    <p class="post-p">If you are considering entering the archival market, the most important thing to understand is that the window for each asset category is finite and non-recoverable. The £80 Vitello Lux window closed in 2022. The accessible Philo Celine window is narrowing now. The question is not whether to enter the archival market. The question is which asset class to enter, and when.</p>`,
+    sidebar:[
+      {label:'Projected depletion', stat:'2028–29', detail:'Critical S-Grade scarcity for 1990–2010 era'},
+      {label:'Categories to watch', stat:'4', detail:'Prada Nylon, Celine Philo, Gucci Ford, Bottega Maier'},
+      {label:'Correction pattern', stat:'Step-change', detail:'Not gradual — absorb then reprice permanently'},
+    ],
+    sideboxTitle:'Plan accordingly', sideboxBody:"Our Buying Guide includes a 2026–2028 market outlook chapter identifying the four categories where we believe the next corrections are building. £35, instant PDF.",
+    relatedPosts:['miu-miu','authentication','birkin-sp500'],
+  },
+  'wedding': {
+    tag:'Collecting Life', tone:'Light',
+    title:"How I accidentally explained bag investment theory at my sister's wedding",
+    author:'Olivia Gaskin', date:'November 2025', read:'6 min read',
+    bgColor:'#fdf5f8', svgKey:'miu-miu-vitello',
+    lead:"Nobody asked. I started anyway. By the third course, three people wanted to know if the Miu Miu beat a pension. It did.",
+    body:`<p class="post-p">I had promised myself I wouldn't talk about bags at my sister's wedding. This was a reasonable promise to make. Her wedding, not a trade conference. There would be people there who did not know what a Vitello Lux was and who had no particular interest in finding out. I would be a normal person at a wedding.</p>
+    <p class="post-p">I lasted until the second course.</p>
+    <h2 class="post-h2">How it started</h2>
+    <p class="post-p">My table neighbour — a pleasant accountant from Edinburgh named Malcolm — noticed my bag. He asked if it was new. I said no, it was from 2004. He said that was a good year for bags, apparently. I told him I'd paid £240 for it in 2021 and that it was now worth approximately £680. Malcolm looked at me in the way that accountants sometimes look at things that don't compute in their usual frameworks.</p>
+    <p class="post-p">He asked if that was normal. I said it was below average, actually. He asked if I was joking. I was not joking. By the time the main course arrived, there were four of us leaning over the table.</p>
+    <div class="post-pull">"Malcolm asked if the Miu Miu beat his pension. I ran the numbers on a napkin. It did, by about 40 percentage points."</div>
+    <h2 class="post-h2">The napkin calculation</h2>
+    <p class="post-p">Malcolm, it turned out, had a very good pension. He was also curious enough to want to run a comparison. We used his phone for the S&P 500 figures and a napkin for the maths. The Miu Miu Vitello Lux, at its floor prices, had outperformed his pension fund by approximately 40 percentage points over the relevant period. Malcolm was quiet for a moment and then asked how one would go about buying one of these bags.</p>
+    <p class="post-p">I told him he should probably stick with the pension. The bag market requires knowledge, patience, and access to authentication expertise. It is not passive. But — and I said this carefully — it is also not magic. It is the same thing that makes any investment work: buying a scarce, quality asset before the broader market has priced in the scarcity.</p>
+    <h2 class="post-h2">What my sister said</h2>
+    <p class="post-p">My sister, who had drifted over during the cheese course and caught the tail end of this, said: "You literally cannot stop. You are at my wedding." She was not wrong. I promised to stop. I stopped. I have since sent Malcolm our buying guide, which he has apparently read and forwarded to two colleagues. This is not the wedding gift I planned to give, but it is the one I gave.</p>`,
+    sidebar:[
+      {label:'Miu Miu return (2021–25)', stat:'+183%', detail:'£240 purchase, now £680 floor'},
+      {label:'Malcolm\'s pension', stat:'Not disclosed', detail:'But the Miu Miu beat it'},
+      {label:'Wedding courses survived', stat:'1.5', detail:'Before starting the bag talk'},
+    ],
+    sideboxTitle:'For the Malcolms of the world', sideboxBody:'Our Buying Guide explains the investment case for archival bags in plain language — no prior knowledge required. £35, instant PDF.',
+    relatedPosts:['miu-miu','supply','birkin-sp500'],
+  },
+  'baguette-history': {
+    tag:'History', tone:'Serious',
+    title:'The Fendi Baguette and the invention of the "it bag"',
+    author:'Olivia Gaskin', date:'October 2025', read:'11 min read',
+    bgColor:'#f7f2e8', svgKey:'fendi-baguette',
+    lead:"How one absurdly small, impractically shaped bag rewrote the rules of luxury desire and created the collector market we inhabit.",
+    body:`<p class="post-p">In 1997, Silvia Venturini Fendi designed a bag that violated most of what was understood about what a handbag should be. It was small — smaller than most people's wallets. It had a single short strap that sat under the arm like a baguette under a Parisian's elbow. It held almost nothing. It cost a significant amount of money. It became, within two years, the most desired object in fashion.</p>
+    <p class="post-p">The Fendi Baguette did not just become a cultural phenomenon. It created the cultural phenomenon of the "it bag" — the concept that a single accessory could function as a social signal, a status marker, and a statement of insider knowledge simultaneously. Everything that followed — the Dior Saddle, the Balenciaga City, the Chanel flap mania of the 2000s — flows directly from what happened when Silvia Fendi put the Baguette into production.</p>
+    <h2 class="post-h2">The design logic</h2>
+    <p class="post-p">The Baguette's shape was not accidental. Venturini Fendi has described wanting a bag that sat against the body differently from anything that existed — not hanging from the shoulder, not gripped in the hand, but tucked under the arm in a way that looked unstudied. The short single strap forced a specific posture. The bag became part of how you held yourself.</p>
+    <p class="post-p">What made it genuinely interesting as a design object was the canvas. The Zucca FF pattern — interlocking Fs on a warm ground — was not new. Fendi had used it since the 1960s. But applied to the Baguette silhouette, in the tobacco and cognac colourways of the first seasons, it created something that looked simultaneously archival and entirely new. It referenced the house's history while belonging completely to that particular moment in late-1990s culture.</p>
+    <div class="post-pull">"The Baguette created the concept of the 'it bag' — the idea that a single accessory could be simultaneously a social signal, a status marker, and insider knowledge."</div>
+    <h2 class="post-h2">Sex and the City and the acceleration</h2>
+    <p class="post-p">The Baguette's transition from fashion-insider object to mass cultural phenomenon is directly traceable to a single television programme. Carrie Bradshaw carried a Baguette in the second season of Sex and the City in 1999. Within months, the bag was being discussed in mainstream media by people who had never previously owned a luxury handbag. The waiting list extended to eighteen months. Fendi began producing the bag in hundreds of variations — leather, satin, embroidered, sequined — to meet demand.</p>
+    <p class="post-p">What this acceleration did to the market was permanent. It established the template for how luxury desire would work for the next twenty years: designer object, cultural endorsement, artificial scarcity, secondary market frenzy. The Baguette didn't just benefit from this template. It created it.</p>
+    <h2 class="post-h2">Why the originals matter</h2>
+    <p class="post-p">The Baguette has been reissued multiple times. Fendi produces it continuously. But the collector market is not interested in the modern Baguette. It is interested in the Zucca canvas examples from 1997–2004, made with the original canvas weight and the brass hardware that carries Fendi lettering rather than the embossed logo of later production. These pieces are not just historically significant. They are materially better — heavier, more densely woven, with a construction quality that Fendi has not matched in recent production.</p>
+    <p class="post-p">That is the version that now trades at £380–£500 in A-Grade condition and declining. The supply of genuine original-era Baguettes in S-Grade is critically thin. It will not improve.</p>`,
+    sidebar:[
+      {label:'Original release', stat:'1997', detail:'Silvia Venturini Fendi, first production'},
+      {label:'Current floor (original era)', stat:'£380–£500', detail:'Tobacco Zucca canvas, A-Grade'},
+      {label:'Supply trend', stat:'Declining', detail:'S-Grade 1997–2004 production near depletion'},
+    ],
+    sideboxTitle:'Own a piece of the story', sideboxBody:'We source original-era Fendi Baguettes in verified A-Grade and S-Grade condition. Enquire through our concierge service for availability.',
+    relatedPosts:['miu-miu','supply','birkin-sp500'],
+  },
+  'birkin-sp500': {
+    tag:'Market Analysis', tone:'Serious',
+    title:"The Hermès Birkin vs. the S&P 500: a ten-year comparison",
+    author:'Olivia Gaskin', date:'July 2025', read:'8 min read',
+    bgColor:'#f5f2ee', svgKey:'hermes-birkin',
+    lead:"We ran the numbers. The Birkin 25 returned 131% over ten years. The S&P returned 174%. But you can't wear an index fund.",
+    body:`<p class="post-p">I am going to be honest with you, which is more than most luxury resale marketing manages. The Hermès Birkin, as an investment asset, does not beat the S&P 500 over a ten-year holding period. The S&P returned approximately 174% between 2015 and 2025, adjusted for inflation. The Birkin 25 in standard Togo colourways returned approximately 131% over the same period. The S&P wins.</p>
+    <p class="post-p">So why are we in this business? And why do serious collectors continue to treat the Birkin as a store of value? The answer involves several things that a percentage return doesn't capture.</p>
+    <h2 class="post-h2">The utility argument</h2>
+    <p class="post-p">An S&P 500 index fund generates a return but provides no utility in the interim. A Birkin 25 generates a return and is also a genuinely exceptional bag. You can carry it. You can wear it. You can use it as the focal point of an outfit every day for ten years, and at the end of those ten years, sell it at a premium. There is no mainstream financial asset that provides this combination of financial return and daily use value.</p>
+    <div class="post-pull">"The S&P wins on paper. But the Birkin also carried your things to dinner for ten years."</div>
+    <h2 class="post-h2">The volatility argument</h2>
+    <p class="post-p">The Birkin's 131% return came with near-zero downside volatility. The Birkin price floor has never moved downward in recorded market history. The S&P 500's 174% return over the same period included a 34% drawdown in early 2020, which required significant nerve to hold through. For many investors, the real value of the Birkin is not the return — it is the fact that the return is achievable without the psychological difficulty of watching your investment decline by a third and choosing not to panic.</p>
+    <h2 class="post-h2">The rare colourway argument</h2>
+    <p class="post-p">The 131% figure is for standard colourways in Togo leather. The rare colourway argument is different. A Birkin 25 in Vert Cypress — the most sought-after current colourway globally — has outperformed the standard by 25–40% over comparable periods. A Birkin 25 in ostrich leather has outperformed further still. The S&P doesn't have a Vert Cypress equivalent. It has no mechanism for exceptional individual performance above the index.</p>
+    <h2 class="post-h2">The honest conclusion</h2>
+    <p class="post-p">If pure financial return over a ten-year period is your only criterion, put your money in a global equity index fund. It will almost certainly outperform a standard-colourway Hermès Birkin. If, however, you want an asset that provides daily utility, near-zero downside risk, strong absolute returns, the possibility of exceptional performance through selection, and an exit market that is genuinely instant — then the Birkin is a legitimate alternative asset that belongs in a considered portfolio. Just not the only one.</p>`,
+    sidebar:[
+      {label:'Birkin 25 (10yr return)', stat:'+131%', detail:'Standard colourways, Togo leather'},
+      {label:'S&P 500 (10yr return)', stat:'+174%', detail:'Total return, inflation-adjusted'},
+      {label:'Birkin downside volatility', stat:'Zero', detail:'Floor has never moved downward in recorded history'},
+    ],
+    sideboxTitle:'The full investment case', sideboxBody:'Chapter five of our Buying Guide covers the Birkin 25 in detail — appreciation data, colourway premiums, authentication, and when to exit. £35, instant PDF.',
+    relatedPosts:['supply','miu-miu','authentication'],
+  },
+};
+
+const relatedPostLabels = {
+  'miu-miu':'Why the Miu Miu Vitello Lux matters',
+  'chanel-hunt':'Six months finding the perfect Chanel',
+  'authentication':'What counterfeiters always get wrong',
+  'supply':'The archival supply is running out',
+  'wedding':'Bag investment theory at a wedding',
+  'baguette-history':'The Fendi Baguette and the "it bag"',
+  'birkin-sp500':'Birkin vs. S&P 500',
+};
+const relatedPostSvgBg = {
+  'miu-miu':['miu-miu-vitello','#fdf5f8'],
+  'chanel-hunt':['chanel-flap','#f5f3f0'],
+  'authentication':['fendi-baguette','#f7f2e8'],
+  'supply':['hermes-birkin','#f5f2ee'],
+  'wedding':['miu-miu-vitello','#fdf5f8'],
+  'baguette-history':['fendi-baguette','#f7f2e8'],
+  'birkin-sp500':['hermes-birkin','#f5f2ee'],
+};
+
+function openPost(id) {
+  const p = POSTS[id];
+  if(!p) return;
+  const svg = SVGS[p.svgKey] || '';
+  const relPosts = p.relatedPosts.map(rid => {
+    const [svgk, bg] = relatedPostSvgBg[rid] || ['chanel-flap','#f5f3f0'];
+    return `<div class="rp-card" onclick="openPost('${rid}')">
+      <div class="rp-img layflat" style="background:${bg}">${SVGS[svgk]||''}</div>
+      <div class="rp-brand">${POSTS[rid]?.tag||''}</div>
+      <div class="rp-title">${relatedPostLabels[rid]||''}</div>
+    </div>`;
+  }).join('');
+
+  const sidebarHtml = p.sidebar.map(s=>`
+    <div class="sidebar-section">
+      <div class="sidebar-label">${s.label}</div>
+      <div class="sidebar-stat">${s.stat}</div>
+      <div class="sidebar-stat-d">${s.detail}</div>
+    </div>`).join('');
+
+  document.getElementById('post-content').innerHTML = `
+    <div>
+      <div class="post-hero">
+        <span class="post-back" onclick="go('blog')">&larr; Back to Journal</span>
+        <div class="post-tag">${p.tag} <span class="tone ${p.tone==='Light'?'tone-l':'tone-s'}">${p.tone}</span></div>
+        <h1 class="post-h">${p.title}</h1>
+        <div class="post-meta">
+          <span>${p.author}</span><div class="post-meta-dot"></div>
+          <span>${p.date}</span><div class="post-meta-dot"></div>
+          <span>${p.read}</span>
+        </div>
+        <div class="post-hero-img layflat" style="background:${p.bgColor}">${svg}</div>
+      </div>
+      <div class="post-body">
+        <div class="post-content">
+          <p class="post-lead">${p.lead}</p>
+          ${p.body}
+        </div>
+        <div class="post-sidebar">
+          ${sidebarHtml}
+          <div class="sidebar-section">
+            <div class="sidebar-label">${p.sideboxTitle}</div>
+            <div class="sidebar-box">
+              <div class="sidebar-box-body">${p.sideboxBody}</div>
+              <div style="margin-top:.85rem"><a class="btn" href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" style="font-size:.54rem;padding:.58rem 1rem">Get the guide — £35 &rarr;</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="related-posts">
+        <div class="sec-lbl">Read next</div>
+        <div class="rp-grid">${relPosts}</div>
+      </div>
+      <footer><div class="f-logo">Gaskin <b>Lab</b></div><ul class="f-links"><li><a href="#">@gaskinlab</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul><div class="f-copy">&copy; 2026 Gaskin Lab</div></footer>
+    </div>
+  `;
+  go('post');
 }
 </script>
 </body>
