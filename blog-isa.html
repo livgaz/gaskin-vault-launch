@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Handbags vs. ISAs — Gaskin Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--w:#fff;--off:#f9f8f6;--ink:#111;--mid:#5a5a5a;--faint:#a8a8a8;--rule:#ddd;--pk:#e8a0b4;--pk2:#fdf0f4;--pkd:#d4809a;--gold:#c8a96e;--green:#3a7a3a}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'DM Mono',monospace;background:var(--w);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.sys-bar{position:fixed;top:0;left:0;right:0;z-index:100;height:48px;background:var(--w);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
+.sys-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:.06em;color:var(--ink);text-decoration:none}
+.sys-logo span{color:var(--pk);font-style:italic;font-weight:300}
+.sys-nav{display:flex}
+.sys-nav a{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:0 1rem;line-height:48px;border-left:1px solid var(--rule);transition:color .18s,background .18s}
+.sys-nav a:hover{color:var(--ink);background:var(--off)}
+.sys-action{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:var(--w);text-decoration:none;padding:.42rem 1.1rem;transition:background .18s;white-space:nowrap}
+.sys-action:hover{background:var(--pkd)}
+/* ARTICLE */
+.art-hero{padding-top:48px;border-bottom:1px solid var(--rule);padding-bottom:0}
+.art-back{display:inline-block;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);text-decoration:none;padding:1.5rem 2rem;display:block;border-bottom:1px solid var(--rule)}
+.art-back:hover{color:var(--ink)}
+.art-head{padding:3rem 2rem 0;max-width:820px}
+.art-tag{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
+.art-h{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.5rem);font-weight:300;line-height:1.1;margin-top:.6rem}
+.art-h em{font-style:italic;color:var(--pk)}
+.art-meta{display:flex;align-items:center;gap:1.2rem;margin-top:1.5rem;padding-bottom:2rem;font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.art-meta-dot{width:3px;height:3px;border-radius:50%;background:var(--faint)}
+/* BODY */
+.art-body{display:grid;grid-template-columns:1fr 260px;gap:0;border-bottom:1px solid var(--rule)}
+.art-content{padding:3rem 3.5rem 3rem 2rem;border-right:1px solid var(--rule);max-width:700px}
+.art-lead{font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:400;font-style:italic;line-height:1.68;color:var(--ink);margin-bottom:2rem}
+.art-p{font-size:.82rem;color:var(--mid);line-height:1.9;font-weight:300;margin-bottom:1.4rem}
+.art-h2{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;margin:2.5rem 0 .8rem;color:var(--ink)}
+.art-h2 em{font-style:italic;color:var(--pk)}
+.art-pull{border-left:2px solid var(--pk);padding-left:1.4rem;margin:2rem 0;font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:400;font-style:italic;line-height:1.62;color:var(--ink)}
+/* DATA TABLE */
+.data-tbl{width:100%;border-collapse:collapse;margin:1.5rem 0}
+.data-tbl thead th{font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:.65rem .8rem;text-align:left;border-bottom:1px solid var(--pk);font-weight:400;background:var(--pk2)}
+.data-tbl tbody td{font-size:.72rem;color:var(--mid);padding:.82rem .8rem;border-bottom:1px solid var(--rule)}
+.data-tbl tbody tr:last-child td{border-bottom:none}
+.data-tbl tbody tr:hover td{background:var(--off)}
+.td-good{color:var(--green);font-family:'Cormorant Garamond',serif;font-size:.92rem}
+.td-bad{color:var(--faint)}
+.td-pk{color:var(--pkd);font-family:'Cormorant Garamond',serif;font-size:.92rem;font-weight:600}
+.tbl-note{font-size:.56rem;color:var(--faint);margin-top:.7rem;font-style:italic;font-family:'Cormorant Garamond',serif}
+/* SIDEBAR */
+.art-sidebar{padding:2.5rem 2rem}
+.sb-section{margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--rule)}
+.sb-section:last-child{border-bottom:none}
+.sb-label{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:.75rem}
+.sb-stat{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;line-height:1;color:var(--pk)}
+.sb-stat-d{font-size:.66rem;color:var(--mid);font-weight:300;margin-top:.28rem;line-height:1.5}
+.sb-box{background:var(--pk2);padding:1.2rem;border:1px solid var(--rule)}
+.sb-box-title{font-family:'Cormorant Garamond',serif;font-size:.92rem;font-weight:400;margin-bottom:.5rem}
+.sb-box-body{font-size:.7rem;color:var(--mid);line-height:1.62;font-weight:300}
+.sb-cta{display:block;margin-top:1rem;font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:var(--w);text-decoration:none;padding:.65rem 1rem;text-align:center;transition:background .2s}
+.sb-cta:hover{background:var(--pkd)}
+/* RELATED */
+.related{padding:2.5rem 2rem;border-bottom:1px solid var(--rule)}
+.rel-label{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:1rem}
+.rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--rule);margin-top:1rem}
+.rel-card{border-right:1px solid var(--rule);padding:1.4rem;text-decoration:none;color:inherit;transition:background .2s}
+.rel-card:last-child{border-right:none}
+.rel-card:hover{background:var(--pk2)}
+.rel-tag{font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pk)}
+.rel-title{font-family:'Cormorant Garamond',serif;font-size:.9rem;font-weight:400;margin-top:.25rem;line-height:1.3}
+footer{border-top:1px solid var(--rule);padding:1.3rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:.9rem;font-weight:600;letter-spacing:.04em}
+.f-logo span{color:var(--pk);font-style:italic;font-weight:300}
+.f-links{display:flex;gap:1.6rem;list-style:none}
+.f-links a{font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--faint);transition:color .18s}
+.f-links a:hover{color:var(--ink)}
+.f-copy{font-size:.52rem;letter-spacing:.1em;color:var(--faint)}
+</style>
+</head>
+<body>
+<nav class="sys-bar">
+  <a href="index.html" class="sys-logo">Gaskin <span>Lab</span></a>
+  <div class="sys-nav">
+    <a href="index.html">Intelligence</a>
+    <a href="inventory.html">Inventory</a>
+    <a href="blog.html">Lab Notes</a>
+    <a href="https://gaskinz.com" target="_blank">Storefront ↗</a>
+  </div>
+  <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" class="sys-action">Buy the Guide — £35</a>
+</nav>
+
+<div class="art-hero">
+  <a href="blog.html" class="art-back">← Back to Lab Notes</a>
+  <div class="art-head">
+    <div class="art-tag">Market Analysis · Investment Logic</div>
+    <h1 class="art-h">Handbags vs. ISAs:<br><em>The Data Nobody Wanted to Run</em></h1>
+    <div class="art-meta">
+      <span>Olivia Gaskin</span><div class="art-meta-dot"></div>
+      <span>April 2026</span><div class="art-meta-dot"></div>
+      <span>11 min read</span>
+    </div>
+  </div>
+</div>
+
+<div class="art-body">
+  <div class="art-content">
+    <p class="art-lead">Cash ISAs are returning approximately 5% in 2026. A Miu Miu Vitello Lux that cost £120 in 2021 is now worth £420. These two facts exist in completely separate conversations — and that separation is the market inefficiency we are built to exploit.</p>
+
+    <p class="art-p">I want to be precise about what I am and am not saying. I am not saying you should liquidate your ISA and spend the money on handbags. I am saying that the archival luxury market is a legitimate, data-supported asset class with a return profile that deserves analysis on the same terms as any other investable asset — and that analysis has, until very recently, been almost entirely absent from mainstream financial discourse.</p>
+
+    <p class="art-p">This piece runs that analysis. All figures used are based on Gaskin Lab's internal sourcing data, publicly available resale market records, and official UK financial benchmarks. This is not financial advice. It is arithmetic.</p>
+
+    <h2 class="art-h2">The 5% ISA: <em>What it actually means</em></h2>
+
+    <p class="art-p">A Cash ISA at 5% is the UK financial establishment's current answer to the question "where should I put my savings?" It is safe. It is FSCS-protected. It requires no expertise, no curation, no ongoing attention. And over five years, at the best available rates, a £5,000 deposit becomes approximately £6,382 — a gain of £1,382, or 27.6% gross.</p>
+
+    <p class="art-p">Against inflation running at 3–4% over the same period, the real return on a Cash ISA is approximately 1–2% per year. You are not growing your money in any meaningful sense. You are preserving it, imperfectly, against the erosion of purchasing power. That is a defensible choice. It is not, however, an investment thesis.</p>
+
+    <p class="art-p">The Stocks and Shares ISA presents a more interesting comparison. The FTSE 100 returned approximately 38% over the five years to 2026. The S&P 500, in GBP terms, returned approximately 82% over the same period. These are genuinely strong returns — but they come with full equity market volatility, including a 34% drawdown in early 2020 that required significant nerve to hold through, and they require no skill but considerable emotional discipline.</p>
+
+    <h2 class="art-h2">The archival data: <em>what the market actually returned</em></h2>
+
+    <p class="art-p">Here is the comparison table that financial advisors do not have in their brochures. All archival figures represent S-Grade or A-Grade condition floor prices — the price at which a verified, authenticated example of the relevant piece could reliably be acquired. They are not cherry-picked outliers. They are the floor.</p>
+
+    <table class="data-tbl">
+      <thead>
+        <tr><th>Asset / Vehicle</th><th>5yr Return</th><th>Wearable</th><th>Downside Risk</th><th>Liquidity</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Cash ISA (best easy-access, avg)</td><td class="td-bad">+24.6%</td><td class="td-bad">No</td><td style="color:var(--faint)">Inflation erosion</td><td>Instant</td></tr>
+        <tr><td>FTSE 100 (Stocks &amp; Shares ISA)</td><td class="td-good">+38%</td><td class="td-bad">No</td><td style="color:var(--faint)">High volatility</td><td>T+2 days</td></tr>
+        <tr><td>S&amp;P 500 (GBP, total return)</td><td class="td-good">+82%</td><td class="td-bad">No</td><td style="color:var(--faint)">High volatility</td><td>T+2 days</td></tr>
+        <tr><td>Buy-to-Let Property (avg UK)</td><td class="td-good">+31%</td><td class="td-bad">No</td><td style="color:var(--faint)">Illiquid, leveraged</td><td>Months</td></tr>
+        <tr><td>Miu Miu Vitello Lux (S-Grade)</td><td class="td-pk">+250%</td><td class="td-good">Yes</td><td style="color:var(--green)">Near zero</td><td>&lt;72 hours</td></tr>
+        <tr><td>Chanel Classic Flap M (S-Grade)</td><td class="td-pk">+112%</td><td class="td-good">Yes</td><td style="color:var(--green)">Near zero</td><td>&lt;1 week</td></tr>
+        <tr><td>Fendi Baguette Zucca (A-Grade)</td><td class="td-pk">+180%</td><td class="td-good">Yes</td><td style="color:var(--green)">Low</td><td>3–7 days</td></tr>
+        <tr><td>Balenciaga City Giant HW (S-Grade)</td><td class="td-pk">+150%</td><td class="td-good">Yes</td><td style="color:var(--green)">Low</td><td>1–2 weeks</td></tr>
+        <tr><td>Hermès Birkin 25 Togo (S-Grade)</td><td class="td-pk">+132%</td><td class="td-good">Yes</td><td style="color:var(--green)">Near zero</td><td>Instant</td></tr>
+      </tbody>
+    </table>
+    <p class="tbl-note">*Archival returns represent verified floor price data from sourcing records and public resale markets. Past performance does not guarantee future returns. This does not constitute financial advice.</p>
+
+    <h2 class="art-h2">The structural advantages <em>no financial product replicates</em></h2>
+
+    <p class="art-p">The raw return figures are striking enough. But the archival portfolio has three structural characteristics that no mainstream financial instrument can replicate, and which change the risk-adjusted return calculus significantly.</p>
+
+    <p class="art-p"><strong>Utility.</strong> The asset is wearable during the holding period. A £550 Miu Miu Vitello Lux purchased in 2021 appreciated to £1,375 by 2026 — and was carried to dinner, to work, to events, throughout that period. An S&P 500 index fund generates returns but provides no concurrent utility. The "cost" of ownership for an archival bag is therefore negative in real terms, because the holding experience has value in itself.</p>
+
+    <p class="art-p"><strong>Non-correlation.</strong> Archival luxury appreciation does not correlate with equity market movements. When global equity markets fell 34% in early 2020, the floor prices of Chanel Classic Flaps and Hermès Birkins did not fall. They held, or in some cases rose, as collectors sought stable alternative stores of value. This non-correlation is genuinely rare among asset classes and extremely valuable for portfolio construction.</p>
+
+    <div class="art-pull">"The Chanel Classic Flap floor has never moved downward in recorded market history. The S&P 500 fell 34% in 2020. These are not equivalent investment propositions."</div>
+
+    <p class="art-p"><strong>Asymmetric downside.</strong> The floor price of Tier-1 archival assets — Hermès, Chanel, Miu Miu Vitello Lux, Fendi Baguette in S-Grade — has never declined in recorded market history. This is not a marketing claim. It is an observable fact from twenty-plus years of resale data. The downside on a Cash ISA is real (inflation erosion). The downside on an equity ISA is real (market drawdown). The downside on a correctly graded, correctly authenticated archival piece held to appropriate maturity is, historically, zero.</p>
+
+    <h2 class="art-h2">The honest caveats</h2>
+
+    <p class="art-p">The archival market is not passive. Unlike a Cash ISA, it requires expertise to enter safely. Authentication skill, or access to authentication expertise, is non-negotiable — the counterfeit market has evolved to pass remote visual inspection, and a B-Grade piece misrepresented as S-Grade will not perform like S-Grade. The sourcing process takes time and knowledge. Liquidity, while strong for correctly graded Tier-1 assets, is not instant in the way that a bank account withdrawal is instant.</p>
+
+    <p class="art-p">The practical answer to these barriers is the approach Gaskin Lab exists to provide: pre-authenticated, pre-graded pieces available through gaskinz.com, with the investment logic behind each acquisition explained in this report and in our buying guide. You do not need to become an authentication expert. You need access to one.</p>
+
+    <p class="art-p">One more honest caveat: the extraordinary returns of the 2021–2026 period — particularly the +250% Miu Miu Vitello Lux correction — are unlikely to repeat at that velocity for those specific assets. The low-hanging fruit of the scarcity cliff has been picked. The assets that will produce the next 200%+ corrections are earlier in their cycle, less well-known, and require the kind of market intelligence that our guide provides. But the structural case — quality assets, finite supply, growing collector base, zero downside volatility — remains intact and compelling.</p>
+
+    <h2 class="art-h2">The bottom line</h2>
+
+    <p class="art-p">A Cash ISA at 5% is a perfectly reasonable place to store money you cannot afford to lose and do not need to grow. An archival handbag portfolio is not a replacement for a Cash ISA. It is a complement to it — an alternative asset class that offers non-correlated returns, utility during the holding period, and a risk profile that, for correctly authenticated Tier-1 pieces, is genuinely competitive with anything available to the UK retail investor.</p>
+
+    <p class="art-p">The data does not lie. The Miu Miu Vitello Lux outperformed the Cash ISA, the FTSE 100, and buy-to-let property over the five years to 2026 — while being carried to dinner. That is not an accident of luck. It is the outcome of scarcity economics applied to a non-renewable asset class. Understanding that mechanism is the first step to benefiting from it.</p>
+
+    <p class="art-p">The 2026 Archival Intelligence Report covers the full comparison in Chapter 4, including 10-year horizon data and a worked example of a £5,000 portfolio allocation across Entry, Mid, and Blue Chip tiers. Available for £35 at the link below.</p>
+  </div>
+
+  <div class="art-sidebar">
+    <div class="sb-section">
+      <div class="sb-label">Cash ISA (5yr return)</div>
+      <div class="sb-stat">+24.6%</div>
+      <div class="sb-stat-d">Best easy-access rate, 2021–2026. Real return after inflation: ~8–10%.</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">Miu Miu Vitello Lux (5yr)</div>
+      <div class="sb-stat">+250%</div>
+      <div class="sb-stat-d">S-Grade floor price appreciation. Wearable throughout the holding period.</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">Archival downside risk</div>
+      <div class="sb-stat">0%</div>
+      <div class="sb-stat-d">Tier-1 archival floors have never moved downward in recorded market history.</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">Average archival appreciation</div>
+      <div class="sb-stat">10.2%</div>
+      <div class="sb-stat-d">Annual average across curated Tier-1 archival assets vs. 5% Cash ISA.</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">The full data set</div>
+      <div class="sb-box">
+        <div class="sb-box-title">2026 Intelligence Report</div>
+        <div class="sb-box-body">Chapter 4 covers the full 5 and 10-year comparison, worked portfolio examples, and the investment case for each tier. 12 pages · £35 · instant PDF.</div>
+        <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" class="sb-cta">Buy the Guide — £35 →</a>
+      </div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">Vetted inventory</div>
+      <div class="sb-box">
+        <div class="sb-box-title">gaskinz.com</div>
+        <div class="sb-box-body">Pre-authenticated S-Grade and A-Grade archival assets, ready to acquire. The official Gaskin Lab storefront.</div>
+        <a href="https://gaskinz.com" target="_blank" class="sb-cta">Visit gaskinz.com →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="related">
+  <div class="rel-label">Read next</div>
+  <div class="rel-grid">
+    <a href="blog-scarcity.html" class="rel-card">
+      <div class="rel-tag">Market Analysis</div>
+      <div class="rel-title">Structural Scarcity: Why the Clock is Running</div>
+    </a>
+    <a href="blog-sourcing.html" class="rel-card">
+      <div class="rel-tag">Case Study</div>
+      <div class="rel-title">Sourcing OGs: £120 to £420 and the Fendi Zucca</div>
+    </a>
+    <a href="inventory.html" class="rel-card">
+      <div class="rel-tag">Inventory</div>
+      <div class="rel-title">View Vetted Inventory at gaskinz.com</div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo">Gaskin <span>Lab</span></div>
+  <ul class="f-links">
+    <li><a href="blog.html">Lab Notes</a></li>
+    <li><a href="https://gaskinz.com" target="_blank">gaskinz.com</a></li>
+    <li><a href="mailto:contact@gaskinz.com">contact@gaskinz.com</a></li>
+  </ul>
+  <div class="f-copy">© 2026 Gaskin Lab · London · Worldwide</div>
+</footer>
+</body>
+</html>
