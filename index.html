@@ -349,34 +349,40 @@ footer {
 .f-links a:hover { color: var(--ink); }
 .f-copy { font-size: .52rem; letter-spacing: .1em; color: var(--faint); }
 @media only screen and (max-width: 600px) {
-
-  .sys-bar {
-    flex-direction: column;
-    padding: 10px;
-    text-align: center;
-  }
-
-  .sys-nav {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap; /* important */
-    margin-top: 10px;
-  }
-
-  .sys-nav a {
-    font-size: 0.9rem;
-    padding: 6px 10px;
-  }
-
-  .container {
-    padding-top: 60px;
-    width: 95%;
-  }
-
-  img, .asset-image {
-    max-width: 100%;
-    height: auto;
-  }
+    .sys-bar {
+        height: auto !important;
+        flex-direction: column !important;
+        display: flex !important;
+        padding: 15px 0 !important;
+        background: #ffffff !important; /* Forces background to be solid white */
+        position: fixed !important; /* Keeps it at the top */
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        z-index: 9999 !important; /* Puts it in front of everything else */
+        border-bottom: 1px solid #eee !important;
+    }
+    .sys-nav {
+        display: flex !important;
+        flex-direction: row !important; /* Keeps links in a line */
+        justify-content: center !important;
+        width: 100% !important;
+        margin-top: 10px !important;
+        gap: 5px !important;
+    }
+    .sys-nav a {
+        font-size: 10px !important; /* Very small to fit the screen */
+        padding: 5px !important;
+        border: none !important;
+        text-transform: uppercase !important;
+    }
+    .container {
+        padding-top: 140px !important; /* Pushes the main text down so it's not hidden */
+    }
+    /* Fixes that black box appearing in the top right */
+    .buy-guide-btn-header { 
+        display: none !important; 
+    }
 </style>
 </head>
 <body>
