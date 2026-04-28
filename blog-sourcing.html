@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sourcing OGs — Gaskin Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--w:#fff;--off:#f9f8f6;--ink:#111;--mid:#5a5a5a;--faint:#a8a8a8;--rule:#ddd;--pk:#e8a0b4;--pk2:#fdf0f4;--pkd:#d4809a;--gold:#c8a96e;--green:#3a7a3a}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'DM Mono',monospace;background:var(--w);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.sys-bar{position:fixed;top:0;left:0;right:0;z-index:100;height:48px;background:var(--w);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
+.sys-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:.06em;color:var(--ink);text-decoration:none}
+.sys-logo span{color:var(--pk);font-style:italic;font-weight:300}
+.sys-nav{display:flex}
+.sys-nav a{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:0 1rem;line-height:48px;border-left:1px solid var(--rule);transition:color .18s,background .18s}
+.sys-nav a:hover{color:var(--ink);background:var(--off)}
+.sys-action{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:var(--w);text-decoration:none;padding:.42rem 1.1rem;transition:background .18s;white-space:nowrap}
+.sys-action:hover{background:var(--pkd)}
+.art-hero{padding-top:48px;border-bottom:1px solid var(--rule)}
+.art-back{display:block;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);text-decoration:none;padding:1.5rem 2rem;border-bottom:1px solid var(--rule)}
+.art-back:hover{color:var(--ink)}
+.art-head{padding:3rem 2rem 0;max-width:820px}
+.art-tag{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
+.art-h{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.5rem);font-weight:300;line-height:1.1;margin-top:.6rem}
+.art-h em{font-style:italic;color:var(--pk)}
+.art-meta{display:flex;align-items:center;gap:1.2rem;margin-top:1.5rem;padding-bottom:2rem;font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.art-meta-dot{width:3px;height:3px;border-radius:50%;background:var(--faint)}
+.art-body{display:grid;grid-template-columns:1fr 260px;gap:0;border-bottom:1px solid var(--rule)}
+.art-content{padding:3rem 3.5rem 3rem 2rem;border-right:1px solid var(--rule);max-width:700px}
+.art-lead{font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:400;font-style:italic;line-height:1.68;color:var(--ink);margin-bottom:2rem}
+.art-p{font-size:.82rem;color:var(--mid);line-height:1.9;font-weight:300;margin-bottom:1.4rem}
+.art-h2{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;margin:2.5rem 0 .8rem;color:var(--ink)}
+.art-h2 em{font-style:italic;color:var(--pk)}
+.art-pull{border-left:2px solid var(--pk);padding-left:1.4rem;margin:2rem 0;font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:400;font-style:italic;line-height:1.62;color:var(--ink)}
+/* TIMELINE */
+.timeline{margin:2rem 0}
+.tl-item{display:grid;grid-template-columns:80px 1fr;gap:1.2rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--rule)}
+.tl-item:last-child{border-bottom:none}
+.tl-date{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--pk);padding-top:.15rem;font-weight:500}
+.tl-content{}
+.tl-price{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;line-height:1;margin-bottom:.35rem}
+.tl-desc{font-size:.72rem;color:var(--mid);line-height:1.65;font-weight:300}
+/* CASE STUDY BOX */
+.case-box{background:var(--off);border:1px solid var(--rule);border-left:3px solid var(--pk);padding:1.8rem;margin:2rem 0}
+.case-label{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk);margin-bottom:.5rem}
+.case-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;margin-bottom:.8rem}
+.case-body{font-size:.76rem;color:var(--mid);line-height:1.72;font-weight:300}
+.art-sidebar{padding:2.5rem 2rem}
+.sb-section{margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--rule)}
+.sb-section:last-child{border-bottom:none}
+.sb-label{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:.75rem}
+.sb-stat{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;line-height:1;color:var(--pk)}
+.sb-stat-d{font-size:.66rem;color:var(--mid);font-weight:300;margin-top:.28rem;line-height:1.5}
+.sb-box{background:var(--pk2);padding:1.2rem;border:1px solid var(--rule)}
+.sb-box-title{font-family:'Cormorant Garamond',serif;font-size:.92rem;font-weight:400;margin-bottom:.5rem}
+.sb-box-body{font-size:.7rem;color:var(--mid);line-height:1.62;font-weight:300}
+.sb-cta{display:block;margin-top:1rem;font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:var(--w);text-decoration:none;padding:.65rem 1rem;text-align:center;transition:background .2s}
+.sb-cta:hover{background:var(--pkd)}
+.related{padding:2.5rem 2rem;border-bottom:1px solid var(--rule)}
+.rel-label{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:1rem}
+.rel-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--rule);margin-top:1rem}
+.rel-card{border-right:1px solid var(--rule);padding:1.4rem;text-decoration:none;color:inherit;transition:background .2s}
+.rel-card:last-child{border-right:none}
+.rel-card:hover{background:var(--pk2)}
+.rel-tag{font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pk)}
+.rel-title{font-family:'Cormorant Garamond',serif;font-size:.9rem;font-weight:400;margin-top:.25rem;line-height:1.3}
+footer{border-top:1px solid var(--rule);padding:1.3rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:.9rem;font-weight:600;letter-spacing:.04em}
+.f-logo span{color:var(--pk);font-style:italic;font-weight:300}
+.f-links{display:flex;gap:1.6rem;list-style:none}
+.f-links a{font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--faint);transition:color .18s}
+.f-links a:hover{color:var(--ink)}
+.f-copy{font-size:.52rem;letter-spacing:.1em;color:var(--faint)}
+</style>
+</head>
+<body>
+<nav class="sys-bar">
+  <a href="index.html" class="sys-logo">Gaskin <span>Lab</span></a>
+  <div class="sys-nav">
+    <a href="index.html">Intelligence</a>
+    <a href="inventory.html">Inventory</a>
+    <a href="blog.html">Lab Notes</a>
+    <a href="https://gaskinz.com" target="_blank">Storefront ↗</a>
+  </div>
+  <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" class="sys-action">Buy the Guide — £35</a>
+</nav>
+
+<div class="art-hero">
+  <a href="blog.html" class="art-back">← Back to Lab Notes</a>
+  <div class="art-head">
+    <div class="art-tag">Case Study · Sourcing Intelligence</div>
+    <h1 class="art-h">Sourcing OGs:<br><em>£120 to £420 and the Fendi Zucca</em></h1>
+    <div class="art-meta">
+      <span>Olivia Gaskin</span><div class="art-meta-dot"></div>
+      <span>February 2026</span><div class="art-meta-dot"></div>
+      <span>10 min read</span>
+    </div>
+  </div>
+</div>
+
+<div class="art-body">
+  <div class="art-content">
+    <p class="art-lead">The two most instructive case studies in the modern archival market are not abstract market stories. They are documented, traceable price corrections in specific physical objects that we sourced, authenticated, and in many cases sold — before the broader market knew they were worth watching.</p>
+
+    <p class="art-p">The Miu Miu Vitello Lux correction and the quiet resurgence of the Fendi Baguette Zucca canvas are different stories with the same underlying mechanics: quality assets, finite supply, and a collector base that discovered the arbitrage in sequence rather than simultaneously. Understanding how these corrections happened — in detail, chronologically, with the actual price movements — is the most useful preparation for identifying the next one.</p>
+
+    <h2 class="art-h2">Case Study One: <em>The Miu Miu Vitello Lux (£120 to £420)</em></h2>
+
+    <p class="art-p">This is not a story about a lucky find. It is a story about a systematic sourcing methodology applied to a category that was structurally undervalued because it had not yet been noticed by the market that eventually repriced it.</p>
+
+    <p class="art-p">The Vitello Lux, manufactured by Miu Miu primarily between 2002 and 2008, used a full-grain calfskin leather — Vitello — that is fundamentally different from what the house produces today. The tanning process used in this era produced leather with a specific hand, weight, and grain density that is measurably superior to the corrected leathers used in modern mass-scale luxury production. The hardware from this period was cast in solid brass at a weight that is immediately apparent when you hold the bag. These are not aesthetic differences. They are material quality differences that are observable and quantifiable.</p>
+
+    <div class="art-pull">"A piece that cost £120 in 2021 is worth £420 in 2026. That is not a lucky find. That is the result of reading supply dynamics correctly eighteen months before the market did."</div>
+
+    <p class="art-p">In 2020–2021, this quality differential was not priced into the secondary market, because the secondary market for archival Miu Miu had not yet developed a sophisticated collector base. Pieces were listed and sold at prices that reflected "second-hand luxury fashion" — i.e., a discount to the current retail equivalent — rather than "heritage investment asset." The floor for S-Grade Vitello Lux pieces in accessible colourways was £80–£120.</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">2020–21</div>
+        <div class="tl-content"><div class="tl-price">£80–£120</div><div class="tl-desc">S-Grade Vitello Lux floor. Early acquisition window. Volume available. Market framing: "preloved designer." No collector premium established.</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Mid 2022</div>
+        <div class="tl-content"><div class="tl-price">£120–£160</div><div class="tl-desc">Miu Miu reaches #1 on Lyst desirability index. New buyers begin discovering archival pieces. Initial price movement. Supply still accessible.</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Early 2023</div>
+        <div class="tl-content"><div class="tl-price">£160–£250</div><div class="tl-desc">First significant floor reset. Accessible S-Grade supply begins tightening. Rosa colourway premium emerges. Collector framing starts replacing fashion framing.</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Late 2023</div>
+        <div class="tl-content"><div class="tl-price">£250–£350</div><div class="tl-desc">Second floor reset. Systematic collectors now competing with casual buyers. Supply critically reduced. Sub-£200 pieces no longer accessible at S-Grade.</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2024–26</div>
+        <div class="tl-content"><div class="tl-price" style="color:var(--pkd)">£420–£700</div><div class="tl-desc">Settled floor for S-Grade standard colourways. Rosa at £600–£700. Original dustbag examples at premium. Supply near critical depletion.</div></div>
+      </div>
+    </div>
+
+    <p class="art-p">The floor movement from £120 to £420 is a +250% appreciation in approximately five years. But the more important metric for understanding how the correction worked is the velocity: each floor reset happened faster than the previous one, because each reset was preceded by a reduction in available supply that left fewer pieces to anchor a lower price point. Once the £120 pieces were absorbed, there was nothing to pull the floor back to £120. The new floor was permanent.</p>
+
+    <div class="case-box">
+      <div class="case-label">Authentication note</div>
+      <div class="case-title">How to identify genuine 2002–2006 era Vitello Lux</div>
+      <div class="case-body">The correct era pieces have hardware that is noticeably heavier than post-2010 production — solid brass with gold plating rather than the lighter alloy used subsequently. The leather grain on genuine Vitello from this period is tight and consistent, with a specific compression response under light finger pressure that corrected calfskin does not replicate. The interior authenticity card should be present with a matching serial number stamped in a slightly condensed, clean serif font. All S-Grade pieces at gaskinz.com have been authenticated against these specific criteria.</div>
+    </div>
+
+    <h2 class="art-h2">Case Study Two: <em>The Fendi Baguette Zucca</em></h2>
+
+    <p class="art-p">The Fendi Baguette Zucca is a different case study — not a step-change correction like the Vitello Lux, but a slow-burning reassessment of a piece that was chronically underpriced relative to its cultural and material significance.</p>
+
+    <p class="art-p">The Baguette, designed by Silvia Venturini Fendi and first produced in 1997, is one of the most culturally significant objects in the history of luxury fashion. It invented the "it bag" template — the concept of a single accessory functioning simultaneously as social signal, status marker, and insider knowledge indicator. The 1990s and early 2000s production in Zucca canvas (FF monogram on tobacco, cognac, or olive ground) represents the original era of this template.</p>
+
+    <p class="art-p">For much of the 2010s, original Zucca Baguettes traded at prices that reflected nostalgia rather than investment logic — £50–£120 for pieces that were neither particularly fashionable nor particularly understood as heritage assets. This changed in approximately 2019–2020, when a combination of factors — growing archival consciousness among younger collectors, Fendi's own archival marketing activity, and the broader emergence of "Y2K" aesthetic as a serious cultural reference — began attracting a new generation of buyers to the originals.</p>
+
+    <p class="art-p">The Zucca floor moved from £120–£150 in 2020 to £420+ for S-Grade tobacco or cognac examples by 2026. This is a +180% appreciation over six years — less dramatic in velocity than the Vitello Lux correction, but more methodical and arguably more sustainable, because it reflects a genuine collector consensus about the cultural value of the original pieces rather than a brand heat spillover from current collections.</p>
+
+    <h2 class="art-h2">What the methodology <em>actually looks like</em></h2>
+
+    <p class="art-p">Both case studies share the same underlying sourcing methodology: identify a quality asset with finite, non-renewable supply, a growing but not yet mainstream collector base, and a material quality differential that is not yet priced into the secondary market. Acquire systematically before the correction. Hold through it. Exit at or near the new floor, or hold if the supply trajectory suggests further appreciation.</p>
+
+    <p class="art-p">The challenge is applying this methodology prospectively rather than retrospectively. In 2026, the Vitello Lux and the Zucca Baguette are post-correction. The assets that are pre-correction today require the same kind of analysis that identified these two — reading supply data, material quality differentials, brand heat trajectories, and collector base expansion signals together, in combination, before the market has connected all of them.</p>
+
+    <p class="art-p">Our current pre-correction candidates — the categories where we believe the same methodology applies today — are covered in Chapters 1–3 of the 2026 Intelligence Report, alongside the specific floor price data and supply depletion estimates that inform those assessments. The S-Grade and A-Grade pieces currently available at gaskinz.com include examples from both established categories (Vitello Lux, Zucca Baguette) and pre-correction candidates that we are actively sourcing while the window remains open.</p>
+
+    <h2 class="art-h2">The sourcing discipline <em>that makes it possible</em></h2>
+
+    <p class="art-p">One thing that does not come through in the price trajectory data is the rejection rate. For every Vitello Lux or Zucca Baguette that made it into a Gaskin Lab listing, approximately two to three pieces were inspected and rejected — for hardware replacement, for leather condition below A-Grade, for authentication concerns, or for supply provenance issues. The 35% acceptance rate we operate at is not an accident of the market. It is a discipline applied to every single piece.</p>
+
+    <p class="art-p">The cases where that discipline matters most are precisely the cases where prices have appreciated and the incentive to misrepresent grade is highest. A Vitello Lux presented as S-Grade at £700 that is actually a well-maintained B-Grade piece will not perform like an S-Grade piece at resale. It will not command the &lt;72 hour resale window. It will not hold the floor if market conditions shift. Knowing the difference requires physical authentication — not remote visual inspection, not AI-assisted image analysis, but handling the piece, weighing the hardware, and assessing the leather under your hands. This is what the Gaskin Lab process provides, and what the grading on every gaskinz.com listing reflects.</p>
+  </div>
+
+  <div class="art-sidebar">
+    <div class="sb-section">
+      <div class="sb-label">Vitello Lux: floor movement</div>
+      <div class="sb-stat">£120→£420</div>
+      <div class="sb-stat-d">S-Grade floor, 2021 to 2026. +250% appreciation. Rosa colourway now £600–£700.</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">Fendi Zucca: floor movement</div>
+      <div class="sb-stat">£150→£420</div>
+      <div class="sb-stat-d">Tobacco/cognac Zucca floor, 2020 to 2026. +180% appreciation.</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">Sourcing acceptance rate</div>
+      <div class="sb-stat">~35%</div>
+      <div class="sb-stat-d">Of pieces inspected pass S-Grade or A-Grade threshold. We reject 65% of what we see.</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">Pre-correction windows</div>
+      <div class="sb-box">
+        <div class="sb-box-title">2026 Intelligence Report</div>
+        <div class="sb-box-body">Chapters 1–3 cover the specific asset categories where we believe the methodology applies today — pre-correction, with accessible entry windows. 12 pages · £35.</div>
+        <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" class="sb-cta">Buy the Guide — £35 →</a>
+      </div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">Current available inventory</div>
+      <div class="sb-box">
+        <div class="sb-box-title">gaskinz.com</div>
+        <div class="sb-box-body">S-Grade Vitello Lux, A-Grade Zucca Baguette, and pre-correction category pieces. Authenticated. Graded. Investment-case attached to each listing.</div>
+        <a href="https://gaskinz.com" target="_blank" class="sb-cta">Visit gaskinz.com →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="related">
+  <div class="rel-label">Read next</div>
+  <div class="rel-grid">
+    <a href="blog-isa.html" class="rel-card">
+      <div class="rel-tag">Investment Logic</div>
+      <div class="rel-title">Handbags vs. ISAs: The Data Nobody Wanted to Run</div>
+    </a>
+    <a href="blog-scarcity.html" class="rel-card">
+      <div class="rel-tag">Market Analysis</div>
+      <div class="rel-title">Structural Scarcity: Why the Clock is Running</div>
+    </a>
+    <a href="inventory.html" class="rel-card">
+      <div class="rel-tag">Inventory</div>
+      <div class="rel-title">View Vetted Inventory at gaskinz.com</div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo">Gaskin <span>Lab</span></div>
+  <ul class="f-links">
+    <li><a href="blog.html">Lab Notes</a></li>
+    <li><a href="https://gaskinz.com" target="_blank">gaskinz.com</a></li>
+    <li><a href="mailto:contact@gaskinz.com">contact@gaskinz.com</a></li>
+  </ul>
+  <div class="f-copy">© 2026 Gaskin Lab · London · Worldwide</div>
+</footer>
+</body>
+</html>
