@@ -348,26 +348,37 @@ footer {
 .f-links a { font-size: .56rem; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; color: var(--faint); transition: color .18s; }
 .f-links a:hover { color: var(--ink); }
 .f-copy { font-size: .52rem; letter-spacing: .1em; color: var(--faint); }
-@media (max-width: 600px) {
-    .sys-bar {
-        padding: 0 1rem !important;
-        height: auto !important;
-        flex-direction: column !important;
-        padding-bottom: 10px !important;
-        display: flex !important;
-    }
-    .sys-nav a {
-        font-size: 0.6rem !important;
-        padding: 0 0.5rem !important;
-        border: none !important;
-        line-height: 30px !important;
-    }
-    .container {
-        padding-top: 120px !important; 
-    }
-    .page-h {
-        font-size: 1.8rem !important;
-    }
+@media only screen and (max-width: 600px) {
+            .sys-bar {
+                height: auto !important;
+                flex-direction: column !important;
+                display: flex !important;
+                padding: 15px 0 !important;
+                text-align: center !important;
+            }
+            .sys-nav {
+                display: flex !important;
+                justify-content: center !important;
+                width: 100% !important;
+                margin-top: 10px !important;
+            }
+            .sys-nav a {
+                font-size: 0.6rem !important;
+                padding: 5px 8px !important;
+                border: none !important;
+            }
+            .container {
+                padding-top: 130px !important;
+                width: 90% !important;
+                margin: 0 auto !important;
+            }
+            /* This ensures your asset images don't "blow out" the screen width */
+            img, .asset-image {
+                max-width: 100% !important;
+                height: auto !important;
+            }
+    </style>
+</head>
 </style>
 </head>
 <body>
