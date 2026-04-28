@@ -348,57 +348,6 @@ footer {
 .f-links a { font-size: .56rem; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; color: var(--faint); transition: color .18s; }
 .f-links a:hover { color: var(--ink); }
 .f-copy { font-size: .52rem; letter-spacing: .1em; color: var(--faint); }
-@media only screen and (max-width: 600px) {
-    /* 1. Prevent the "Side-to-Side" wobble */
-    html, body {
-        overflow-x: hidden !important;
-        width: 100% !important;
-        position: relative !important;
-    }
-
-    /* 2. Fix the Header (The overlapping text) */
-    .sys-bar {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: auto !important;
-        background: #ffffff !important;
-        flex-direction: column !important;
-        z-index: 10000 !important;
-        padding: 10px 0 !important;
-        border-bottom: 1px solid #eee !important;
-    }
-
-    .sys-nav {
-        margin-top: 8px !important;
-        gap: 2px !important;
-    }
-
-    .sys-nav a {
-        font-size: 9px !important;
-        padding: 4px !important;
-    }
-
-    /* 3. Push the main content down below the fixed header */
-    .container, main, #main-content {
-        padding-top: 140px !important;
-        width: 95% !important;
-        margin: 0 auto !important;
-        display: block !important;
-    }
-
-    /* 4. Fix giant text and images from breaking the layout */
-    .page-h, h1 {
-        font-size: 1.6rem !important;
-        line-height: 1.1 !important;
-        word-wrap: break-word !important;
-    }
-
-    img {
-        max-width: 100% !important;
-        height: auto !important;
-    }
 </style>
 </head>
 <body>
