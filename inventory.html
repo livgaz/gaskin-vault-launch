@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vetted Inventory — Gaskin Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--w:#fff;--off:#f9f8f6;--ink:#111;--mid:#5a5a5a;--faint:#a8a8a8;--rule:#ddd;--pk:#e8a0b4;--pk2:#fdf0f4;--pkd:#d4809a;--gold:#c8a96e}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'DM Mono',monospace;background:var(--w);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.sys-bar{position:fixed;top:0;left:0;right:0;z-index:100;height:48px;background:var(--w);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
+.sys-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:.06em;color:var(--ink);text-decoration:none}
+.sys-logo span{color:var(--pk);font-style:italic;font-weight:300}
+.sys-nav{display:flex}
+.sys-nav a{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:0 1rem;line-height:48px;border-left:1px solid var(--rule);transition:color .18s,background .18s}
+.sys-nav a:hover,.sys-nav a.active{color:var(--ink);background:var(--off)}
+.sys-nav a.active{color:var(--pkd)}
+.sys-action{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:var(--w);text-decoration:none;padding:.42rem 1.1rem;transition:background .18s;white-space:nowrap}
+.sys-action:hover{background:var(--pkd)}
+
+/* HERO */
+.inv-hero{padding-top:48px;min-height:62vh;background:var(--ink);color:var(--w);display:flex;flex-direction:column;justify-content:space-between}
+.ih-top{padding:4rem 2rem 0;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.ih-tag{font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);display:flex;align-items:center;gap:.6rem}
+.ih-pip{width:5px;height:5px;border-radius:50%;background:var(--pk);flex-shrink:0}
+.ih-h{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,6rem);font-weight:300;line-height:.95;letter-spacing:-.01em;margin-top:1.5rem}
+.ih-h em{font-style:italic;color:var(--pk)}
+.ih-r{padding-top:3.5rem}
+.ih-desc{font-size:.72rem;color:rgba(255,255,255,.45);line-height:1.9;font-weight:300;max-width:420px}
+.ih-standard{margin-top:2rem;border:1px solid rgba(255,255,255,.12);padding:1.4rem}
+.is-title{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.8rem}
+.is-items{display:flex;flex-direction:column;gap:.6rem}
+.is-item{display:flex;align-items:flex-start;gap:.75rem;font-size:.67rem;color:rgba(255,255,255,.52);line-height:1.5}
+.is-check{width:5px;height:5px;border-radius:50%;background:var(--pk);flex-shrink:0;margin-top:.35rem}
+.ih-bottom{margin-top:3rem;border-top:1px solid rgba(255,255,255,.1);padding:2rem;display:flex;align-items:center;justify-content:space-between}
+.ih-bottom-label{font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.28)}
+.ih-storefront{display:inline-flex;align-items:center;gap:.75rem;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;background:var(--pk);color:var(--w);text-decoration:none;padding:.75rem 2rem;transition:opacity .2s}
+.ih-storefront:hover{opacity:.85}
+
+/* GRADE STRIP */
+.grade-strip{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--rule)}
+.grade-item{padding:1.8rem 1.4rem;border-right:1px solid var(--rule)}
+.grade-item:last-child{border-right:none}
+.grade-letter{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;line-height:1}
+.grade-item:first-child .grade-letter{color:var(--pk)}
+.grade-item:nth-child(2) .grade-letter{color:var(--gold)}
+.grade-name{font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:.4rem}
+.grade-desc{font-size:.64rem;color:var(--mid);margin-top:.5rem;line-height:1.55;font-weight:300}
+.grade-liq{font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;margin-top:.6rem}
+.grade-item:first-child .grade-liq{color:var(--pk)}
+.grade-item:nth-child(2) .grade-liq{color:var(--gold)}
+.grade-other{color:var(--faint)}
+
+/* SECTION */
+.section-head{display:flex;justify-content:space-between;align-items:center;padding:.95rem 2rem;border-bottom:1px solid var(--rule)}
+.sh-l{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid)}
+.sh-link{font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pkd);text-decoration:none}
+.sh-link:hover{text-decoration:underline}
+
+/* INVENTORY ITEMS — typography only, no image boxes */
+.inv-grid{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--rule)}
+.inv-item{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:2.2rem;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:background .2s}
+.inv-item:nth-child(3n){border-right:none}
+.inv-item:nth-child(4),.inv-item:nth-child(5),.inv-item:nth-child(6){border-bottom:none}
+.inv-item:hover{background:var(--off)}
+.inv-item-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.2rem}
+.inv-grade{font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .5rem}
+.grade-s-badge{background:var(--pk2);color:var(--pkd)}
+.grade-a-badge{background:#fdf8ec;color:#9a7820}
+.inv-brand{font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
+.inv-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;line-height:1.3;margin-top:.22rem}
+.inv-era{font-size:.62rem;color:var(--faint);margin-top:.2rem;font-weight:300}
+.inv-detail{font-size:.66rem;color:var(--mid);margin-top:.8rem;line-height:1.6;font-weight:300;flex:1}
+.inv-meta{display:flex;justify-content:space-between;align-items:flex-end;margin-top:1.2rem;padding-top:1.1rem;border-top:1px solid var(--rule)}
+.inv-price{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400}
+.inv-appr{font-size:.52rem;letter-spacing:.1em;color:var(--pkd)}
+.inv-cta{display:block;width:100%;margin-top:1rem;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;padding:.6rem;border:1px solid var(--rule);background:transparent;color:var(--mid);text-decoration:none;text-align:center;transition:all .18s;cursor:pointer}
+.inv-cta:hover{background:var(--ink);color:var(--w);border-color:var(--ink)}
+
+/* LIVE CTA */
+.live-cta{text-align:center;padding:3rem 2rem;border-bottom:1px solid var(--rule);background:var(--off)}
+.live-domain{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--ink);text-decoration:none;display:block;margin:.6rem 0 1.4rem}
+.live-btn{display:inline-block;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;background:var(--ink);color:var(--w);text-decoration:none;padding:.85rem 2.4rem;transition:background .2s}
+.live-btn:hover{background:var(--pkd)}
+.live-note{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+
+/* CONCIERGE */
+.concierge{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--rule)}
+.con-l{padding:4rem 3.5rem 4rem 2rem;border-right:1px solid var(--rule)}
+.con-tag{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+.con-h{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:300;line-height:1.15;margin-top:.8rem}
+.con-h em{font-style:italic;color:var(--pk)}
+.con-body{font-size:.71rem;color:var(--mid);line-height:1.88;font-weight:300;margin-top:1.2rem;max-width:400px}
+.con-cta{display:inline-block;margin-top:2rem;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;background:var(--ink);color:var(--w);text-decoration:none;padding:.85rem 2rem;transition:background .2s}
+.con-cta:hover{background:var(--pkd)}
+.con-r{padding:4rem 3rem;display:flex;flex-direction:column;justify-content:center;gap:0}
+.con-stat{padding:1.5rem 0;border-bottom:1px solid var(--rule)}
+.con-stat:last-child{border-bottom:none}
+.con-n{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300}
+.con-n span{color:var(--pk)}
+.con-d{font-size:.67rem;color:var(--mid);margin-top:.25rem;font-weight:300}
+
+footer{border-top:1px solid var(--rule);padding:1.3rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:.9rem;font-weight:600;letter-spacing:.04em}
+.f-logo span{color:var(--pk);font-style:italic;font-weight:300}
+.f-links{display:flex;gap:1.6rem;list-style:none}
+.f-links a{font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--faint);transition:color .18s}
+.f-links a:hover{color:var(--ink)}
+.f-copy{font-size:.52rem;letter-spacing:.1em;color:var(--faint)}
+</style>
+</head>
+<body>
+<nav class="sys-bar">
+  <a href="index.html" class="sys-logo">Gaskin <span>Lab</span></a>
+  <div class="sys-nav">
+    <a href="index.html">Intelligence</a>
+    <a href="inventory.html" class="active">Inventory</a>
+    <a href="blog.html">Lab Notes</a>
+    <a href="https://gaskinz.com" target="_blank">Storefront ↗</a>
+  </div>
+  <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" class="sys-action">Buy the Guide — £35</a>
+</nav>
+
+<div class="inv-hero">
+  <div class="ih-top">
+    <div>
+      <div class="ih-tag"><div class="ih-pip"></div>Gaskin Lab · Authenticated Assets</div>
+      <h1 class="ih-h">Vetted<br><em>Inventory.</em></h1>
+    </div>
+    <div class="ih-r">
+      <p class="ih-desc">This is not a second-hand shop. Every piece sourced through Gaskin Lab has been evaluated against our S-Grade standard — physical authentication, condition assessment, investment viability — before it reaches the market.</p>
+      <div class="ih-standard">
+        <div class="is-title">The Gaskin Standard</div>
+        <div class="is-items">
+          <div class="is-item"><div class="is-check"></div>Physical in-person authentication before acquisition</div>
+          <div class="is-item"><div class="is-check"></div>Hardware weight, stitch tension, and serial verification</div>
+          <div class="is-item"><div class="is-check"></div>Leather compression and grade classification</div>
+          <div class="is-item"><div class="is-check"></div>Full condition assessment and investment case analysis</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ih-bottom">
+    <div class="ih-bottom-label">Live listings available now at gaskinz.com</div>
+    <a href="https://gaskinz.com" target="_blank" class="ih-storefront">View Live Listings at gaskinz.com ↗</a>
+  </div>
+</div>
+
+<!-- GRADE STRIP -->
+<div class="grade-strip">
+  <div class="grade-item">
+    <div class="grade-letter">S</div>
+    <div class="grade-name">Pristine</div>
+    <div class="grade-desc">Unused or essentially unused. Original dustbag intact. Zero corner wear. Hardware unscratched.</div>
+    <div class="grade-liq">Resale: &lt;72 hours</div>
+  </div>
+  <div class="grade-item">
+    <div class="grade-letter">A</div>
+    <div class="grade-name">Excellent</div>
+    <div class="grade-desc">Light use only. Minor hardware patina. No staining or structural damage. Investment grade.</div>
+    <div class="grade-liq">Resale: 3–7 days</div>
+  </div>
+  <div class="grade-item">
+    <div class="grade-letter">B</div>
+    <div class="grade-name">Very Good</div>
+    <div class="grade-desc">Moderate use. Corner wear, leather darkening, light hardware scratches. Not investment grade.</div>
+    <div class="grade-liq grade-other">Resale: 2–4 weeks</div>
+  </div>
+  <div class="grade-item">
+    <div class="grade-letter">C</div>
+    <div class="grade-name">Good</div>
+    <div class="grade-desc">Clear wear. Significant scuffing, lining wear. Personal use only. Not sourced by Gaskin Lab.</div>
+    <div class="grade-liq grade-other">Not listed</div>
+  </div>
+  <div class="grade-item">
+    <div class="grade-letter">D</div>
+    <div class="grade-name">Fair</div>
+    <div class="grade-desc">Heavy wear. Requires restoration. Below investment threshold. Gaskin Lab does not source below B.</div>
+    <div class="grade-liq grade-other">Not listed</div>
+  </div>
+</div>
+
+<!-- INVENTORY — typography-only, no image boxes -->
+<div class="section-head">
+  <span class="sh-l">Curated Asset Gallery</span>
+  <a href="https://gaskinz.com" target="_blank" class="sh-link">View Live Listings at gaskinz.com →</a>
+</div>
+
+<div class="inv-grid">
+
+  <div class="inv-item">
+    <div class="inv-item-header">
+      <div><div class="inv-brand">Miu Miu</div><div class="inv-name">Vitello Lux Bow Satchel — Rosa</div><div class="inv-era">2002–2006 era</div></div>
+      <span class="inv-grade grade-s-badge">S-Grade</span>
+    </div>
+    <div class="inv-detail">Full-grain Vitello leather in Rosa colourway. Era-specific gold hardware — noticeably heavier than modern production. Interior serial card present and matching. The Rosa colourway commands a 15–20% premium over black or beige.</div>
+    <div class="inv-meta"><div class="inv-price">£550</div><div class="inv-appr">+250% floor (2021→26)</div></div>
+    <a href="https://gaskinz.com" target="_blank" class="inv-cta">View at gaskinz.com →</a>
+  </div>
+
+  <div class="inv-item">
+    <div class="inv-item-header">
+      <div><div class="inv-brand">Miu Miu</div><div class="inv-name">Vitello Lux Hobo — Beige</div><div class="inv-era">2003–2007 era</div></div>
+      <span class="inv-grade grade-s-badge">S-Grade</span>
+    </div>
+    <div class="inv-detail">Distressed calfskin in beige. Aged gold hardware with original weight and finish. Detachable shoulder strap included. S-Grade: all corner edges pristine, lining clean, hardware unchipped and original to era.</div>
+    <div class="inv-meta"><div class="inv-price">£480</div><div class="inv-appr">+218% floor appreciation</div></div>
+    <a href="https://gaskinz.com" target="_blank" class="inv-cta">View at gaskinz.com →</a>
+  </div>
+
+  <div class="inv-item">
+    <div class="inv-item-header">
+      <div><div class="inv-brand">Fendi</div><div class="inv-name">Baguette — Tobacco Zucca Canvas</div><div class="inv-era">1999–2002 archival</div></div>
+      <span class="inv-grade grade-a-badge">A-Grade</span>
+    </div>
+    <div class="inv-detail">Original Zucca FF canvas in tobacco colourway — the highest-premium Baguette iteration. Brass hardware with Fendi lettering at original weight. FF canvas pattern continues seamlessly around all seams. Date code verified.</div>
+    <div class="inv-meta"><div class="inv-price">£420</div><div class="inv-appr">+180% floor appreciation</div></div>
+    <a href="https://gaskinz.com" target="_blank" class="inv-cta">View at gaskinz.com →</a>
+  </div>
+
+  <div class="inv-item">
+    <div class="inv-item-header">
+      <div><div class="inv-brand">Fendi</div><div class="inv-name">Baguette — Cognac Zucca Canvas</div><div class="inv-era">1998–2001 archival</div></div>
+      <span class="inv-grade grade-s-badge">S-Grade</span>
+    </div>
+    <div class="inv-detail">Cognac Zucca canvas — the second most desirable colourway after tobacco, commanding a 20–25% premium over black. Original brass gold hardware. Pristine canvas with no fraying at edges. Interior date code confirmed.</div>
+    <div class="inv-meta"><div class="inv-price">£460</div><div class="inv-appr">+180% floor appreciation</div></div>
+    <a href="https://gaskinz.com" target="_blank" class="inv-cta">View at gaskinz.com →</a>
+  </div>
+
+  <div class="inv-item">
+    <div class="inv-item-header">
+      <div><div class="inv-brand">Chanel</div><div class="inv-name">Classic Flap Medium — Black Caviar</div><div class="inv-era">Lagerfeld era, 2005–2010</div></div>
+      <span class="inv-grade grade-s-badge">S-Grade</span>
+    </div>
+    <div class="inv-detail">Black caviar leather with gold-tone CC hardware. CC clasp alignment precise and symmetrical — key authentication indicator. Burgundy grosgrain lining confirms pre-2005 era. Serial sticker present and matching production year.</div>
+    <div class="inv-meta"><div class="inv-price">£2,800</div><div class="inv-appr">+112% floor appreciation</div></div>
+    <a href="https://gaskinz.com" target="_blank" class="inv-cta">View at gaskinz.com →</a>
+  </div>
+
+  <div class="inv-item">
+    <div class="inv-item-header">
+      <div><div class="inv-brand">Hermès</div><div class="inv-name">Birkin 25 — Gold Togo</div><div class="inv-era">2005 production, Stamp J</div></div>
+      <span class="inv-grade grade-s-badge">S-Grade</span>
+    </div>
+    <div class="inv-detail">Gold Togo leather with palladium hardware — a particularly rare and sought-after configuration. Blind stamp J in square, confirmed and independently authenticated. Clochette and padlock with both keys. Zero corner wear.</div>
+    <div class="inv-meta"><div class="inv-price">£7,400</div><div class="inv-appr">+132% floor appreciation</div></div>
+    <a href="https://gaskinz.com" target="_blank" class="inv-cta">View at gaskinz.com →</a>
+  </div>
+
+</div>
+
+<div class="live-cta">
+  <div class="live-note">These are representative pieces. Live, purchasable inventory is at:</div>
+  <a href="https://gaskinz.com" target="_blank" class="live-domain">gaskinz.com</a>
+  <a href="https://gaskinz.com" target="_blank" class="live-btn">View Live Listings at gaskinz.com ↗</a>
+</div>
+
+<div class="concierge">
+  <div class="con-l">
+    <div class="con-tag">Private sourcing</div>
+    <h2 class="con-h">Looking for<br><em>something specific?</em></h2>
+    <p class="con-body">Our Private Concierge Sourcing service locates specific pieces from our global authentication network that never reach the public market. S-Grade only. Authenticated before acquisition. For collectors building a focused archival portfolio.</p>
+    <a href="mailto:contact@gaskinz.com" class="con-cta">Request a Sourcing Brief →</a>
+  </div>
+  <div class="con-r">
+    <div class="con-stat"><div class="con-n">&lt;72<span>hrs</span></div><div class="con-d">Average resale time for S-Grade, correctly priced</div></div>
+    <div class="con-stat"><div class="con-n">35<span>%</span></div><div class="con-d">Of pieces inspected pass our S-Grade or A-Grade standard</div></div>
+    <div class="con-stat"><div class="con-n">0<span>%</span></div><div class="con-d">Downside volatility recorded in archival floor prices, historically</div></div>
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo">Gaskin <span>Lab</span></div>
+  <ul class="f-links">
+    <li><a href="index.html">Intelligence</a></li>
+    <li><a href="blog.html">Lab Notes</a></li>
+    <li><a href="https://gaskinz.com" target="_blank">gaskinz.com</a></li>
+    <li><a href="mailto:contact@gaskinz.com">contact@gaskinz.com</a></li>
+  </ul>
+  <div class="f-copy">© 2026 Gaskin Lab · London · Worldwide</div>
+</footer>
+</body>
+</html>
