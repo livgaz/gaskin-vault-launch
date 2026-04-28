@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab Notes — Gaskin Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--w:#fff;--off:#f9f8f6;--ink:#111;--mid:#5a5a5a;--faint:#a8a8a8;--rule:#ddd;--pk:#e8a0b4;--pk2:#fdf0f4;--pkd:#d4809a;--gold:#c8a96e}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'DM Mono',monospace;background:var(--w);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.sys-bar{position:fixed;top:0;left:0;right:0;z-index:100;height:48px;background:var(--w);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
+.sys-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:.06em;color:var(--ink);text-decoration:none}
+.sys-logo span{color:var(--pk);font-style:italic;font-weight:300}
+.sys-nav{display:flex}
+.sys-nav a{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:0 1rem;line-height:48px;border-left:1px solid var(--rule);transition:color .18s,background .18s}
+.sys-nav a:hover,.sys-nav a.active{color:var(--ink);background:var(--off)}
+.sys-nav a.active{color:var(--pkd)}
+.sys-action{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:var(--w);text-decoration:none;padding:.42rem 1.1rem;transition:background .18s;white-space:nowrap}
+.sys-action:hover{background:var(--pkd)}
+
+/* PAGE HEADER */
+.page-header{padding-top:48px;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:1fr 1fr;min-height:240px}
+.ph-l{padding:3.5rem 3rem 3rem 2rem;border-right:1px solid var(--rule);display:flex;flex-direction:column;justify-content:space-between}
+.ph-tag{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:.6rem}
+.ph-pip{width:5px;height:5px;border-radius:50%;background:var(--pk);flex-shrink:0}
+.ph-h{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.0;margin-top:1rem}
+.ph-h em{font-style:italic;color:var(--pk)}
+.ph-r{padding:3.5rem 3rem;display:flex;flex-direction:column;justify-content:flex-end}
+.ph-desc{font-size:.72rem;color:var(--mid);line-height:1.85;font-weight:300;max-width:400px}
+
+/* FEATURED */
+.feat{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--rule);min-height:440px}
+.feat-l{background:var(--off);border-right:1px solid var(--rule);padding:4rem 3rem 4rem 2rem;display:flex;flex-direction:column;justify-content:space-between}
+.feat-tag{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
+.feat-h{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:300;line-height:1.15;margin-top:.6rem}
+.feat-h em{font-style:italic;color:var(--pk)}
+.feat-exc{font-size:.72rem;color:var(--mid);line-height:1.88;font-weight:300;margin-top:1.2rem;max-width:380px}
+.feat-meta{display:flex;align-items:center;gap:1rem;margin-top:2rem;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.feat-dot{width:3px;height:3px;border-radius:50%;background:var(--faint)}
+.feat-read{display:inline-block;margin-top:1.8rem;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:var(--w);text-decoration:none;padding:.72rem 1.6rem;transition:background .2s}
+.feat-read:hover{background:var(--pkd)}
+.feat-r{padding:4rem 3rem;display:flex;flex-direction:column;justify-content:space-between}
+/* mini table */
+.mini-tbl{width:100%;border-collapse:collapse;margin-top:1rem}
+.mini-tbl thead th{font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:.6rem .8rem;text-align:left;border-bottom:1px solid var(--rule);font-weight:400}
+.mini-tbl tbody td{font-size:.7rem;color:var(--mid);padding:.8rem .8rem;border-bottom:1px solid var(--rule)}
+.mini-tbl tbody tr:last-child td{border-bottom:none}
+.tbl-good{color:#3a7a3a;font-family:'Cormorant Garamond',serif;font-size:.92rem}
+.tbl-bad{color:var(--faint)}
+.tbl-pk{color:var(--pkd);font-family:'Cormorant Garamond',serif;font-size:.92rem;font-weight:600}
+.mini-tbl tbody tr:hover td{background:var(--off)}
+.tbl-note{font-size:.56rem;color:var(--faint);margin-top:.75rem;font-style:italic;font-family:'Cormorant Garamond',serif}
+
+/* GRID */
+.grid-head{display:flex;justify-content:space-between;align-items:center;padding:.95rem 2rem;border-bottom:1px solid var(--rule)}
+.gh-l{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid)}
+.articles{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--rule)}
+.art{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:2.2rem;display:flex;flex-direction:column;transition:background .2s}
+.art:nth-child(3n){border-right:none}
+.art:nth-child(4),.art:nth-child(5),.art:nth-child(6){border-bottom:none}
+.art:hover{background:var(--pk2)}
+.art-tag{font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
+.art-h{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;line-height:1.35;margin-top:.4rem}
+.art-h em{font-style:italic}
+.art-exc{font-size:.68rem;color:var(--mid);line-height:1.65;font-weight:300;margin-top:.5rem;flex:1}
+.art-meta{display:flex;align-items:center;gap:.8rem;margin-top:1.2rem;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.art-dot{width:2px;height:2px;border-radius:50%;background:var(--faint)}
+.art-link{display:inline-block;margin-top:1rem;font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--pkd);text-decoration:none;border-bottom:1px solid var(--pk2);padding-bottom:1px;transition:border-color .18s}
+.art-link:hover{border-color:var(--pkd)}
+
+/* DATA BAND */
+.data-band{background:var(--ink);color:var(--w);padding:3.5rem 2rem;display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--rule)}
+.db-item{padding:1rem 2rem;border-right:1px solid rgba(255,255,255,.1)}
+.db-item:last-child{border-right:none}
+.db-n{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--pk)}
+.db-l{font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-top:.3rem}
+.db-d{font-size:.64rem;color:rgba(255,255,255,.38);margin-top:.38rem;line-height:1.5}
+
+/* CTA strip */
+.cta-strip{border-bottom:1px solid var(--rule);display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;padding:2.5rem 2rem;background:var(--off)}
+.cs-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;font-style:italic}
+.cs-sub{font-size:.67rem;color:var(--mid);font-weight:300;margin-top:.3rem}
+.cs-btn{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:var(--w);text-decoration:none;padding:.8rem 1.8rem;transition:background .2s;white-space:nowrap}
+.cs-btn:hover{background:var(--pkd)}
+
+footer{border-top:1px solid var(--rule);padding:1.3rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:.9rem;font-weight:600;letter-spacing:.04em}
+.f-logo span{color:var(--pk);font-style:italic;font-weight:300}
+.f-links{display:flex;gap:1.6rem;list-style:none}
+.f-links a{font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--faint);transition:color .18s}
+.f-links a:hover{color:var(--ink)}
+.f-copy{font-size:.52rem;letter-spacing:.1em;color:var(--faint)}
+</style>
+</head>
+<body>
+<nav class="sys-bar">
+  <a href="index.html" class="sys-logo">Gaskin <span>Lab</span></a>
+  <div class="sys-nav">
+    <a href="index.html">Intelligence</a>
+    <a href="inventory.html">Inventory</a>
+    <a href="blog.html" class="active">Lab Notes</a>
+    <a href="https://gaskinz.com" target="_blank">Storefront ↗</a>
+  </div>
+  <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" class="sys-action">Buy the Guide — £35</a>
+</nav>
+
+<div class="page-header">
+  <div class="ph-l">
+    <div class="ph-tag"><div class="ph-pip"></div>Research &amp; Analysis</div>
+    <h1 class="ph-h">Lab <em>Notes</em></h1>
+  </div>
+  <div class="ph-r">
+    <p class="ph-desc">The Gaskin Lab research function. Essays, data analysis, and market intelligence on the archival luxury asset class. These notes explain why the pieces at gaskinz.com are priced the way they are — and why that pricing is justified.</p>
+  </div>
+</div>
+
+<!-- FEATURED -->
+<div class="feat">
+  <div class="feat-l">
+    <div>
+      <div class="feat-tag">Featured · Market Analysis</div>
+      <h2 class="feat-h">Handbags vs. ISAs:<br><em>The Data Nobody Wanted to Run</em></h2>
+      <p class="feat-exc">Cash ISAs are returning approximately 5% in 2026, widely considered the "safe" option for UK savers. We compared this against a curated archival handbag portfolio over five-year horizons. The results are not what most financial advisors would expect.</p>
+      <div class="feat-meta"><span>Olivia Gaskin</span><div class="feat-dot"></div><span>April 2026</span><div class="feat-dot"></div><span>11 min read</span></div>
+    </div>
+    <a href="blog-isa.html" class="feat-read">Read the Full Analysis →</a>
+  </div>
+  <div class="feat-r">
+    <div>
+      <div style="font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:1rem">FIVE-YEAR RETURN COMPARISON (2021–2026)</div>
+      <table class="mini-tbl">
+        <thead><tr><th>Asset</th><th>5yr Return</th><th>Wearable</th><th>Downside</th></tr></thead>
+        <tbody>
+          <tr><td>Cash ISA (avg)</td><td class="tbl-bad">+24.6%</td><td class="tbl-bad">No</td><td style="color:var(--faint)">Inflation erosion</td></tr>
+          <tr><td>FTSE 100 ISA</td><td class="tbl-good">+38%</td><td class="tbl-bad">No</td><td style="color:var(--faint)">High volatility</td></tr>
+          <tr><td>Miu Miu Vitello Lux</td><td class="tbl-pk">+250%</td><td class="tbl-good">Yes</td><td style="color:#3a7a3a">Near zero</td></tr>
+          <tr><td>Chanel Classic Flap</td><td class="tbl-pk">+112%</td><td class="tbl-good">Yes</td><td style="color:#3a7a3a">Near zero</td></tr>
+          <tr><td>Fendi Baguette Zucca</td><td class="tbl-pk">+180%</td><td class="tbl-good">Yes</td><td style="color:#3a7a3a">Low</td></tr>
+        </tbody>
+      </table>
+      <p class="tbl-note">*S-Grade condition floor prices. Past performance does not guarantee future returns. Not financial advice.</p>
+    </div>
+    <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--rule)">
+      <div style="font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.6rem">The full analysis is in the guide</div>
+      <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" style="display:inline-block;font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:var(--w);text-decoration:none;padding:.65rem 1.4rem;transition:background .2s" onmouseover="this.style.background='var(--pkd)'" onmouseout="this.style.background='var(--ink)'">Read Chapter 4 — £35 →</a>
+    </div>
+  </div>
+</div>
+
+<!-- GRID -->
+<div class="grid-head"><span class="gh-l">All Lab Notes</span></div>
+<div class="articles">
+  <div class="art">
+    <div class="art-tag">Market Analysis</div>
+    <h2 class="art-h">Structural Scarcity:<br><em>Why the Clock is Running</em></h2>
+    <p class="art-exc">The supply of S-Grade Golden Era leather (1990–2010) is finite and being absorbed at an accelerating rate. Once it depletes, floor prices don't creep up — they step-change permanently. The Miu Miu correction from £120 to £420 is the template.</p>
+    <div class="art-meta"><span>Olivia Gaskin</span><div class="art-dot"></div><span>March 2026</span><div class="art-dot"></div><span>9 min</span></div>
+    <a href="blog-scarcity.html" class="art-link">Read More →</a>
+  </div>
+  <div class="art">
+    <div class="art-tag">Case Study</div>
+    <h2 class="art-h">Sourcing OGs:<br><em>£120 to £420 and the Fendi Zucca</em></h2>
+    <p class="art-exc">The Miu Miu Vitello Lux correction and the Fendi Baguette's quiet resurgence are the two most instructive case studies in the modern archival market. Here is exactly how they happened, and what the methodology means for the next wave of corrections.</p>
+    <div class="art-meta"><span>Olivia Gaskin</span><div class="art-dot"></div><span>February 2026</span><div class="art-dot"></div><span>10 min</span></div>
+    <a href="blog-sourcing.html" class="art-link">Read More →</a>
+  </div>
+  <div class="art">
+    <div class="art-tag">Investment Logic</div>
+    <h2 class="art-h">Handbags vs. ISAs:<br><em>The Data Nobody Wanted to Run</em></h2>
+    <p class="art-exc">A Cash ISA at 5% sounds safe. A Miu Miu Vitello Lux that returned 250% over the same period is not in your financial advisor's brochure. We ran the comparison properly, with the real numbers, and the result is genuinely uncomfortable.</p>
+    <div class="art-meta"><span>Olivia Gaskin</span><div class="art-dot"></div><span>April 2026</span><div class="art-dot"></div><span>11 min</span></div>
+    <a href="blog-isa.html" class="art-link">Read More →</a>
+  </div>
+  <div class="art">
+    <div class="art-tag">Authentication</div>
+    <h2 class="art-h">The Five Technical<br><em>Tells of a Fake</em></h2>
+    <p class="art-exc">Hardware weight, stitch tension, serial sticker format, leather compression, date stamp alignment. These are the five physical indicators that separate genuine archival assets from high-quality replicas. None are visible in photographs.</p>
+    <div class="art-meta"><span>Gaskin Lab</span><div class="art-dot"></div><span>November 2025</span><div class="art-dot"></div><span>8 min</span></div>
+    <a href="blog-scarcity.html" class="art-link">Read More →</a>
+  </div>
+  <div class="art">
+    <div class="art-tag">Strategy</div>
+    <h2 class="art-h">Exit Strategies:<br><em>When to Flip for Profit</em></h2>
+    <p class="art-exc">The four exit signals — brand reissue window, celebrity styling spike, tier-crossing trade, supply expansion — and how to execute a profitable flip at peak ROI without giving back the appreciation you came for.</p>
+    <div class="art-meta"><span>Olivia Gaskin</span><div class="art-dot"></div><span>October 2025</span><div class="art-dot"></div><span>7 min</span></div>
+    <a href="blog-sourcing.html" class="art-link">Read More →</a>
+  </div>
+  <div class="art">
+    <div class="art-tag">Grading</div>
+    <h2 class="art-h">Why <em>S-Grade</em><br>Matters Financially</h2>
+    <p class="art-exc">The difference between S-Grade and A-Grade is not aesthetic — it is financial. S-Grade commands a 35–60% premium at resale, sells in under 72 hours versus two weeks, and is the only tier with reliably zero depreciation risk.</p>
+    <div class="art-meta"><span>Gaskin Lab</span><div class="art-dot"></div><span>September 2025</span><div class="art-dot"></div><span>6 min</span></div>
+    <a href="blog-isa.html" class="art-link">Read More →</a>
+  </div>
+</div>
+
+<div class="data-band">
+  <div class="db-item"><div class="db-n">+250%</div><div class="db-l">Miu Miu Vitello Lux</div><div class="db-d">Floor appreciation, 2021–2026</div></div>
+  <div class="db-item"><div class="db-n">10.2%</div><div class="db-l">Annual average</div><div class="db-d">Archival Tier-1 vs 5% Cash ISA</div></div>
+  <div class="db-item"><div class="db-n">72hrs</div><div class="db-l">S-Grade resale window</div><div class="db-d">Average time to sold, correctly priced</div></div>
+  <div class="db-item"><div class="db-n">0%</div><div class="db-l">Downside volatility</div><div class="db-d">Archival floors have never moved downward historically</div></div>
+</div>
+
+<div class="cta-strip">
+  <div>
+    <div class="cs-title">The full data set is in the 2026 Intelligence Report.</div>
+    <div class="cs-sub">12 pages · portfolio tiers, authentication guide, exit strategies · instant PDF · £35</div>
+  </div>
+  <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" class="cs-btn">Buy the Guide — £35 →</a>
+</div>
+
+<footer>
+  <div class="f-logo">Gaskin <span>Lab</span></div>
+  <ul class="f-links">
+    <li><a href="index.html">Intelligence</a></li>
+    <li><a href="inventory.html">Inventory</a></li>
+    <li><a href="https://gaskinz.com" target="_blank">gaskinz.com</a></li>
+    <li><a href="mailto:contact@gaskinz.com">contact@gaskinz.com</a></li>
+  </ul>
+  <div class="f-copy">© 2026 Gaskin Lab · London · Worldwide</div>
+</footer>
+</body>
+</html>
