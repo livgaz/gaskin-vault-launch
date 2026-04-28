@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaskin Lab — Archival Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+
+
 /*
  * ═══════════════════════════════════════════════════════════════
  *  GASKIN LAB — RESPONSIVE CSS  (Mobile-First)
@@ -62,6 +74,9 @@ html {
   max-width: 100%;
   /* Prevent font size inflation on iOS */
   -webkit-text-size-adjust: 100%;
+  /* Belt-and-braces: kill any UA margin/padding at root */
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -72,6 +87,9 @@ body {
   max-width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Eliminate any browser-default body margin/padding that causes nav gap */
+  margin: 0;
+  padding: 0;
 }
 
 img,
@@ -116,9 +134,10 @@ ul {
   background-color: var(--white);
   border-bottom: 1px solid var(--rule);
 
-  /* Keep nav above ALL content on every screen size */
+  /* Pinned to the very top of the viewport — no gap, ever */
   position: sticky;
-  top: 0;
+  top: 0 !important;
+  margin-top: 0 !important;
   left: 0;
   right: 0;
   z-index: 9999;
@@ -136,8 +155,9 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--rule);
+  padding: 0.72rem 1rem;
+  border-bottom: none;           /* border comes from sys-bar itself */
+  min-height: 48px;              /* consistent touch target */
 }
 
 .sys-logo {
@@ -192,6 +212,7 @@ ul {
 }
 .sys-nav.is-open {
   display: flex;
+  border-top: 1px solid var(--rule);   /* separator between logo and open menu */
 }
 
 .sys-nav a {
@@ -357,7 +378,7 @@ ul {
   border-bottom: 1px solid var(--rule);
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 0.75rem;                   /* reduced — lets margin on child elements control spacing */
 }
 
 .hero-eyebrow {
@@ -376,8 +397,9 @@ ul {
   font-size: clamp(3.5rem, 12vw, 5.5rem);
   font-weight: 300;
   color: var(--pk);               /* Gaskin Pink — preserved */
-  line-height: 1;
+  line-height: 0.9;               /* tighter — visually raises the number */
   letter-spacing: -0.02em;
+  margin-bottom: -0.2rem;         /* pull 'ONE-TIME PURCHASE' note up */
 }
 
 .hero-price-note {
@@ -385,7 +407,8 @@ ul {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--faint);
-  margin-top: -0.4rem;
+  margin-top: 0.15rem;            /* small breathing gap under price */
+  margin-bottom: 0.6rem;          /* clear gap before headline starts */
 }
 
 .hero-title {
@@ -1281,6 +1304,22 @@ ul {
   font-family: var(--font-serif);
 }
 
+/* Grid section header */
+.grid-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--rule);
+  border-top: 1px solid var(--rule);
+}
+.gh-l {
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+
 /* Article grid */
 .articles {
   display: grid;
@@ -1292,24 +1331,46 @@ ul {
   border-bottom: 1px solid var(--rule);
   display: flex;
   flex-direction: column;
-  transition: background 0.2s;
+  transition: background 0.2s, box-shadow 0.2s;
+  cursor: pointer;              /* whole card is clickable */
+  position: relative;           /* so we can use ::after overlay */
+  text-decoration: none;        /* when wrapped in <a> */
+  color: inherit;
 }
 .art:last-child { border-bottom: none; }
-.art:hover { background: var(--pk2); }
+.art:hover {
+  background: var(--pk2);
+}
+/* Pink left accent bar on hover */
+.art::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--pk);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.22s ease;
+}
+.art:hover::before { transform: scaleY(1); }
 .art-tag {
   font-size: 0.5rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--pk);
+  transition: color 0.18s;
 }
+.art:hover .art-tag { color: var(--pkd); }
 .art-h {
   font-family: var(--font-serif);
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.35;
   margin-top: 0.38rem;
+  transition: color 0.18s;
 }
-.art-h em { font-style: italic; }
+.art-h em { font-style: italic; color: var(--pk); }
+.art:hover .art-h { color: var(--pkd); }
 .art-exc {
   font-size: 0.66rem;
   color: var(--mid);
@@ -1330,18 +1391,26 @@ ul {
 }
 .art-dot { width: 2px; height: 2px; border-radius: 50%; background: var(--faint); }
 .art-link {
-  display: inline-block;
-  margin-top: 0.9rem;
-  font-size: 0.52rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 1rem;
+  font-size: 0.54rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--pkd);
   text-decoration: none;
-  border-bottom: 1px solid var(--pk2);
-  padding-bottom: 1px;
-  transition: border-color 0.18s;
+  border-bottom: 1.5px solid var(--pk);
+  padding-bottom: 2px;
+  transition: color 0.18s, border-color 0.18s, gap 0.18s;
+  font-weight: 500;
 }
-.art-link:hover { border-color: var(--pkd); }
+.art-link:hover,
+.art:hover .art-link {
+  color: var(--pkd);
+  border-color: var(--pkd);
+  gap: 0.55rem;
+}
 
 /* Data band (dark, 4 stats) */
 .data-band {
@@ -1580,6 +1649,8 @@ ul {
 .art-back:hover { color: var(--ink); }
 .art-head {
   padding: 2rem 1rem 0;
+  width: 100%;
+  /* No max-width — headline spans the full content area */
 }
 .art-tag-page {
   font-size: 0.5rem;
@@ -1621,6 +1692,8 @@ ul {
 }
 .art-content {
   padding: 2rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 .art-lead-text {
   font-family: var(--font-serif);
@@ -1928,28 +2001,56 @@ footer {
   .nav-toggle { display: none; }
 
   .sys-nav {
-    display: flex !important;   /* always visible on desktop */
+    display: flex !important;
     flex-direction: row;
+    align-items: center;
     background: transparent;
     border-bottom: none;
+    gap: 0;                    /* borders act as separators */
   }
 
   .sys-nav a {
-    padding: 0 1rem;
+    padding: 0 1.15rem;
     line-height: 48px;
     border-bottom: none;
     border-left: 1px solid var(--rule);
+    white-space: nowrap;
   }
+  /* First nav link has no left border */
   .sys-nav a:first-child { border-left: none; }
+
+  /* Active state: pink text, no background bleed */
+  .sys-nav a.active {
+    color: var(--pkd);
+    background: transparent;
+  }
+  .sys-nav a:hover {
+    color: var(--ink);
+    background: var(--off);
+  }
 
   .sys-action {
     display: inline-block;
     margin: 0;
-    padding: 0.42rem 1.1rem;
+    padding: 0.42rem 1.15rem;
+    border-left: 1px solid var(--rule);
+    line-height: 1;             /* override the 48px line-height */
+    align-self: center;
   }
 
-  /* Compensate for fixed nav pushing content down */
-  body > *:first-child { margin-top: 48px; }
+  /* Compensate for fixed nav — push only NON-NAV first elements down.
+     We target the element immediately after the nav using ~ sibling,
+     but the safest cross-browser approach is a padding-top on body
+     and a negative margin-top recovery on the nav itself.           */
+  body {
+    padding-top: 48px;  /* reserve space for fixed nav */
+    margin: 0;          /* belt + braces — no gap sources */
+  }
+  .sys-bar {
+    position: fixed;
+    top: 0 !important;
+    margin-top: 0 !important;  /* nav never inherits the body padding */
+  }
   .page-section { padding-top: 3rem; }
 
   /* ── Hero ── */
@@ -2123,6 +2224,9 @@ footer {
   .art:nth-child(4),
   .art:nth-child(5),
   .art:nth-child(6)  { border-bottom: none; }
+  /* Desktop: border-left accent bar needs inside padding */
+  .art { padding-left: calc(1rem + 3px); }
+  .art::before { display: block; }
 
   /* ── Data band ── */
   .data-band { grid-template-columns: repeat(4, 1fr); }
@@ -2166,12 +2270,23 @@ footer {
   .art-body-wrap {
     flex-direction: row;
     align-items: flex-start;
+    width: 100%;        /* full viewport width */
+    max-width: none;    /* no inherited constraint */
+    margin: 0;          /* no centring offset */
+  }
+  /* Content column: readable at max 1200px by using generous padding */
+  .art-content {
+    flex: 1;
+    padding: 3rem 4rem 3rem 3rem;  /* generous horizontal padding for readability */
+    border-right: 1px solid var(--rule);
+    min-width: 0;
   }
   .art-content {
     flex: 1;
     padding: 3rem 3.5rem 3rem 2rem;
     border-right: 1px solid var(--rule);
-    max-width: 700px;
+    /* No max-width here — let it fill the available flex space */
+    min-width: 0;  /* prevent flex child overflow */
   }
   .art-sidebar {
     width: 260px;
@@ -2204,3 +2319,164 @@ footer {
   .tl-item { grid-template-columns: 80px 1fr; }
 
 } /* end @media (min-width: 1024px) */
+
+
+
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="sys-bar" role="navigation" aria-label="Main navigation">
+  <div class="sys-bar-top">
+    <a href="index.html" class="sys-logo">Gaskin <span>Lab</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"
+      aria-controls="main-nav" onclick="toggleNav(this)">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="sys-nav" id="main-nav" role="menubar">
+    <a href="index.html" class="active">Intelligence</a>
+    <a href="inventory.html">Inventory</a>
+    <a href="blog.html">Lab Notes</a>
+    <a href="https://gaskinz.com" target="_blank" rel="noopener">Storefront ↗</a>
+    <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" class="sys-action">Buy the Guide — £35</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-l">
+    <div>
+      <div class="hero-eyebrow"><span class="pip"></span>The 2026 Archival Intelligence Report</div>
+      <div class="hero-price-display">£35</div>
+      <div class="hero-price-note">One-time · Instant PDF · No subscription</div>
+      <h1 class="hero-title">The market<br>has shifted.<br><em>Are you</em><br>positioned?</h1>
+      <p class="hero-sub">Gaskin Lab is an archival investment intelligence platform. We identify undervalued, high-liquidity luxury assets before the broader market catches up — backed by data.</p>
+      <div class="hero-cta">
+        <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" class="btn-primary">Buy the Guide — £35</a>
+        <a href="https://gaskinz.com" target="_blank" rel="noopener" class="btn-ghost">Access Vetted Inventory ↗</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-r">
+    <div class="hero-r-label">Gaskin Lab · Intelligence Report 2026</div>
+    <div class="report-card">
+      <div class="rc-price-display">£35</div>
+      <div class="rc-price-label">One-time purchase · Instant PDF</div>
+      <hr class="rc-rule">
+      <div class="rc-title">Archival Assets &amp;<br><em>Market Movements 2026</em></div>
+      <div class="rc-meta">
+        <div class="rc-mi"><div class="rc-mv">12</div><div class="rc-mk">Pages</div></div>
+        <div class="rc-mi"><div class="rc-mv">2026</div><div class="rc-mk">Edition</div></div>
+        <div class="rc-mi"><div class="rc-mv">PDF</div><div class="rc-mk">Instant</div></div>
+      </div>
+      <div class="rc-buy-row">
+        <div class="rc-buy-price">£35</div>
+        <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" class="rc-buy-btn">Acquire →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ti">Miu Miu Vitello Lux <span class="val">+250%</span></span><span class="ti ti-sep">/</span>
+    <span class="ti">Annual archival appreciation <span class="val">10.2% avg</span></span><span class="ti ti-sep">/</span>
+    <span class="ti">Chanel Classic Flap <span class="val">+112%</span></span><span class="ti ti-sep">/</span>
+    <span class="ti">Fendi Baguette <span class="val">+180%</span></span><span class="ti ti-sep">/</span>
+    <span class="ti">Global resale market <span class="val">$42B</span></span><span class="ti ti-sep">/</span>
+    <span class="ti">S-Grade supply <span class="val">critically declining</span></span><span class="ti ti-sep">/</span>
+    <span class="ti">Hermès Birkin 25 <span class="val">+132%</span></span><span class="ti ti-sep">/</span>
+    <span class="ti">Miu Miu Vitello Lux <span class="val">+250%</span></span><span class="ti ti-sep">/</span>
+    <span class="ti">Annual archival appreciation <span class="val">10.2% avg</span></span><span class="ti ti-sep">/</span>
+    <span class="ti">Chanel Classic Flap <span class="val">+112%</span></span><span class="ti ti-sep">/</span>
+    <span class="ti">Fendi Baguette <span class="val">+180%</span></span><span class="ti ti-sep">/</span>
+    <span class="ti">Global resale market <span class="val">$42B</span></span><span class="ti ti-sep">/</span>
+    <span class="ti">S-Grade supply <span class="val">critically declining</span></span><span class="ti ti-sep">/</span>
+    <span class="ti">Hermès Birkin 25 <span class="val">+132%</span></span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-n">+<span>250%</span></div><div class="stat-bar"></div><div class="stat-d">Miu Miu Vitello Lux floor appreciation, 2021–2026</div></div>
+  <div class="stat"><div class="stat-n"><span>10.2%</span></div><div class="stat-bar"></div><div class="stat-d">Average annual appreciation across Tier-1 archival assets</div></div>
+  <div class="stat"><div class="stat-n">$<span>42B</span></div><div class="stat-bar"></div><div class="stat-d">Projected global luxury resale market value, 2026</div></div>
+  <div class="stat"><div class="stat-n">S<span>-Grade</span></div><div class="stat-bar"></div><div class="stat-d">Every piece at gaskinz.com authenticated to our grading standard</div></div>
+</div>
+
+<!-- CHAPTERS -->
+<section>
+  <div class="section-head">
+    <span class="sh-label">What's inside the guide</span>
+    <span class="sh-count">12 pages · instant PDF</span>
+  </div>
+  <div class="chapters">
+    <div class="ch"><div class="ch-num">01–03</div><div class="ch-title">The 2026 Scarcity Cliff</div><div class="ch-desc">Why the supply of S-Grade golden era leather is non-renewable, how the depletion timeline works, and why 2026 is the critical acquisition window.</div></div>
+    <div class="ch"><div class="ch-num">04</div><div class="ch-title">ISA vs. Handbag Portfolio</div><div class="ch-desc">A data-led comparison of 5% cash ISA returns against curated archival appreciation. The numbers are uncomfortable. The bags are not.</div></div>
+    <div class="ch"><div class="ch-num">05</div><div class="ch-title">The Gaskin Grading System</div><div class="ch-desc">S-Grade and A-Grade defined. What each means for liquidity, appreciation trajectory, and resale velocity. The standard behind gaskinz.com.</div></div>
+    <div class="ch"><div class="ch-num">06–08</div><div class="ch-title">Portfolio Tiers: £500–£20k</div><div class="ch-desc">Floor prices, appreciation data, and acquisition logic across Entry, Mid, Blue Chip, and Trophy tiers. Asset-by-asset case studies.</div></div>
+    <div class="ch"><div class="ch-num">09–10</div><div class="ch-title">Sourcing &amp; Authentication</div><div class="ch-desc">Our global sourcing methodology and the five technical tells that protect you from the sophisticated counterfeit market.</div></div>
+    <div class="ch"><div class="ch-num">11–12</div><div class="ch-title">Acquisition &amp; Exit Pathways</div><div class="ch-desc">How to deploy capital via gaskinz.com, when to hold versus exit, and how to execute a profitable flip at peak ROI.</div></div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-band">
+  <div class="q-attr">— Olivia Gaskin<br>Founder &amp; Analyst<br>Gaskin Lab<br>London, 2026</div>
+  <blockquote class="q-text">"Luxury should be a <em>store of value</em>, not an expense. The archival market is the only asset class where you can carry your investment to dinner."</blockquote>
+</div>
+
+<!-- BRIDGE -->
+<section class="bridge">
+  <div class="bridge-l">
+    <div>
+      <div class="bridge-tag">Ready to deploy capital?</div>
+      <h2 class="bridge-h">Access <em>Vetted</em> Inventory</h2>
+      <p class="bridge-body">gaskinz.com is Gaskin Lab's official storefront for authenticated, graded archival assets. Every piece evaluated against our S-Grade standard before it reaches the market.</p>
+    </div>
+    <a href="https://gaskinz.com" target="_blank" rel="noopener" class="bridge-cta">Visit the Storefront — gaskinz.com ↗</a>
+  </div>
+  <div class="bridge-r">
+    <a href="https://gaskinz.com" target="_blank" rel="noopener" class="bridge-item"><div><div class="bi-brand">Miu Miu</div><div class="bi-name">Vitello Lux — S-Grade Verified</div></div><span class="bi-tag">S-Grade</span></a>
+    <a href="https://gaskinz.com" target="_blank" rel="noopener" class="bridge-item"><div><div class="bi-brand">Fendi</div><div class="bi-name">Baguette Zucca — Archival Canvas</div></div><span class="bi-tag">A-Grade</span></a>
+    <a href="https://gaskinz.com" target="_blank" rel="noopener" class="bridge-item"><div><div class="bi-brand">Chanel</div><div class="bi-name">Classic Flap — Lagerfeld Era</div></div><span class="bi-tag">S-Grade</span></a>
+    <a href="https://gaskinz.com" target="_blank" rel="noopener" class="bridge-item"><div><div class="bi-brand">Hermès</div><div class="bi-name">Birkin 25 — Togo Leather</div></div><span class="bi-tag">S-Grade</span></a>
+    <div class="bridge-all"><a href="https://gaskinz.com" target="_blank" rel="noopener">View all live listings at gaskinz.com →</a></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Gaskin <span>Lab</span></div>
+  <ul class="f-links">
+    <li><a href="https://gaskinz.com" target="_blank" rel="noopener">gaskinz.com</a></li>
+    <li><a href="blog.html">Lab Notes</a></li>
+    <li><a href="inventory.html">Inventory</a></li>
+    <li><a href="mailto:contact@gaskinz.com">contact@gaskinz.com</a></li>
+  </ul>
+  <div class="f-copy">© 2026 Gaskin Lab · London · Worldwide</div>
+</footer>
+
+<script>
+function toggleNav(btn) {
+  var expanded = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', String(!expanded));
+  document.getElementById('main-nav').classList.toggle('is-open');
+}
+document.querySelectorAll('.sys-nav a').forEach(function(link) {
+  link.addEventListener('click', function() {
+    var btn = document.querySelector('.nav-toggle');
+    if (btn) {
+      btn.setAttribute('aria-expanded', 'false');
+      document.getElementById('main-nav').classList.remove('is-open');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
