@@ -7,6 +7,28 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+  @media (max-width: 600px) {
+            .sys-bar {
+                padding: 0 1rem;
+                height: auto;
+                flex-direction: column;
+                padding-bottom: 10px;
+            }
+            .sys-nav a {
+                font-size: 0.5rem; 
+                padding: 0 0.5rem;
+                border: none;
+                line-height: 30px; /* Added to stop links from squashing vertically */
+            }
+            .container {
+                padding-top: 100px; 
+            }
+            .page-h {
+                font-size: 1.8rem; /* Shrinks the giant title so it fits on one screen */
+            }
+        }
+    </style>
+</head>
 :root {
   --white: #ffffff;
   --black: #0a0a0a;
