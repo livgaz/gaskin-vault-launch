@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Structural Scarcity — Gaskin Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--w:#fff;--off:#f9f8f6;--ink:#111;--mid:#5a5a5a;--faint:#a8a8a8;--rule:#ddd;--pk:#e8a0b4;--pk2:#fdf0f4;--pkd:#d4809a;--gold:#c8a96e;--green:#3a7a3a}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'DM Mono',monospace;background:var(--w);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.sys-bar{position:fixed;top:0;left:0;right:0;z-index:100;height:48px;background:var(--w);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
+.sys-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:.06em;color:var(--ink);text-decoration:none}
+.sys-logo span{color:var(--pk);font-style:italic;font-weight:300}
+.sys-nav{display:flex}
+.sys-nav a{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:0 1rem;line-height:48px;border-left:1px solid var(--rule);transition:color .18s,background .18s}
+.sys-nav a:hover{color:var(--ink);background:var(--off)}
+.sys-action{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:var(--w);text-decoration:none;padding:.42rem 1.1rem;transition:background .18s;white-space:nowrap}
+.sys-action:hover{background:var(--pkd)}
+.art-hero{padding-top:48px;border-bottom:1px solid var(--rule)}
+.art-back{display:block;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);text-decoration:none;padding:1.5rem 2rem;border-bottom:1px solid var(--rule)}
+.art-back:hover{color:var(--ink)}
+.art-head{padding:3rem 2rem 0;max-width:820px}
+.art-tag{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pk)}
+.art-h{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.5rem);font-weight:300;line-height:1.1;margin-top:.6rem}
+.art-h em{font-style:italic;color:var(--pk)}
+.art-meta{display:flex;align-items:center;gap:1.2rem;margin-top:1.5rem;padding-bottom:2rem;font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.art-meta-dot{width:3px;height:3px;border-radius:50%;background:var(--faint)}
+.art-body{display:grid;grid-template-columns:1fr 260px;gap:0;border-bottom:1px solid var(--rule)}
+.art-content{padding:3rem 3.5rem 3rem 2rem;border-right:1px solid var(--rule);max-width:700px}
+.art-lead{font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:400;font-style:italic;line-height:1.68;color:var(--ink);margin-bottom:2rem}
+.art-p{font-size:.82rem;color:var(--mid);line-height:1.9;font-weight:300;margin-bottom:1.4rem}
+.art-h2{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;margin:2.5rem 0 .8rem;color:var(--ink)}
+.art-h2 em{font-style:italic;color:var(--pk)}
+.art-pull{border-left:2px solid var(--pk);padding-left:1.4rem;margin:2rem 0;font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:400;font-style:italic;line-height:1.62;color:var(--ink)}
+.data-tbl{width:100%;border-collapse:collapse;margin:1.5rem 0}
+.data-tbl thead th{font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:.65rem .8rem;text-align:left;border-bottom:1px solid var(--pk);font-weight:400;background:var(--pk2)}
+.data-tbl tbody td{font-size:.72rem;color:var(--mid);padding:.82rem .8rem;border-bottom:1px solid var(--rule)}
+.data-tbl tbody tr:last-child td{border-bottom:none}
+.data-tbl tbody tr:hover td{background:var(--off)}
+.td-good{color:var(--green);font-family:'Cormorant Garamond',serif;font-size:.92rem}
+.td-warn{color:#8a6020;font-family:'Cormorant Garamond',serif;font-size:.92rem}
+.tbl-note{font-size:.56rem;color:var(--faint);margin-top:.7rem;font-style:italic;font-family:'Cormorant Garamond',serif}
+.art-sidebar{padding:2.5rem 2rem}
+.sb-section{margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--rule)}
+.sb-section:last-child{border-bottom:none}
+.sb-label{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:.75rem}
+.sb-stat{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;line-height:1;color:var(--pk)}
+.sb-stat-d{font-size:.66rem;color:var(--mid);font-weight:300;margin-top:.28rem;line-height:1.5}
+.sb-box{background:var(--pk2);padding:1.2rem;border:1px solid var(--rule)}
+.sb-box-title{font-family:'Cormorant Garamond',serif;font-size:.92rem;font-weight:400;margin-bottom:.5rem}
+.sb-box-body{font-size:.7rem;color:var(--mid);line-height:1.62;font-weight:300}
+.sb-cta{display:block;margin-top:1rem;font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:var(--w);text-decoration:none;padding:.65rem 1rem;text-align:center;transition:background .2s}
+.sb-cta:hover{background:var(--pkd)}
+.related{padding:2.5rem 2rem;border-bottom:1px solid var(--rule)}
+.rel-label{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:1rem}
+.rel-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--rule);margin-top:1rem}
+.rel-card{border-right:1px solid var(--rule);padding:1.4rem;text-decoration:none;color:inherit;transition:background .2s}
+.rel-card:last-child{border-right:none}
+.rel-card:hover{background:var(--pk2)}
+.rel-tag{font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pk)}
+.rel-title{font-family:'Cormorant Garamond',serif;font-size:.9rem;font-weight:400;margin-top:.25rem;line-height:1.3}
+footer{border-top:1px solid var(--rule);padding:1.3rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:.9rem;font-weight:600;letter-spacing:.04em}
+.f-logo span{color:var(--pk);font-style:italic;font-weight:300}
+.f-links{display:flex;gap:1.6rem;list-style:none}
+.f-links a{font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--faint);transition:color .18s}
+.f-links a:hover{color:var(--ink)}
+.f-copy{font-size:.52rem;letter-spacing:.1em;color:var(--faint)}
+</style>
+</head>
+<body>
+<nav class="sys-bar">
+  <a href="index.html" class="sys-logo">Gaskin <span>Lab</span></a>
+  <div class="sys-nav">
+    <a href="index.html">Intelligence</a>
+    <a href="inventory.html">Inventory</a>
+    <a href="blog.html">Lab Notes</a>
+    <a href="https://gaskinz.com" target="_blank">Storefront ↗</a>
+  </div>
+  <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" class="sys-action">Buy the Guide — £35</a>
+</nav>
+
+<div class="art-hero">
+  <a href="blog.html" class="art-back">← Back to Lab Notes</a>
+  <div class="art-head">
+    <div class="art-tag">Market Analysis · Supply Dynamics</div>
+    <h1 class="art-h">Structural Scarcity:<br><em>Why the Clock is Running</em></h1>
+    <div class="art-meta">
+      <span>Olivia Gaskin</span><div class="art-meta-dot"></div>
+      <span>March 2026</span><div class="art-meta-dot"></div>
+      <span>9 min read</span>
+    </div>
+  </div>
+</div>
+
+<div class="art-body">
+  <div class="art-content">
+    <p class="art-lead">The archival luxury market is not experiencing a trend. It is experiencing a supply event — the kind that, once it has passed a certain threshold, does not reverse. Understanding this distinction is the difference between capturing the remaining window and reading about it later.</p>
+
+    <p class="art-p">Let me be precise about what I mean by "structural scarcity." I am not talking about a temporary shortage caused by disrupted supply chains or changing consumer demand. I am talking about a non-renewable resource reaching depletion. The supply of S-Grade Golden Era leather goods — pieces manufactured between 1990 and 2010 and preserved in genuinely mint or near-mint condition — is finite in absolute terms. No factory can produce more of it. No heritage house can commission a reissue of it. It exists in the quantity it exists in, it is being absorbed by collectors, and once it is gone, the floor price mechanism changes permanently.</p>
+
+    <h2 class="art-h2">Where the supply comes from — <em>and why it matters</em></h2>
+
+    <p class="art-p">The extraordinary preservation culture of certain global luxury markets — where items purchased in the 1990s and 2000s were stored in original dustbags, with receipts, in environments that maintained leather quality across decades — produced a phenomenon that the Western resale market did not anticipate: a massive, high-quality reservoir of S-Grade vintage inventory that began entering the secondary market in volume around 2018–2020.</p>
+
+    <p class="art-p">This is why 2020–2022 was the window in which pieces like the Miu Miu Vitello Lux, the Fendi Baguette Zucca, and the Dior Saddle could be sourced for £80–£180. The inventory was there. The collector awareness was not. Early buyers — including Gaskin Lab — were acquiring at prices that reflected "second-hand fashion" rather than "heritage investment." That narrative has now shifted, permanently.</p>
+
+    <div class="art-pull">"The supply of S-Grade Golden Era leather is finite. Once absorbed, the floor price does not creep back — it steps permanently higher and never returns to where it was."</div>
+
+    <p class="art-p">The absorption mechanism works as follows. Early collectors discover an asset category and begin systematic acquisition. This reduces the supply of accessible S-Grade pieces. Prices begin to rise, which attracts broader market attention. The broader market then competes for the remaining supply, accelerating absorption and further raising prices. By the time mainstream coverage arrives, the correction has already happened — and the new floor is permanent, because the inventory that made the old floor possible no longer exists.</p>
+
+    <h2 class="art-h2">The depletion timeline: <em>what the data shows</em></h2>
+
+    <p class="art-p">Based on Gaskin Lab's sourcing data and our network's assessment of accessible S-Grade inventory across the categories we track, we estimate the following depletion trajectory:</p>
+
+    <table class="data-tbl">
+      <thead>
+        <tr><th>Category</th><th>Accessible S-Grade supply (2020)</th><th>Accessible S-Grade supply (2026)</th><th>Estimated critical depletion</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Miu Miu Vitello Lux (all colours)</td><td class="td-good">High</td><td class="td-warn">Low-Medium</td><td>2027</td></tr>
+        <tr><td>Fendi Baguette Zucca (tobacco/cognac)</td><td class="td-good">Medium</td><td class="td-warn">Low</td><td>2026–27</td></tr>
+        <tr><td>Chanel Classic Flap (pre-2010)</td><td class="td-good">Medium-High</td><td class="td-warn">Medium</td><td>2028</td></tr>
+        <tr><td>Balenciaga City (Giant HW era)</td><td class="td-good">Medium</td><td class="td-warn">Low</td><td>2027</td></tr>
+        <tr><td>Prada Nylon (1990s originals)</td><td class="td-good">High</td><td class="td-good">Medium-High</td><td>2028–29</td></tr>
+        <tr><td>Celine Philo era (2008–2018)</td><td class="td-good">Medium</td><td class="td-warn">Low-Medium</td><td>2027–28</td></tr>
+        <tr><td>Hermès Birkin 25 (S-Grade)</td><td class="td-warn">Low</td><td style="color:var(--pkd)">Very Low</td><td>Already critical</td></tr>
+      </tbody>
+    </table>
+    <p class="tbl-note">*Depletion estimates are based on Gaskin Lab sourcing intelligence and internal network assessment. They represent S-Grade condition specifically and should not be taken as precise forecasts.</p>
+
+    <h2 class="art-h2">What depletion looks like in <em>price terms</em></h2>
+
+    <p class="art-p">The most instructive case study is the Miu Miu Vitello Lux correction of 2022–2024. This is not ancient history — it happened in the last two years, and it happened fast enough that many buyers who were aware of the opportunity still missed it.</p>
+
+    <p class="art-p">In early 2022, S-Grade Vitello Lux pieces were accessible at £80–£120. This was the "bargain hunting" phase — the price at which casual buyers and opportunistic early collectors were acquiring pieces without particular urgency. The supply was sufficient to satisfy demand at that level, so the price stayed at that level.</p>
+
+    <p class="art-p">Between late 2022 and mid-2023, two things happened simultaneously. The collector base for archival Miu Miu expanded — driven in part by the brand's sustained dominance of the Lyst desirability index — and the accessible S-Grade supply of Vitello Lux pieces began tightening as the early collection was absorbed. The floor moved from £120 to £200 in approximately six months.</p>
+
+    <p class="art-p">The second phase of the correction was sharper. Between mid-2023 and late 2024, the floor moved from £200 to £420 as a new wave of buyers — this time including serious collectors rather than opportunistic early entrants — competed for a supply that had declined materially. By early 2025, pieces that were £80 in 2022 were fetching £500–£700 at S-Grade, with the Rosa colourway commanding significant premiums above the floor.</p>
+
+    <p class="art-p">The critical point is what happened to the price after the correction: it held. The floor did not retreat to £200 or £300 once the initial buying pressure eased. It held at £420+ because the inventory that made the £120 floor possible no longer existed. There were no more £120 pieces to set a lower reference price. The new floor was structural, not cyclical.</p>
+
+    <h2 class="art-h2">The categories where <em>the window is still open</em></h2>
+
+    <p class="art-p">The Vitello Lux window has closed. The Balenciaga City Giant Hardware window is closing. But the depletion mechanism is a clock that runs at different speeds for different categories, and there are assets where the clock is still early enough that the Entry Tier remains accessible.</p>
+
+    <p class="art-p">The 1990s original Prada Nylon — the genuine re-nylon from the late 1990s, not the modern reissues — is currently in the pre-correction phase that the Vitello Lux occupied in 2020–2021. Floor prices for S-Grade examples sit at £280–£480. The collector awareness is growing but has not yet hit the inflection point. Supply is still accessible. Our model suggests the critical depletion window for this category is 2028–2029, which means the next 18–24 months represent the final accessible entry window.</p>
+
+    <p class="art-p">Similarly, the Philo-era Celine — Luggage, Trapeze, and Classic Box from 2008–2018 — is in early correction, with S-Grade supply already thin and prices rising. Tom Ford Gucci from 1994–2004 (Bamboo, Jackie precursors, Horsebit) is building toward a correction that has not yet happened at the floor level but which our sourcing data suggests is approaching.</p>
+
+    <h2 class="art-h2">The practical implication</h2>
+
+    <p class="art-p">The scarcity cliff is not a metaphor. It is the observable depletion of a finite, non-renewable resource in a market with growing demand. The Miu Miu Vitello Lux correction demonstrated what it looks like when the cliff arrives. The Fendi Baguette correction demonstrated that the mechanism repeats across asset categories. The open question for 2026 is not whether further corrections will happen — the supply dynamics make them structurally inevitable — but which specific categories are next, and whether you are positioned before or after the correction occurs.</p>
+
+    <p class="art-p">The current S-Grade and A-Grade inventory available at gaskinz.com represents pieces that have been sourced during what we believe to be the final accessible windows for their respective categories. The full market outlook, including our 2026–2028 forward assessment of which categories remain in their pre-correction phase, is covered in detail in Chapters 1–3 and 9 of the 2026 Intelligence Report.</p>
+  </div>
+
+  <div class="art-sidebar">
+    <div class="sb-section">
+      <div class="sb-label">Supply status: Miu Miu Vitello</div>
+      <div class="sb-stat">Critical</div>
+      <div class="sb-stat-d">S-Grade inventory near depletion. Floor now £420+. Was £120 in 2022.</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">Supply status: Prada Nylon OG</div>
+      <div class="sb-stat">Open</div>
+      <div class="sb-stat-d">Still in pre-correction phase. Current floor: £280–£480. Depletion est. 2028–29.</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">Hermès Birkin 25 (S-Grade)</div>
+      <div class="sb-stat">Already critical</div>
+      <div class="sb-stat-d">S-Grade supply is already at critical scarcity. Floor reflects it: £9,500+.</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">The full outlook</div>
+      <div class="sb-box">
+        <div class="sb-box-title">2026 Intelligence Report</div>
+        <div class="sb-box-body">Chapters 1–3 cover the full scarcity cliff analysis, depletion timelines by asset category, and the acquisition case for the remaining open windows. 12 pages · £35.</div>
+        <a href="https://buy.stripe.com/test_cNibJ2bUpgOR3Rncf3efC00" class="sb-cta">Buy the Guide — £35 →</a>
+      </div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">Pre-correction inventory</div>
+      <div class="sb-box">
+        <div class="sb-box-title">gaskinz.com</div>
+        <div class="sb-box-body">Current S-Grade and A-Grade pieces sourced from categories still within their acquisition window. The official Gaskin Lab storefront.</div>
+        <a href="https://gaskinz.com" target="_blank" class="sb-cta">Visit gaskinz.com →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="related">
+  <div class="rel-label">Read next</div>
+  <div class="rel-grid">
+    <a href="blog-isa.html" class="rel-card">
+      <div class="rel-tag">Investment Logic</div>
+      <div class="rel-title">Handbags vs. ISAs: The Data Nobody Wanted to Run</div>
+    </a>
+    <a href="blog-sourcing.html" class="rel-card">
+      <div class="rel-tag">Case Study</div>
+      <div class="rel-title">Sourcing OGs: £120 to £420 and the Fendi Zucca</div>
+    </a>
+    <a href="inventory.html" class="rel-card">
+      <div class="rel-tag">Inventory</div>
+      <div class="rel-title">View Vetted Inventory at gaskinz.com</div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo">Gaskin <span>Lab</span></div>
+  <ul class="f-links">
+    <li><a href="blog.html">Lab Notes</a></li>
+    <li><a href="https://gaskinz.com" target="_blank">gaskinz.com</a></li>
+    <li><a href="mailto:contact@gaskinz.com">contact@gaskinz.com</a></li>
+  </ul>
+  <div class="f-copy">© 2026 Gaskin Lab · London · Worldwide</div>
+</footer>
+</body>
+</html>
