@@ -349,36 +349,34 @@ footer {
 .f-links a:hover { color: var(--ink); }
 .f-copy { font-size: .52rem; letter-spacing: .1em; color: var(--faint); }
 @media only screen and (max-width: 600px) {
-            .sys-bar {
-                height: auto !important;
-                flex-direction: column !important;
-                display: flex !important;
-                padding: 15px 0 !important;
-                text-align: center !important;
-            }
-            .sys-nav {
-                display: flex !important;
-                justify-content: center !important;
-                width: 100% !important;
-                margin-top: 10px !important;
-            }
-            .sys-nav a {
-                font-size: 0.6rem !important;
-                padding: 5px 8px !important;
-                border: none !important;
-            }
-            .container {
-                padding-top: 130px !important;
-                width: 90% !important;
-                margin: 0 auto !important;
-            }
-            /* This ensures your asset images don't "blow out" the screen width */
-            img, .asset-image {
-                max-width: 100% !important;
-                height: auto !important;
-            }
-    </style>
-</head>
+
+  .sys-bar {
+    flex-direction: column;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .sys-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* important */
+    margin-top: 10px;
+  }
+
+  .sys-nav a {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+
+  .container {
+    padding-top: 60px;
+    width: 95%;
+  }
+
+  img, .asset-image {
+    max-width: 100%;
+    height: auto;
+  }
 </style>
 </head>
 <body>
